@@ -1,0 +1,14 @@
+{
+  "name": "oref-shelter-timer",
+  "version": "1.0.0",
+  "description": "Shelter countdown timer for Israeli Home Front Command alerts",
+  "scripts": {
+    "install:all": "cd server && npm install && cd ../client && npm install",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm start",
+    "build:client": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "docker:build": "docker build -t oref-shelter-timer .",
+    "docker:run": "docker run -p 3001:3001 oref-shelter-timer"
+  }
+}
