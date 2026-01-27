@@ -15,6 +15,7 @@ function App() {
   const {
     alerts,
     activeAlert,
+    alertEnded,  // NEW: true when alert just ended (safe to exit)
     getRemainingTime,
     timeOffset,
     isLoading: alertsLoading,
@@ -93,6 +94,7 @@ function App() {
     <CountdownTimer
       selectedArea={selectedArea}
       activeAlert={activeAlert}
+      alertEnded={alertEnded}  // NEW: pass alertEnded to CountdownTimer
       getRemainingTime={getRemainingTime}
       onChangeArea={handleChangeArea}
       allAlerts={alerts}

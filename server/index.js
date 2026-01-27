@@ -2,9 +2,42 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const fetch = require('node-fetch');
+const rateLimit = require('express-rate-limit');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// API Key for test-alert endpoint (set in environment or use default for dev)
+const TEST_ALERT_KEY = process.env.TEST_ALERT_KEY || 'dev-key-not-for-production';
+
+// CORS configuration - allow all origins in dev, restrict in production
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production'
+    ? process.env.ALLOWED_ORIGINS?.split(',') || true
+    : true,
+  methods: ['GET'],
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+// Rate limiting - 100 requests per minute per IP
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 600, // 600 requests per minute (10req/sec) - prevents 429s with 1s polling
+  message: { error: 'Too many requests, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use('/api/', limiter);
+
+// Stricter rate limit for test-alert endpoint
+const testAlertLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10, // Only 10 test alerts per minute
+  message: { error: 'Too many test alerts, please try again later.' }
+});
+
 
 // Load areas data
 const areasPath = path.join(__dirname, '..', 'data', 'areas.json');
@@ -165,39 +198,63 @@ app.get('/api/areas', (req, res) => {
   res.json(areas);
 });
 
-// Test alert endpoint
-app.get('/api/test-alert', (req, res) => {
+// Test alert endpoint - supports multiple areas
+// Usage: ?areas=area1,area2,area3 OR ?area=single_area
+// Requires API key in production: X-API-Key header or ?key= param
+app.get('/api/test-alert', testAlertLimiter, (req, res) => {
   const isDev = process.env.NODE_ENV !== 'production';
-  const testParam = req.query.test === 'true';
 
-  if (!isDev && !testParam) {
-    return res.status(403).json({ error: 'Test alerts only available in development mode or with ?test=true' });
+  // Check API key (header or query param)
+  const apiKey = req.headers['x-api-key'] || req.query.key;
+
+  if (!isDev && apiKey !== TEST_ALERT_KEY) {
+    return res.status(401).json({ error: 'Invalid or missing API key' });
   }
 
-  const areaName = req.query.area;
+  // Support both single area (?area=) and multiple areas (?areas=)
+  let areaNames = [];
 
-  if (!areaName) {
-    return res.status(400).json({ error: 'Area name required. Use ?area=אזור' });
+  if (req.query.areas) {
+    // Multiple areas - comma separated
+    areaNames = req.query.areas.split(',').map(a => a.trim()).filter(a => a);
+  } else if (req.query.area) {
+    // Single area (backward compatible)
+    areaNames = [req.query.area];
   }
 
-  const migunTime = areaTimeMap.get(areaName) || parseInt(req.query.migun_time) || 90;
+  if (areaNames.length === 0) {
+    return res.status(400).json({
+      error: 'Area name(s) required. Use ?area=אזור or ?areas=אזור1,אזור2,אזור3'
+    });
+  }
+
   const now = Date.now();
+  const createdAlerts = [];
 
-  testAlerts.set(areaName, {
-    area: areaName,
-    migun_time: migunTime,
-    started_at: now
-  });
+  for (const areaName of areaNames) {
+    // Query param takes priority for testing, then area map, then default 90
+    const queryMigunTime = parseInt(req.query.migun_time);
+    const migunTime = !isNaN(queryMigunTime) ? queryMigunTime : (areaTimeMap.get(areaName) || 90);
 
-  console.log(`Test alert created for: ${areaName} (${migunTime}s)`);
-
-  res.json({
-    success: true,
-    alert: {
+    testAlerts.set(areaName, {
       area: areaName,
       migun_time: migunTime,
       started_at: now
-    }
+    });
+
+    createdAlerts.push({
+      area: areaName,
+      migun_time: migunTime,
+      started_at: now
+    });
+
+    console.log(`Test alert created for: ${areaName} (${migunTime}s)`);
+  }
+
+  res.json({
+    success: true,
+    count: createdAlerts.length,
+    alerts: createdAlerts
   });
 });
 

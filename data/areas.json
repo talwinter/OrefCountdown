@@ -1,84 +1,5798 @@
 [
-  { "name": "שדרות, איבים, ניר עם", "migun_time": 15 },
-  { "name": "ניר עם", "migun_time": 15 },
-  { "name": "כיסופים", "migun_time": 15 },
-  { "name": "עין השלושה, ניר עוז", "migun_time": 15 },
-  { "name": "נחל עוז", "migun_time": 15 },
-  { "name": "כפר עזה", "migun_time": 15 },
-  { "name": "מפלסים", "migun_time": 15 },
-  { "name": "סעד", "migun_time": 15 },
-  { "name": "אורים", "migun_time": 15 },
-  { "name": "רעים", "migun_time": 15 },
-  { "name": "בארי", "migun_time": 15 },
-  { "name": "אשקלון - דרום", "migun_time": 30 },
-  { "name": "אשקלון - צפון", "migun_time": 30 },
-  { "name": "אשקלון - מרכז", "migun_time": 30 },
-  { "name": "נתיבות", "migun_time": 30 },
-  { "name": "אופקים", "migun_time": 30 },
-  { "name": "שער הנגב", "migun_time": 30 },
-  { "name": "חוף אשקלון", "migun_time": 30 },
-  { "name": "מרחבים", "migun_time": 30 },
-  { "name": "אשדוד - א,ב,ג,ד,ה", "migun_time": 45 },
-  { "name": "אשדוד - ו,ז,ח,ט,י,יא,יב,יג,יד,טו,יז", "migun_time": 45 },
-  { "name": "אשדוד - יז", "migun_time": 45 },
-  { "name": "יבנה", "migun_time": 45 },
-  { "name": "גן יבנה", "migun_time": 45 },
-  { "name": "באר טוביה", "migun_time": 45 },
-  { "name": "קריית גת", "migun_time": 45 },
-  { "name": "קריית מלאכי", "migun_time": 45 },
-  { "name": "גדרה", "migun_time": 45 },
-  { "name": "חיפה - כרמל ועיר תחתית", "migun_time": 60 },
-  { "name": "חיפה - מערב", "migun_time": 60 },
-  { "name": "חיפה - נווה שאנן", "migun_time": 60 },
-  { "name": "קריית אתא", "migun_time": 60 },
-  { "name": "קריית מוצקין", "migun_time": 60 },
-  { "name": "קריית ביאליק", "migun_time": 60 },
-  { "name": "קריית ים", "migun_time": 60 },
-  { "name": "עכו", "migun_time": 60 },
-  { "name": "נהריה", "migun_time": 60 },
-  { "name": "מעלות-תרשיחא", "migun_time": 60 },
-  { "name": "כרמיאל", "migun_time": 60 },
-  { "name": "צפת", "migun_time": 60 },
-  { "name": "טבריה", "migun_time": 60 },
-  { "name": "קריית שמונה", "migun_time": 30 },
-  { "name": "מטולה", "migun_time": 15 },
-  { "name": "שלומי", "migun_time": 30 },
-  { "name": "תל אביב - מרכז העיר", "migun_time": 90 },
-  { "name": "תל אביב - דרום העיר ויפו", "migun_time": 90 },
-  { "name": "תל אביב - צפון העיר הישן", "migun_time": 90 },
-  { "name": "תל אביב - צפון העיר החדש", "migun_time": 90 },
-  { "name": "רמת גן - מזרח", "migun_time": 90 },
-  { "name": "רמת גן - מערב", "migun_time": 90 },
-  { "name": "גבעתיים", "migun_time": 90 },
-  { "name": "בני ברק", "migun_time": 90 },
-  { "name": "פתח תקווה", "migun_time": 90 },
-  { "name": "ראשון לציון - מזרח", "migun_time": 90 },
-  { "name": "ראשון לציון - מערב", "migun_time": 90 },
-  { "name": "חולון", "migun_time": 90 },
-  { "name": "בת ים", "migun_time": 90 },
-  { "name": "הרצליה", "migun_time": 90 },
-  { "name": "רעננה", "migun_time": 90 },
-  { "name": "כפר סבא", "migun_time": 90 },
-  { "name": "הוד השרון", "migun_time": 90 },
-  { "name": "רמת השרון", "migun_time": 90 },
-  { "name": "נתניה", "migun_time": 90 },
-  { "name": "רחובות", "migun_time": 90 },
-  { "name": "נס ציונה", "migun_time": 90 },
-  { "name": "לוד", "migun_time": 90 },
-  { "name": "רמלה", "migun_time": 90 },
-  { "name": "מודיעין-מכבים-רעות", "migun_time": 90 },
-  { "name": "ירושלים - מרכז", "migun_time": 90 },
-  { "name": "ירושלים - דרום", "migun_time": 90 },
-  { "name": "ירושלים - צפון", "migun_time": 90 },
-  { "name": "ירושלים - מזרח", "migun_time": 90 },
-  { "name": "ירושלים - מערב", "migun_time": 90 },
-  { "name": "בית שמש", "migun_time": 90 },
-  { "name": "מעלה אדומים", "migun_time": 90 },
-  { "name": "באר שבע - צפון", "migun_time": 60 },
-  { "name": "באר שבע - דרום", "migun_time": 60 },
-  { "name": "באר שבע - מערב", "migun_time": 60 },
-  { "name": "באר שבע - מזרח", "migun_time": 60 },
-  { "name": "דימונה", "migun_time": 90 },
-  { "name": "ערד", "migun_time": 90 },
-  { "name": "אילת", "migun_time": 180 }
+  {
+    "name": "אבו גוש",
+    "migun_time": 90
+  },
+  {
+    "name": "אבו סנאן",
+    "migun_time": 30
+  },
+  {
+    "name": "אבו קרינאת",
+    "migun_time": 90
+  },
+  {
+    "name": "אבו תלול",
+    "migun_time": 90
+  },
+  {
+    "name": "אבטליון",
+    "migun_time": 60
+  },
+  {
+    "name": "אביאל",
+    "migun_time": 90
+  },
+  {
+    "name": "אביבים",
+    "migun_time": 0
+  },
+  {
+    "name": "אביגדור",
+    "migun_time": 45
+  },
+  {
+    "name": "אביגיל",
+    "migun_time": 90
+  },
+  {
+    "name": "אביחיל",
+    "migun_time": 90
+  },
+  {
+    "name": "אביעזר",
+    "migun_time": 90
+  },
+  {
+    "name": "אבירים",
+    "migun_time": 0
+  },
+  {
+    "name": "אביתר",
+    "migun_time": 90
+  },
+  {
+    "name": "אבן יהודה",
+    "migun_time": 90
+  },
+  {
+    "name": "אבן מנחם",
+    "migun_time": 0
+  },
+  {
+    "name": "אבן ספיר",
+    "migun_time": 90
+  },
+  {
+    "name": "אבן שמואל",
+    "migun_time": 30
+  },
+  {
+    "name": "אבני איתן",
+    "migun_time": 0
+  },
+  {
+    "name": "אבני חפץ",
+    "migun_time": 90
+  },
+  {
+    "name": "אבנת",
+    "migun_time": 90
+  },
+  {
+    "name": "אבשלום",
+    "migun_time": 15
+  },
+  {
+    "name": "אדורה",
+    "migun_time": 90
+  },
+  {
+    "name": "אדורים",
+    "migun_time": 90
+  },
+  {
+    "name": "אדמית",
+    "migun_time": 0
+  },
+  {
+    "name": "אדרת",
+    "migun_time": 90
+  },
+  {
+    "name": "אודים",
+    "migun_time": 90
+  },
+  {
+    "name": "אודם",
+    "migun_time": 0
+  },
+  {
+    "name": "אום אל פחם",
+    "migun_time": 90
+  },
+  {
+    "name": "אום אל קוטוף",
+    "migun_time": 90
+  },
+  {
+    "name": "אום בטין",
+    "migun_time": 90
+  },
+  {
+    "name": "אופקים",
+    "migun_time": 45
+  },
+  {
+    "name": "אור הגנוז",
+    "migun_time": 30
+  },
+  {
+    "name": "אור הנר",
+    "migun_time": 15
+  },
+  {
+    "name": "אור יהודה",
+    "migun_time": 90
+  },
+  {
+    "name": "אור עקיבא",
+    "migun_time": 90
+  },
+  {
+    "name": "אורה",
+    "migun_time": 90
+  },
+  {
+    "name": "אורות",
+    "migun_time": 45
+  },
+  {
+    "name": "אורטל",
+    "migun_time": 0
+  },
+  {
+    "name": "אורים",
+    "migun_time": 30
+  },
+  {
+    "name": "אורנים",
+    "migun_time": 60
+  },
+  {
+    "name": "אורנית",
+    "migun_time": 90
+  },
+  {
+    "name": "אושה",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה אלון התבור",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה אפק ולב הארץ",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה אריאל",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה באר טוביה",
+    "migun_time": 45
+  },
+  {
+    "name": "אזור תעשייה בני יהודה",
+    "migun_time": 0
+  },
+  {
+    "name": "אזור תעשייה בר-לב",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה בראון",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה ברוש",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה ברקן",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה גדרה",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה דימונה",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה הדרומי אשקלון",
+    "migun_time": 30
+  },
+  {
+    "name": "אזור תעשייה הר טוב - צרעה",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה חבל מודיעין שוהם",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה יקנעם עילית",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה כנות",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה כפר יונה",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה כרמיאל",
+    "migun_time": 30
+  },
+  {
+    "name": "אזור תעשייה מבוא כרמל",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה מבואות הגלבוע",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה מישור אדומים",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה מיתרים",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה נ.ע.מ",
+    "migun_time": 30
+  },
+  {
+    "name": "אזור תעשייה ניר עציון",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה נשר - רמלה",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה עד הלום",
+    "migun_time": 45
+  },
+  {
+    "name": "אזור תעשייה עידן הנגב",
+    "migun_time": 45
+  },
+  {
+    "name": "אזור תעשייה עמק חפר",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה צ.ח.ר",
+    "migun_time": 30
+  },
+  {
+    "name": "אזור תעשייה ציפורית",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה צפוני אשקלון",
+    "migun_time": 30
+  },
+  {
+    "name": "אזור תעשייה קדמת גליל",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה קיסריה",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה קריית ביאליק",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה קריית גת",
+    "migun_time": 45
+  },
+  {
+    "name": "אזור תעשייה רבדים",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה רותם",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה רמת דלתון",
+    "migun_time": 0
+  },
+  {
+    "name": "אזור תעשייה שחורת",
+    "migun_time": 30
+  },
+  {
+    "name": "אזור תעשייה שחק",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה שער בנימין",
+    "migun_time": 90
+  },
+  {
+    "name": "אזור תעשייה שער נעמן",
+    "migun_time": 60
+  },
+  {
+    "name": "אזור תעשייה תימורים",
+    "migun_time": 45
+  },
+  {
+    "name": "אזור תעשייה תרדיון",
+    "migun_time": 60
+  },
+  {
+    "name": "אחווה",
+    "migun_time": 45
+  },
+  {
+    "name": "אחוזם",
+    "migun_time": 30
+  },
+  {
+    "name": "אחוזת ברק",
+    "migun_time": 60
+  },
+  {
+    "name": "אחיה",
+    "migun_time": 90
+  },
+  {
+    "name": "אחיהוד",
+    "migun_time": 60
+  },
+  {
+    "name": "אחיטוב",
+    "migun_time": 90
+  },
+  {
+    "name": "אחיסמך",
+    "migun_time": 90
+  },
+  {
+    "name": "אחיעזר",
+    "migun_time": 90
+  },
+  {
+    "name": "איבטין",
+    "migun_time": 60
+  },
+  {
+    "name": "איבי הנחל",
+    "migun_time": 90
+  },
+  {
+    "name": "איזור תעשייה מילואות צפון",
+    "migun_time": 0
+  },
+  {
+    "name": "אייל",
+    "migun_time": 90
+  },
+  {
+    "name": "איילת השחר",
+    "migun_time": 30
+  },
+  {
+    "name": "איירפורט סיטי",
+    "migun_time": 90
+  },
+  {
+    "name": "אילון",
+    "migun_time": 0
+  },
+  {
+    "name": "אילות",
+    "migun_time": 30
+  },
+  {
+    "name": "אילניה",
+    "migun_time": 60
+  },
+  {
+    "name": "אילת",
+    "migun_time": 30
+  },
+  {
+    "name": "אירוס",
+    "migun_time": 90
+  },
+  {
+    "name": "איתמר",
+    "migun_time": 90
+  },
+  {
+    "name": "איתן",
+    "migun_time": 30
+  },
+  {
+    "name": "אכסאל",
+    "migun_time": 60
+  },
+  {
+    "name": "אל סייד",
+    "migun_time": 90
+  },
+  {
+    "name": "אל עזי",
+    "migun_time": 45
+  },
+  {
+    "name": "אל עמארני, אל מסק",
+    "migun_time": 90
+  },
+  {
+    "name": "אל עריאן",
+    "migun_time": 90
+  },
+  {
+    "name": "אל פורעה",
+    "migun_time": 90
+  },
+  {
+    "name": "אל רום",
+    "migun_time": 0
+  },
+  {
+    "name": "אלומה",
+    "migun_time": 45
+  },
+  {
+    "name": "אלומות",
+    "migun_time": 60
+  },
+  {
+    "name": "אלון",
+    "migun_time": 90
+  },
+  {
+    "name": "אלון הגליל",
+    "migun_time": 60
+  },
+  {
+    "name": "אלון מורה",
+    "migun_time": 90
+  },
+  {
+    "name": "אלון שבות",
+    "migun_time": 90
+  },
+  {
+    "name": "אלוני אבא",
+    "migun_time": 60
+  },
+  {
+    "name": "אלוני הבשן",
+    "migun_time": 0
+  },
+  {
+    "name": "אלוני יצחק",
+    "migun_time": 90
+  },
+  {
+    "name": "אלונים",
+    "migun_time": 60
+  },
+  {
+    "name": "אלי עד",
+    "migun_time": 0
+  },
+  {
+    "name": "אליאב",
+    "migun_time": 60
+  },
+  {
+    "name": "אליכין",
+    "migun_time": 90
+  },
+  {
+    "name": "אליפז ומכרות תמנע",
+    "migun_time": 90
+  },
+  {
+    "name": "אליפלט",
+    "migun_time": 30
+  },
+  {
+    "name": "אליקים",
+    "migun_time": 90
+  },
+  {
+    "name": "אלישיב",
+    "migun_time": 90
+  },
+  {
+    "name": "אלישמע",
+    "migun_time": 90
+  },
+  {
+    "name": "אלמגור",
+    "migun_time": 30
+  },
+  {
+    "name": "אלמוג",
+    "migun_time": 90
+  },
+  {
+    "name": "אלעד",
+    "migun_time": 90
+  },
+  {
+    "name": "אלעזר",
+    "migun_time": 90
+  },
+  {
+    "name": "אלפי מנשה",
+    "migun_time": 90
+  },
+  {
+    "name": "אלקוש",
+    "migun_time": 0
+  },
+  {
+    "name": "אלקנה",
+    "migun_time": 90
+  },
+  {
+    "name": "אמונים",
+    "migun_time": 45
+  },
+  {
+    "name": "אמירים",
+    "migun_time": 30
+  },
+  {
+    "name": "אמנון",
+    "migun_time": 30
+  },
+  {
+    "name": "אמץ",
+    "migun_time": 90
+  },
+  {
+    "name": "אניעם",
+    "migun_time": 15
+  },
+  {
+    "name": "אעבלין",
+    "migun_time": 60
+  },
+  {
+    "name": "אעירה השחר",
+    "migun_time": 90
+  },
+  {
+    "name": "אפיק",
+    "migun_time": 0
+  },
+  {
+    "name": "אפיקים",
+    "migun_time": 60
+  },
+  {
+    "name": "אפק",
+    "migun_time": 60
+  },
+  {
+    "name": "אפקה",
+    "migun_time": 90
+  },
+  {
+    "name": "אפרת",
+    "migun_time": 90
+  },
+  {
+    "name": "ארבל",
+    "migun_time": 60
+  },
+  {
+    "name": "ארגמן",
+    "migun_time": 90
+  },
+  {
+    "name": "ארז",
+    "migun_time": 15
+  },
+  {
+    "name": "אריאל",
+    "migun_time": 90
+  },
+  {
+    "name": "ארסוף",
+    "migun_time": 90
+  },
+  {
+    "name": "אש קודש",
+    "migun_time": 90
+  },
+  {
+    "name": "אשבול",
+    "migun_time": 30
+  },
+  {
+    "name": "אשבל",
+    "migun_time": 60
+  },
+  {
+    "name": "אשדוד - א,ב,ד,ה",
+    "migun_time": 45
+  },
+  {
+    "name": "אשדוד - איזור תעשייה צפוני",
+    "migun_time": 45
+  },
+  {
+    "name": "אשדוד - ג,ו,ז",
+    "migun_time": 45
+  },
+  {
+    "name": "אשדוד - ח,ט,י,יג,יד,טז",
+    "migun_time": 45
+  },
+  {
+    "name": "אשדוד -יא,יב,טו,יז,מרינה,סיטי",
+    "migun_time": 45
+  },
+  {
+    "name": "אשדות יעקב",
+    "migun_time": 60
+  },
+  {
+    "name": "אשחר",
+    "migun_time": 60
+  },
+  {
+    "name": "אשכולות",
+    "migun_time": 60
+  },
+  {
+    "name": "אשל הנשיא",
+    "migun_time": 45
+  },
+  {
+    "name": "אשלים",
+    "migun_time": 90
+  },
+  {
+    "name": "אשקלון - דרום",
+    "migun_time": 30
+  },
+  {
+    "name": "אשקלון - צפון",
+    "migun_time": 30
+  },
+  {
+    "name": "אשרת",
+    "migun_time": 30
+  },
+  {
+    "name": "אשתאול",
+    "migun_time": 90
+  },
+  {
+    "name": "אשתמוע",
+    "migun_time": 90
+  },
+  {
+    "name": "אתר דודאים",
+    "migun_time": 45
+  },
+  {
+    "name": "אתר ההנצחה גולני",
+    "migun_time": 60
+  },
+  {
+    "name": "באקה אל גרבייה",
+    "migun_time": 90
+  },
+  {
+    "name": "באר אורה",
+    "migun_time": 90
+  },
+  {
+    "name": "באר גנים",
+    "migun_time": 30
+  },
+  {
+    "name": "באר טוביה",
+    "migun_time": 45
+  },
+  {
+    "name": "באר יעקב",
+    "migun_time": 90
+  },
+  {
+    "name": "באר מילכה",
+    "migun_time": 60
+  },
+  {
+    "name": "באר שבע - דרום",
+    "migun_time": 60
+  },
+  {
+    "name": "באר שבע - מזרח",
+    "migun_time": 60
+  },
+  {
+    "name": "באר שבע - מערב",
+    "migun_time": 60
+  },
+  {
+    "name": "באר שבע - צפון",
+    "migun_time": 60
+  },
+  {
+    "name": "בארות יצחק",
+    "migun_time": 90
+  },
+  {
+    "name": "בארותיים",
+    "migun_time": 90
+  },
+  {
+    "name": "בארי",
+    "migun_time": 15
+  },
+  {
+    "name": "בוסתן הגליל",
+    "migun_time": 30
+  },
+  {
+    "name": "בועיינה-נוג'ידאת",
+    "migun_time": 60
+  },
+  {
+    "name": "בוקעתא",
+    "migun_time": 0
+  },
+  {
+    "name": "בורגתה",
+    "migun_time": 90
+  },
+  {
+    "name": "בחן",
+    "migun_time": 90
+  },
+  {
+    "name": "בטחה",
+    "migun_time": 45
+  },
+  {
+    "name": "בי\"ס כרמים בנימינה",
+    "migun_time": 90
+  },
+  {
+    "name": "ביצרון",
+    "migun_time": 60
+  },
+  {
+    "name": "ביר אלמכסור",
+    "migun_time": 60
+  },
+  {
+    "name": "ביר הדאג'",
+    "migun_time": 90
+  },
+  {
+    "name": "ביריה",
+    "migun_time": 30
+  },
+  {
+    "name": "בית אורן",
+    "migun_time": 60
+  },
+  {
+    "name": "בית אל",
+    "migun_time": 90
+  },
+  {
+    "name": "בית אלעזרי",
+    "migun_time": 60
+  },
+  {
+    "name": "בית אלפא וחפציבה",
+    "migun_time": 60
+  },
+  {
+    "name": "בית אריה",
+    "migun_time": 90
+  },
+  {
+    "name": "בית ברל",
+    "migun_time": 90
+  },
+  {
+    "name": "בית ג'אן",
+    "migun_time": 30
+  },
+  {
+    "name": "בית גוברין",
+    "migun_time": 60
+  },
+  {
+    "name": "בית גמליאל",
+    "migun_time": 60
+  },
+  {
+    "name": "בית דגן",
+    "migun_time": 90
+  },
+  {
+    "name": "בית הברכה",
+    "migun_time": 90
+  },
+  {
+    "name": "בית הגדי",
+    "migun_time": 30
+  },
+  {
+    "name": "בית הלוי",
+    "migun_time": 90
+  },
+  {
+    "name": "בית הלל",
+    "migun_time": 0
+  },
+  {
+    "name": "בית העלמין החדש נהריה",
+    "migun_time": 30
+  },
+  {
+    "name": "בית העלמין החדש עכו",
+    "migun_time": 30
+  },
+  {
+    "name": "בית העמק",
+    "migun_time": 30
+  },
+  {
+    "name": "בית הערבה",
+    "migun_time": 90
+  },
+  {
+    "name": "בית השיטה",
+    "migun_time": 60
+  },
+  {
+    "name": "בית זית",
+    "migun_time": 90
+  },
+  {
+    "name": "בית זרע",
+    "migun_time": 60
+  },
+  {
+    "name": "בית חג\"י",
+    "migun_time": 90
+  },
+  {
+    "name": "בית חגלה",
+    "migun_time": 90
+  },
+  {
+    "name": "בית חורון",
+    "migun_time": 90
+  },
+  {
+    "name": "בית חלקיה",
+    "migun_time": 60
+  },
+  {
+    "name": "בית חנן",
+    "migun_time": 90
+  },
+  {
+    "name": "בית חנניה",
+    "migun_time": 90
+  },
+  {
+    "name": "בית חרות",
+    "migun_time": 90
+  },
+  {
+    "name": "בית חשמונאי",
+    "migun_time": 90
+  },
+  {
+    "name": "בית יהושע",
+    "migun_time": 90
+  },
+  {
+    "name": "בית יוסף",
+    "migun_time": 60
+  },
+  {
+    "name": "בית ינאי",
+    "migun_time": 90
+  },
+  {
+    "name": "בית יצחק - שער חפר",
+    "migun_time": 90
+  },
+  {
+    "name": "בית ירח",
+    "migun_time": 60
+  },
+  {
+    "name": "בית יתיר",
+    "migun_time": 90
+  },
+  {
+    "name": "בית לחם הגלילית",
+    "migun_time": 60
+  },
+  {
+    "name": "בית מאיר",
+    "migun_time": 90
+  },
+  {
+    "name": "בית נחמיה",
+    "migun_time": 90
+  },
+  {
+    "name": "בית ניר",
+    "migun_time": 60
+  },
+  {
+    "name": "בית נקופה",
+    "migun_time": 90
+  },
+  {
+    "name": "בית סוהר צלמון",
+    "migun_time": 60
+  },
+  {
+    "name": "בית סוהר קישון",
+    "migun_time": 60
+  },
+  {
+    "name": "בית ספר שדה מירון",
+    "migun_time": 0
+  },
+  {
+    "name": "בית עובד",
+    "migun_time": 90
+  },
+  {
+    "name": "בית עוזיאל",
+    "migun_time": 90
+  },
+  {
+    "name": "בית עזרא",
+    "migun_time": 45
+  },
+  {
+    "name": "בית עלמין מורשה",
+    "migun_time": 90
+  },
+  {
+    "name": "בית עלמין תל רגב",
+    "migun_time": 60
+  },
+  {
+    "name": "בית עריף",
+    "migun_time": 90
+  },
+  {
+    "name": "בית צבי",
+    "migun_time": 60
+  },
+  {
+    "name": "בית קמה",
+    "migun_time": 45
+  },
+  {
+    "name": "בית קשת",
+    "migun_time": 60
+  },
+  {
+    "name": "בית רימון",
+    "migun_time": 60
+  },
+  {
+    "name": "בית שאן",
+    "migun_time": 60
+  },
+  {
+    "name": "בית שמש",
+    "migun_time": 90
+  },
+  {
+    "name": "בית שערים",
+    "migun_time": 60
+  },
+  {
+    "name": "בית שקמה",
+    "migun_time": 30
+  },
+  {
+    "name": "ביתן אהרן",
+    "migun_time": 90
+  },
+  {
+    "name": "ביתר עילית",
+    "migun_time": 90
+  },
+  {
+    "name": "בלפוריה",
+    "migun_time": 60
+  },
+  {
+    "name": "בן זכאי",
+    "migun_time": 60
+  },
+  {
+    "name": "בן עמי",
+    "migun_time": 0
+  },
+  {
+    "name": "בן שמן",
+    "migun_time": 90
+  },
+  {
+    "name": "בני אדם",
+    "migun_time": 90
+  },
+  {
+    "name": "בני ברק",
+    "migun_time": 90
+  },
+  {
+    "name": "בני דקלים",
+    "migun_time": 60
+  },
+  {
+    "name": "בני דרום",
+    "migun_time": 45
+  },
+  {
+    "name": "בני דרור",
+    "migun_time": 90
+  },
+  {
+    "name": "בני יהודה וגבעת יואב",
+    "migun_time": 15
+  },
+  {
+    "name": "בני נצרים",
+    "migun_time": 30
+  },
+  {
+    "name": "בני עטרות",
+    "migun_time": 90
+  },
+  {
+    "name": "בני עי'ש",
+    "migun_time": 60
+  },
+  {
+    "name": "בני ציון",
+    "migun_time": 90
+  },
+  {
+    "name": "בני ראם",
+    "migun_time": 60
+  },
+  {
+    "name": "בניה",
+    "migun_time": 60
+  },
+  {
+    "name": "בנימינה",
+    "migun_time": 90
+  },
+  {
+    "name": "בסמת טבעון",
+    "migun_time": 60
+  },
+  {
+    "name": "בענה",
+    "migun_time": 30
+  },
+  {
+    "name": "בצרה",
+    "migun_time": 90
+  },
+  {
+    "name": "בצת",
+    "migun_time": 0
+  },
+  {
+    "name": "בקוע",
+    "migun_time": 90
+  },
+  {
+    "name": "בקעות",
+    "migun_time": 90
+  },
+  {
+    "name": "בר גיורא",
+    "migun_time": 90
+  },
+  {
+    "name": "בר יוחאי",
+    "migun_time": 30
+  },
+  {
+    "name": "בר כוכבא",
+    "migun_time": 90
+  },
+  {
+    "name": "ברוכין",
+    "migun_time": 90
+  },
+  {
+    "name": "ברור חיל",
+    "migun_time": 30
+  },
+  {
+    "name": "ברוש",
+    "migun_time": 30
+  },
+  {
+    "name": "ברטעה",
+    "migun_time": 90
+  },
+  {
+    "name": "ברכיה",
+    "migun_time": 30
+  },
+  {
+    "name": "ברעם",
+    "migun_time": 0
+  },
+  {
+    "name": "ברקאי",
+    "migun_time": 90
+  },
+  {
+    "name": "ברקן",
+    "migun_time": 90
+  },
+  {
+    "name": "ברקת",
+    "migun_time": 90
+  },
+  {
+    "name": "בת הדר",
+    "migun_time": 30
+  },
+  {
+    "name": "בת חן",
+    "migun_time": 90
+  },
+  {
+    "name": "בת חפר",
+    "migun_time": 90
+  },
+  {
+    "name": "בת ים",
+    "migun_time": 90
+  },
+  {
+    "name": "בת עין",
+    "migun_time": 90
+  },
+  {
+    "name": "בת שלמה",
+    "migun_time": 60
+  },
+  {
+    "name": "בתי מלון ים המלח",
+    "migun_time": 90
+  },
+  {
+    "name": "בתרונות",
+    "migun_time": 90
+  },
+  {
+    "name": "ג'דידה מכר",
+    "migun_time": 30
+  },
+  {
+    "name": "ג'וליס",
+    "migun_time": 30
+  },
+  {
+    "name": "ג'לג'וליה",
+    "migun_time": 90
+  },
+  {
+    "name": "ג'סר א-זרקא",
+    "migun_time": 90
+  },
+  {
+    "name": "ג'ש - גוש חלב",
+    "migun_time": 0
+  },
+  {
+    "name": "ג'ת",
+    "migun_time": 90
+  },
+  {
+    "name": "גאולי תימן",
+    "migun_time": 90
+  },
+  {
+    "name": "גאולים",
+    "migun_time": 90
+  },
+  {
+    "name": "גאליה",
+    "migun_time": 60
+  },
+  {
+    "name": "גבולות",
+    "migun_time": 30
+  },
+  {
+    "name": "גבים, מכללת ספיר",
+    "migun_time": 15
+  },
+  {
+    "name": "גבע בנימין",
+    "migun_time": 90
+  },
+  {
+    "name": "גבע כרמל",
+    "migun_time": 60
+  },
+  {
+    "name": "גבעון החדשה",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעות",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעות בר",
+    "migun_time": 45
+  },
+  {
+    "name": "גבעות עדן",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת אבני",
+    "migun_time": 60
+  },
+  {
+    "name": "גבעת אלה",
+    "migun_time": 60
+  },
+  {
+    "name": "גבעת אסף",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת ברנר",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת הראל",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת הרואה",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת השלושה",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת וולפסון",
+    "migun_time": 60
+  },
+  {
+    "name": "גבעת וושינגטון",
+    "migun_time": 60
+  },
+  {
+    "name": "גבעת זאב",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת חיים איחוד",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת חיים מאוחד",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת חן",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת יערים",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת ישעיהו",
+    "migun_time": 60
+  },
+  {
+    "name": "גבעת כ'ח",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת ניל'י",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת עדה",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת עוז",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת פורת יוסף",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת שמואל",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעת שפירא",
+    "migun_time": 90
+  },
+  {
+    "name": "גבעתי",
+    "migun_time": 45
+  },
+  {
+    "name": "גבעתיים",
+    "migun_time": 90
+  },
+  {
+    "name": "גברעם",
+    "migun_time": 15
+  },
+  {
+    "name": "גבת",
+    "migun_time": 60
+  },
+  {
+    "name": "גדות",
+    "migun_time": 30
+  },
+  {
+    "name": "גדעונה",
+    "migun_time": 60
+  },
+  {
+    "name": "גדרה",
+    "migun_time": 60
+  },
+  {
+    "name": "גונן",
+    "migun_time": 15
+  },
+  {
+    "name": "גופנה",
+    "migun_time": 90
+  },
+  {
+    "name": "גורן",
+    "migun_time": 0
+  },
+  {
+    "name": "גורנות הגליל",
+    "migun_time": 0
+  },
+  {
+    "name": "גזית",
+    "migun_time": 60
+  },
+  {
+    "name": "גזר",
+    "migun_time": 90
+  },
+  {
+    "name": "גיאה",
+    "migun_time": 30
+  },
+  {
+    "name": "גיבתון",
+    "migun_time": 90
+  },
+  {
+    "name": "גיזו",
+    "migun_time": 90
+  },
+  {
+    "name": "גילת",
+    "migun_time": 45
+  },
+  {
+    "name": "גינוסר",
+    "migun_time": 60
+  },
+  {
+    "name": "גינתון",
+    "migun_time": 90
+  },
+  {
+    "name": "גיתה",
+    "migun_time": 30
+  },
+  {
+    "name": "גיתית",
+    "migun_time": 90
+  },
+  {
+    "name": "גלאון",
+    "migun_time": 45
+  },
+  {
+    "name": "גלגל",
+    "migun_time": 90
+  },
+  {
+    "name": "גלעד",
+    "migun_time": 90
+  },
+  {
+    "name": "גמזו",
+    "migun_time": 90
+  },
+  {
+    "name": "גן הדרום",
+    "migun_time": 60
+  },
+  {
+    "name": "גן השומרון",
+    "migun_time": 90
+  },
+  {
+    "name": "גן חיים",
+    "migun_time": 90
+  },
+  {
+    "name": "גן יאשיה",
+    "migun_time": 90
+  },
+  {
+    "name": "גן יבנה",
+    "migun_time": 45
+  },
+  {
+    "name": "גן נר",
+    "migun_time": 60
+  },
+  {
+    "name": "גן שורק",
+    "migun_time": 90
+  },
+  {
+    "name": "גן שלמה",
+    "migun_time": 90
+  },
+  {
+    "name": "גן שמואל",
+    "migun_time": 90
+  },
+  {
+    "name": "גנות",
+    "migun_time": 90
+  },
+  {
+    "name": "גנות הדר",
+    "migun_time": 90
+  },
+  {
+    "name": "גני הדר",
+    "migun_time": 90
+  },
+  {
+    "name": "גני חוגה",
+    "migun_time": 60
+  },
+  {
+    "name": "גני טל",
+    "migun_time": 60
+  },
+  {
+    "name": "גני יוחנן",
+    "migun_time": 90
+  },
+  {
+    "name": "גני עם",
+    "migun_time": 90
+  },
+  {
+    "name": "גני תקווה",
+    "migun_time": 90
+  },
+  {
+    "name": "גניגר",
+    "migun_time": 60
+  },
+  {
+    "name": "געש",
+    "migun_time": 90
+  },
+  {
+    "name": "געתון",
+    "migun_time": 15
+  },
+  {
+    "name": "גפן",
+    "migun_time": 60
+  },
+  {
+    "name": "גרופית",
+    "migun_time": 90
+  },
+  {
+    "name": "גשור",
+    "migun_time": 15
+  },
+  {
+    "name": "גשר",
+    "migun_time": 60
+  },
+  {
+    "name": "גשר הזיו",
+    "migun_time": 0
+  },
+  {
+    "name": "גת",
+    "migun_time": 45
+  },
+  {
+    "name": "גת רימון",
+    "migun_time": 90
+  },
+  {
+    "name": "דבוריה",
+    "migun_time": 60
+  },
+  {
+    "name": "דביר",
+    "migun_time": 45
+  },
+  {
+    "name": "דברת",
+    "migun_time": 60
+  },
+  {
+    "name": "דגניה א",
+    "migun_time": 60
+  },
+  {
+    "name": "דגניה ב",
+    "migun_time": 60
+  },
+  {
+    "name": "דוב'ב",
+    "migun_time": 0
+  },
+  {
+    "name": "דולב",
+    "migun_time": 90
+  },
+  {
+    "name": "דור, נחשולים",
+    "migun_time": 60
+  },
+  {
+    "name": "דורות",
+    "migun_time": 30
+  },
+  {
+    "name": "דורות עילית",
+    "migun_time": 90
+  },
+  {
+    "name": "דחי",
+    "migun_time": 60
+  },
+  {
+    "name": "דימונה",
+    "migun_time": 90
+  },
+  {
+    "name": "דיר אל-אסד",
+    "migun_time": 30
+  },
+  {
+    "name": "דיר חנא",
+    "migun_time": 60
+  },
+  {
+    "name": "דישון",
+    "migun_time": 0
+  },
+  {
+    "name": "דליה",
+    "migun_time": 90
+  },
+  {
+    "name": "דלית אל כרמל",
+    "migun_time": 60
+  },
+  {
+    "name": "דלתון",
+    "migun_time": 0
+  },
+  {
+    "name": "דמיידה",
+    "migun_time": 60
+  },
+  {
+    "name": "דפנה",
+    "migun_time": 0
+  },
+  {
+    "name": "דקל",
+    "migun_time": 15
+  },
+  {
+    "name": "האון",
+    "migun_time": 30
+  },
+  {
+    "name": "הבונים",
+    "migun_time": 60
+  },
+  {
+    "name": "הגבעה הצהובה",
+    "migun_time": 90
+  },
+  {
+    "name": "הגושרים",
+    "migun_time": 0
+  },
+  {
+    "name": "הדר עם",
+    "migun_time": 90
+  },
+  {
+    "name": "הוד השרון",
+    "migun_time": 90
+  },
+  {
+    "name": "הודיה",
+    "migun_time": 30
+  },
+  {
+    "name": "הודיות",
+    "migun_time": 60
+  },
+  {
+    "name": "הושעיה",
+    "migun_time": 60
+  },
+  {
+    "name": "הזורעים",
+    "migun_time": 60
+  },
+  {
+    "name": "החווה של אורי כהן",
+    "migun_time": 90
+  },
+  {
+    "name": "החווה של זוהר",
+    "migun_time": 90
+  },
+  {
+    "name": "החווה של יאיא",
+    "migun_time": 90
+  },
+  {
+    "name": "החווה של מנחם",
+    "migun_time": 90
+  },
+  {
+    "name": "החווה של עשהאל",
+    "migun_time": 90
+  },
+  {
+    "name": "החותרים",
+    "migun_time": 60
+  },
+  {
+    "name": "היוגב",
+    "migun_time": 60
+  },
+  {
+    "name": "היישוב היהודי חברון",
+    "migun_time": 90
+  },
+  {
+    "name": "הילה",
+    "migun_time": 0
+  },
+  {
+    "name": "המעפיל",
+    "migun_time": 90
+  },
+  {
+    "name": "המרכז האקדמי רופין",
+    "migun_time": 90
+  },
+  {
+    "name": "הסוללים",
+    "migun_time": 60
+  },
+  {
+    "name": "העוגן",
+    "migun_time": 90
+  },
+  {
+    "name": "הר אדר",
+    "migun_time": 90
+  },
+  {
+    "name": "הר ברכה",
+    "migun_time": 90
+  },
+  {
+    "name": "הר גילה",
+    "migun_time": 90
+  },
+  {
+    "name": "הר חלוץ",
+    "migun_time": 30
+  },
+  {
+    "name": "הר עמשא",
+    "migun_time": 90
+  },
+  {
+    "name": "הראל",
+    "migun_time": 90
+  },
+  {
+    "name": "הרדוף",
+    "migun_time": 60
+  },
+  {
+    "name": "הרצליה - מערב",
+    "migun_time": 90
+  },
+  {
+    "name": "הרצליה - מרכז וגליל ים",
+    "migun_time": 90
+  },
+  {
+    "name": "הררית יחד",
+    "migun_time": 60
+  },
+  {
+    "name": "ואדי אל חמאם",
+    "migun_time": 60
+  },
+  {
+    "name": "ואדי אל נעם דרום",
+    "migun_time": 60
+  },
+  {
+    "name": "ורד יריחו",
+    "migun_time": 90
+  },
+  {
+    "name": "ורדון",
+    "migun_time": 45
+  },
+  {
+    "name": "זבדיאל",
+    "migun_time": 45
+  },
+  {
+    "name": "זוהר",
+    "migun_time": 30
+  },
+  {
+    "name": "זיקים",
+    "migun_time": 15
+  },
+  {
+    "name": "זיתן",
+    "migun_time": 90
+  },
+  {
+    "name": "זכרון יעקב",
+    "migun_time": 90
+  },
+  {
+    "name": "זכריה",
+    "migun_time": 60
+  },
+  {
+    "name": "זמר",
+    "migun_time": 90
+  },
+  {
+    "name": "זמרת, שובה",
+    "migun_time": 15
+  },
+  {
+    "name": "זנוח",
+    "migun_time": 90
+  },
+  {
+    "name": "זרועה",
+    "migun_time": 30
+  },
+  {
+    "name": "זרזיר",
+    "migun_time": 60
+  },
+  {
+    "name": "זרחיה",
+    "migun_time": 45
+  },
+  {
+    "name": "זרעית",
+    "migun_time": 0
+  },
+  {
+    "name": "חבצלת השרון וצוקי ים",
+    "migun_time": 90
+  },
+  {
+    "name": "חג'אג'רה",
+    "migun_time": 60
+  },
+  {
+    "name": "חגור",
+    "migun_time": 90
+  },
+  {
+    "name": "חגלה",
+    "migun_time": 90
+  },
+  {
+    "name": "חד נס",
+    "migun_time": 15
+  },
+  {
+    "name": "חדיד",
+    "migun_time": 90
+  },
+  {
+    "name": "חדרה - מזרח",
+    "migun_time": 90
+  },
+  {
+    "name": "חדרה - מערב",
+    "migun_time": 90
+  },
+  {
+    "name": "חדרה - מרכז",
+    "migun_time": 90
+  },
+  {
+    "name": "חדרה - נווה חיים",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות אביה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות אביחי",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות אל נווה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות אלחי",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות ארץ האיילים",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות אשכולות",
+    "migun_time": 60
+  },
+  {
+    "name": "חוות בניהו",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות גלעד",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות גנות",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות דרומא",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות הרועה העברי",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות הרשאש",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות חנינא",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות טואמין",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות טליה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות יאיר",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות יד השומר",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות יויו",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות ינון",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מגדלים",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מגנזי",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מדבר חבר",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מור ואברהם",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מלאכי אברהם",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מלכיאל",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מנחם",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מעלה אהוביה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מקנה יהודה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות מרום שמואל",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות נווה צוף",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות נוף אב\"י",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות נחל שילה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות נחלת אבות",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות נחלת צבי",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות עדן",
+    "migun_time": 60
+  },
+  {
+    "name": "חוות עולם חסד",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות עמיאל",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות פריאל",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות צאן קדר",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות צרידה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות קשואלה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות ראש תאנה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות שדה",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות שוביאל",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות שחרית",
+    "migun_time": 90
+  },
+  {
+    "name": "חוות תלם צפון",
+    "migun_time": 90
+  },
+  {
+    "name": "חולדה",
+    "migun_time": 90
+  },
+  {
+    "name": "חולון",
+    "migun_time": 90
+  },
+  {
+    "name": "חולית",
+    "migun_time": 15
+  },
+  {
+    "name": "חולתה",
+    "migun_time": 30
+  },
+  {
+    "name": "חומש",
+    "migun_time": 90
+  },
+  {
+    "name": "חוסן",
+    "migun_time": 15
+  },
+  {
+    "name": "חוסנייה",
+    "migun_time": 60
+  },
+  {
+    "name": "חוף אכזיב",
+    "migun_time": 0
+  },
+  {
+    "name": "חוף בצת",
+    "migun_time": 0
+  },
+  {
+    "name": "חוף זיקים",
+    "migun_time": 15
+  },
+  {
+    "name": "חוף קליה",
+    "migun_time": 90
+  },
+  {
+    "name": "חופית",
+    "migun_time": 90
+  },
+  {
+    "name": "חוקוק",
+    "migun_time": 60
+  },
+  {
+    "name": "חורה",
+    "migun_time": 90
+  },
+  {
+    "name": "חורפיש",
+    "migun_time": 0
+  },
+  {
+    "name": "חורשים",
+    "migun_time": 90
+  },
+  {
+    "name": "חזון",
+    "migun_time": 60
+  },
+  {
+    "name": "חיבת ציון",
+    "migun_time": 90
+  },
+  {
+    "name": "חיננית",
+    "migun_time": 90
+  },
+  {
+    "name": "חיפה - בת גלים ק.אליעזר",
+    "migun_time": 60
+  },
+  {
+    "name": "חיפה - כרמל, הדר ועיר תחתית",
+    "migun_time": 60
+  },
+  {
+    "name": "חיפה - מערב",
+    "migun_time": 60
+  },
+  {
+    "name": "חיפה - מפרץ",
+    "migun_time": 60
+  },
+  {
+    "name": "חיפה - נווה שאנן ורמות כרמל",
+    "migun_time": 60
+  },
+  {
+    "name": "חיפה - קריית חיים ושמואל",
+    "migun_time": 60
+  },
+  {
+    "name": "חירן",
+    "migun_time": 90
+  },
+  {
+    "name": "חלץ",
+    "migun_time": 30
+  },
+  {
+    "name": "חמד",
+    "migun_time": 90
+  },
+  {
+    "name": "חמדיה",
+    "migun_time": 60
+  },
+  {
+    "name": "חמדת",
+    "migun_time": 90
+  },
+  {
+    "name": "חמדת ימים",
+    "migun_time": 30
+  },
+  {
+    "name": "חמרה",
+    "migun_time": 90
+  },
+  {
+    "name": "חמת גדר",
+    "migun_time": 15
+  },
+  {
+    "name": "חניאל",
+    "migun_time": 90
+  },
+  {
+    "name": "חניון רעים אנדרטת הנובה",
+    "migun_time": 15
+  },
+  {
+    "name": "חניתה",
+    "migun_time": 0
+  },
+  {
+    "name": "חנתון",
+    "migun_time": 60
+  },
+  {
+    "name": "חספין",
+    "migun_time": 0
+  },
+  {
+    "name": "חפץ חיים",
+    "migun_time": 60
+  },
+  {
+    "name": "חצב",
+    "migun_time": 60
+  },
+  {
+    "name": "חצבה",
+    "migun_time": 90
+  },
+  {
+    "name": "חצור",
+    "migun_time": 45
+  },
+  {
+    "name": "חצור הגלילית",
+    "migun_time": 30
+  },
+  {
+    "name": "חצרים",
+    "migun_time": 60
+  },
+  {
+    "name": "חרב לאת",
+    "migun_time": 90
+  },
+  {
+    "name": "חרוצים",
+    "migun_time": 90
+  },
+  {
+    "name": "חרות",
+    "migun_time": 90
+  },
+  {
+    "name": "חריש",
+    "migun_time": 90
+  },
+  {
+    "name": "חרמש",
+    "migun_time": 90
+  },
+  {
+    "name": "חרמש דרום",
+    "migun_time": 90
+  },
+  {
+    "name": "חרשה",
+    "migun_time": 90
+  },
+  {
+    "name": "חרשים",
+    "migun_time": 30
+  },
+  {
+    "name": "חשמונאים",
+    "migun_time": 90
+  },
+  {
+    "name": "טבריה",
+    "migun_time": 60
+  },
+  {
+    "name": "טובא זנגריה",
+    "migun_time": 30
+  },
+  {
+    "name": "טורעאן",
+    "migun_time": 60
+  },
+  {
+    "name": "טייבה",
+    "migun_time": 90
+  },
+  {
+    "name": "טייבה בגלבוע",
+    "migun_time": 60
+  },
+  {
+    "name": "טירה",
+    "migun_time": 90
+  },
+  {
+    "name": "טירת יהודה",
+    "migun_time": 90
+  },
+  {
+    "name": "טירת כרמל",
+    "migun_time": 60
+  },
+  {
+    "name": "טירת צבי",
+    "migun_time": 60
+  },
+  {
+    "name": "טל - אל",
+    "migun_time": 30
+  },
+  {
+    "name": "טל מנשה",
+    "migun_time": 90
+  },
+  {
+    "name": "טל שחר",
+    "migun_time": 90
+  },
+  {
+    "name": "טללים",
+    "migun_time": 90
+  },
+  {
+    "name": "טלמון",
+    "migun_time": 90
+  },
+  {
+    "name": "טמרה",
+    "migun_time": 60
+  },
+  {
+    "name": "טמרה בגלבוע",
+    "migun_time": 60
+  },
+  {
+    "name": "טנא עומרים",
+    "migun_time": 90
+  },
+  {
+    "name": "טפחות",
+    "migun_time": 60
+  },
+  {
+    "name": "יבוא דודי",
+    "migun_time": 90
+  },
+  {
+    "name": "יבול",
+    "migun_time": 15
+  },
+  {
+    "name": "יבנאל",
+    "migun_time": 60
+  },
+  {
+    "name": "יבנה",
+    "migun_time": 60
+  },
+  {
+    "name": "יגור",
+    "migun_time": 60
+  },
+  {
+    "name": "יגל",
+    "migun_time": 90
+  },
+  {
+    "name": "יד בנימין",
+    "migun_time": 60
+  },
+  {
+    "name": "יד השמונה",
+    "migun_time": 90
+  },
+  {
+    "name": "יד חנה",
+    "migun_time": 90
+  },
+  {
+    "name": "יד מרדכי",
+    "migun_time": 15
+  },
+  {
+    "name": "יד נתן",
+    "migun_time": 30
+  },
+  {
+    "name": "יד רמב'ם",
+    "migun_time": 90
+  },
+  {
+    "name": "יהוד מונוסון",
+    "migun_time": 90
+  },
+  {
+    "name": "יהל",
+    "migun_time": 90
+  },
+  {
+    "name": "יובלים",
+    "migun_time": 60
+  },
+  {
+    "name": "יודפת",
+    "migun_time": 60
+  },
+  {
+    "name": "יונתן",
+    "migun_time": 0
+  },
+  {
+    "name": "יושיביה",
+    "migun_time": 15
+  },
+  {
+    "name": "יזרעאל",
+    "migun_time": 60
+  },
+  {
+    "name": "יחיעם",
+    "migun_time": 15
+  },
+  {
+    "name": "יטבתה",
+    "migun_time": 90
+  },
+  {
+    "name": "ייט'ב",
+    "migun_time": 90
+  },
+  {
+    "name": "יכיני",
+    "migun_time": 15
+  },
+  {
+    "name": "ינוב",
+    "migun_time": 90
+  },
+  {
+    "name": "ינוח ג'ת",
+    "migun_time": 30
+  },
+  {
+    "name": "ינון",
+    "migun_time": 60
+  },
+  {
+    "name": "יסוד המעלה",
+    "migun_time": 30
+  },
+  {
+    "name": "יסודות",
+    "migun_time": 90
+  },
+  {
+    "name": "יסעור",
+    "migun_time": 60
+  },
+  {
+    "name": "יעבץ, יעף",
+    "migun_time": 90
+  },
+  {
+    "name": "יעד",
+    "migun_time": 60
+  },
+  {
+    "name": "יערה",
+    "migun_time": 0
+  },
+  {
+    "name": "יפיע",
+    "migun_time": 60
+  },
+  {
+    "name": "יפית",
+    "migun_time": 90
+  },
+  {
+    "name": "יפעת",
+    "migun_time": 60
+  },
+  {
+    "name": "יפתח",
+    "migun_time": 0
+  },
+  {
+    "name": "יצהר",
+    "migun_time": 90
+  },
+  {
+    "name": "יציץ",
+    "migun_time": 90
+  },
+  {
+    "name": "יקום",
+    "migun_time": 90
+  },
+  {
+    "name": "יקיר",
+    "migun_time": 90
+  },
+  {
+    "name": "יקנעם המושבה והזורע",
+    "migun_time": 90
+  },
+  {
+    "name": "יקנעם עילית",
+    "migun_time": 90
+  },
+  {
+    "name": "יראון",
+    "migun_time": 0
+  },
+  {
+    "name": "ירדנה",
+    "migun_time": 60
+  },
+  {
+    "name": "ירוחם",
+    "migun_time": 90
+  },
+  {
+    "name": "ירושלים - אזור תעשייה עטרות",
+    "migun_time": 90
+  },
+  {
+    "name": "ירושלים - דרום",
+    "migun_time": 90
+  },
+  {
+    "name": "ירושלים - כפר עקב",
+    "migun_time": 90
+  },
+  {
+    "name": "ירושלים - מזרח",
+    "migun_time": 90
+  },
+  {
+    "name": "ירושלים - מערב",
+    "migun_time": 90
+  },
+  {
+    "name": "ירושלים - מרכז",
+    "migun_time": 90
+  },
+  {
+    "name": "ירושלים - צפון",
+    "migun_time": 90
+  },
+  {
+    "name": "ירחיב",
+    "migun_time": 90
+  },
+  {
+    "name": "ירכא",
+    "migun_time": 30
+  },
+  {
+    "name": "ירקונה",
+    "migun_time": 90
+  },
+  {
+    "name": "ישובי אומן",
+    "migun_time": 60
+  },
+  {
+    "name": "ישובי יעל",
+    "migun_time": 60
+  },
+  {
+    "name": "ישעי",
+    "migun_time": 90
+  },
+  {
+    "name": "ישרש",
+    "migun_time": 90
+  },
+  {
+    "name": "יתד",
+    "migun_time": 15
+  },
+  {
+    "name": "כאבול",
+    "migun_time": 60
+  },
+  {
+    "name": "כאוכב אבו אלהיג'א",
+    "migun_time": 60
+  },
+  {
+    "name": "כברי",
+    "migun_time": 0
+  },
+  {
+    "name": "כדורי",
+    "migun_time": 60
+  },
+  {
+    "name": "כוכב השחר",
+    "migun_time": 90
+  },
+  {
+    "name": "כוכב יאיר - צור יגאל",
+    "migun_time": 90
+  },
+  {
+    "name": "כוכב יעקב",
+    "migun_time": 90
+  },
+  {
+    "name": "כוכב מיכאל",
+    "migun_time": 30
+  },
+  {
+    "name": "כורזים ורד הגליל",
+    "migun_time": 30
+  },
+  {
+    "name": "כחל",
+    "migun_time": 60
+  },
+  {
+    "name": "כינרת מושבה",
+    "migun_time": 60
+  },
+  {
+    "name": "כינרת קבוצה",
+    "migun_time": 60
+  },
+  {
+    "name": "כיסופים",
+    "migun_time": 15
+  },
+  {
+    "name": "כישור",
+    "migun_time": 30
+  },
+  {
+    "name": "כליל",
+    "migun_time": 30
+  },
+  {
+    "name": "כלנית",
+    "migun_time": 60
+  },
+  {
+    "name": "כמהין",
+    "migun_time": 60
+  },
+  {
+    "name": "כמון - כמאנה מזרחית",
+    "migun_time": 30
+  },
+  {
+    "name": "כנות",
+    "migun_time": 60
+  },
+  {
+    "name": "כנף",
+    "migun_time": 15
+  },
+  {
+    "name": "כסייפה",
+    "migun_time": 90
+  },
+  {
+    "name": "כסלון",
+    "migun_time": 90
+  },
+  {
+    "name": "כסרא סמיע",
+    "migun_time": 30
+  },
+  {
+    "name": "כעביה טבאש",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר אביב",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר אדומים",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר אוריה",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר אחים",
+    "migun_time": 45
+  },
+  {
+    "name": "כפר אלדד",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר ביאליק",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר ביל'ו",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר בלום",
+    "migun_time": 0
+  },
+  {
+    "name": "כפר בן נון",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר ברא",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר ברוך",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר גדעון",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר גלים",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר גליקסון",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר גלעדי",
+    "migun_time": 0
+  },
+  {
+    "name": "כפר גמילה מלכישוע",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר דניאל",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר האורנים",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר החורש",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר המכבי",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר הנגיד",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר הנוער קריית יערים",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר הנוקדים",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר הנשיא",
+    "migun_time": 30
+  },
+  {
+    "name": "כפר הס",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר הרא'ה",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר הרי'ף וצומת ראם",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר ויתקין",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר ורבורג",
+    "migun_time": 45
+  },
+  {
+    "name": "כפר ורדים",
+    "migun_time": 15
+  },
+  {
+    "name": "כפר זוהרים",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר זיתים",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר ח'וואלד",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר חב'ד",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר חיטים",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר חיים",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר חנניה",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר חסידים",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר חרוב",
+    "migun_time": 15
+  },
+  {
+    "name": "כפר טרומן",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר יאסיף",
+    "migun_time": 30
+  },
+  {
+    "name": "כפר ידידיה",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר יהושע",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר יובל",
+    "migun_time": 0
+  },
+  {
+    "name": "כפר יונה",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר יחזקאל",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר כמא",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר כנא",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר מונש",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר מימון ותושיה",
+    "migun_time": 15
+  },
+  {
+    "name": "כפר מל'ל",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר מנדא",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר מנחם",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר מסריק",
+    "migun_time": 30
+  },
+  {
+    "name": "כפר מצר",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר מרדכי",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר נהר הירדן",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר נוער בן שמן",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר נטר",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר סאלד",
+    "migun_time": 15
+  },
+  {
+    "name": "כפר סבא",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר סילבר",
+    "migun_time": 30
+  },
+  {
+    "name": "כפר סירקין",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר עבודה",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר עזה",
+    "migun_time": 15
+  },
+  {
+    "name": "כפר עציון",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר פינס",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר קאסם",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר קיש",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר קרע",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר רופין",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר רות",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר שמאי",
+    "migun_time": 30
+  },
+  {
+    "name": "כפר שמואל",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר שמריהו",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר תבור",
+    "migun_time": 60
+  },
+  {
+    "name": "כפר תפוח",
+    "migun_time": 90
+  },
+  {
+    "name": "כפר תקווה",
+    "migun_time": 60
+  },
+  {
+    "name": "כרכום",
+    "migun_time": 30
+  },
+  {
+    "name": "כרם ביבנה",
+    "migun_time": 60
+  },
+  {
+    "name": "כרם בן זמרה",
+    "migun_time": 0
+  },
+  {
+    "name": "כרם מהר'ל",
+    "migun_time": 60
+  },
+  {
+    "name": "כרם רעים",
+    "migun_time": 90
+  },
+  {
+    "name": "כרם שלום",
+    "migun_time": 15
+  },
+  {
+    "name": "כרמי יוסף",
+    "migun_time": 90
+  },
+  {
+    "name": "כרמי צור",
+    "migun_time": 90
+  },
+  {
+    "name": "כרמי קטיף ואמציה",
+    "migun_time": 60
+  },
+  {
+    "name": "כרמיאל",
+    "migun_time": 30
+  },
+  {
+    "name": "כרמיה",
+    "migun_time": 15
+  },
+  {
+    "name": "כרמים",
+    "migun_time": 90
+  },
+  {
+    "name": "כרמית",
+    "migun_time": 60
+  },
+  {
+    "name": "כרמל",
+    "migun_time": 90
+  },
+  {
+    "name": "לב החולה",
+    "migun_time": 0
+  },
+  {
+    "name": "לבון",
+    "migun_time": 30
+  },
+  {
+    "name": "לביא",
+    "migun_time": 60
+  },
+  {
+    "name": "לבנים",
+    "migun_time": 60
+  },
+  {
+    "name": "להב",
+    "migun_time": 45
+  },
+  {
+    "name": "להבות הבשן",
+    "migun_time": 15
+  },
+  {
+    "name": "להבות חביבה",
+    "migun_time": 90
+  },
+  {
+    "name": "להבים",
+    "migun_time": 45
+  },
+  {
+    "name": "לוד",
+    "migun_time": 90
+  },
+  {
+    "name": "לוזית",
+    "migun_time": 60
+  },
+  {
+    "name": "לוחמי הגטאות",
+    "migun_time": 30
+  },
+  {
+    "name": "לוטם וחמדון",
+    "migun_time": 60
+  },
+  {
+    "name": "לוטן",
+    "migun_time": 90
+  },
+  {
+    "name": "לטרון",
+    "migun_time": 90
+  },
+  {
+    "name": "לימן",
+    "migun_time": 0
+  },
+  {
+    "name": "לכיש",
+    "migun_time": 45
+  },
+  {
+    "name": "לפיד",
+    "migun_time": 90
+  },
+  {
+    "name": "לפידות",
+    "migun_time": 30
+  },
+  {
+    "name": "לקיה",
+    "migun_time": 60
+  },
+  {
+    "name": "מאור",
+    "migun_time": 90
+  },
+  {
+    "name": "מאיר שפיה",
+    "migun_time": 60
+  },
+  {
+    "name": "מבוא ביתר",
+    "migun_time": 90
+  },
+  {
+    "name": "מבוא דותן",
+    "migun_time": 90
+  },
+  {
+    "name": "מבוא חורון",
+    "migun_time": 90
+  },
+  {
+    "name": "מבוא חמה",
+    "migun_time": 15
+  },
+  {
+    "name": "מבוא מודיעים",
+    "migun_time": 90
+  },
+  {
+    "name": "מבואות יריחו",
+    "migun_time": 90
+  },
+  {
+    "name": "מבועים",
+    "migun_time": 30
+  },
+  {
+    "name": "מבטחים, עמיעוז, ישע",
+    "migun_time": 15
+  },
+  {
+    "name": "מבקיעים",
+    "migun_time": 30
+  },
+  {
+    "name": "מבשרת ציון",
+    "migun_time": 90
+  },
+  {
+    "name": "מג'דל כרום",
+    "migun_time": 30
+  },
+  {
+    "name": "מג'דל שמס",
+    "migun_time": 0
+  },
+  {
+    "name": "מגדים",
+    "migun_time": 60
+  },
+  {
+    "name": "מגדל",
+    "migun_time": 60
+  },
+  {
+    "name": "מגדל העמק",
+    "migun_time": 60
+  },
+  {
+    "name": "מגדל עוז",
+    "migun_time": 90
+  },
+  {
+    "name": "מגדל תפן",
+    "migun_time": 30
+  },
+  {
+    "name": "מגדלים",
+    "migun_time": 90
+  },
+  {
+    "name": "מגל",
+    "migun_time": 90
+  },
+  {
+    "name": "מגן",
+    "migun_time": 15
+  },
+  {
+    "name": "מגן שאול",
+    "migun_time": 60
+  },
+  {
+    "name": "מגרון",
+    "migun_time": 90
+  },
+  {
+    "name": "מגשימים",
+    "migun_time": 90
+  },
+  {
+    "name": "מדרך עוז",
+    "migun_time": 90
+  },
+  {
+    "name": "מדרשת בן גוריון",
+    "migun_time": 90
+  },
+  {
+    "name": "מודיעין - ישפרו סנטר",
+    "migun_time": 90
+  },
+  {
+    "name": "מודיעין - ליגד סנטר",
+    "migun_time": 90
+  },
+  {
+    "name": "מודיעין מכבים רעות",
+    "migun_time": 90
+  },
+  {
+    "name": "מודיעין עילית",
+    "migun_time": 90
+  },
+  {
+    "name": "מולדת",
+    "migun_time": 60
+  },
+  {
+    "name": "מועאוויה",
+    "migun_time": 90
+  },
+  {
+    "name": "מוצא עילית",
+    "migun_time": 90
+  },
+  {
+    "name": "מוקיבלה",
+    "migun_time": 60
+  },
+  {
+    "name": "מורן",
+    "migun_time": 60
+  },
+  {
+    "name": "מורשת",
+    "migun_time": 60
+  },
+  {
+    "name": "מזור",
+    "migun_time": 90
+  },
+  {
+    "name": "מזכרת בתיה",
+    "migun_time": 90
+  },
+  {
+    "name": "מזרע",
+    "migun_time": 60
+  },
+  {
+    "name": "מזרעה",
+    "migun_time": 30
+  },
+  {
+    "name": "מחולה",
+    "migun_time": 90
+  },
+  {
+    "name": "מחניים",
+    "migun_time": 30
+  },
+  {
+    "name": "מחסיה",
+    "migun_time": 90
+  },
+  {
+    "name": "מטווח ניר עם",
+    "migun_time": 15
+  },
+  {
+    "name": "מטולה",
+    "migun_time": 0
+  },
+  {
+    "name": "מטע",
+    "migun_time": 90
+  },
+  {
+    "name": "מי עמי",
+    "migun_time": 90
+  },
+  {
+    "name": "מייסר",
+    "migun_time": 90
+  },
+  {
+    "name": "מיני ישראל - נחשון",
+    "migun_time": 90
+  },
+  {
+    "name": "מיצד",
+    "migun_time": 90
+  },
+  {
+    "name": "מיצר",
+    "migun_time": 0
+  },
+  {
+    "name": "מירב",
+    "migun_time": 60
+  },
+  {
+    "name": "מירון",
+    "migun_time": 30
+  },
+  {
+    "name": "מישר",
+    "migun_time": 60
+  },
+  {
+    "name": "מיתר",
+    "migun_time": 90
+  },
+  {
+    "name": "מכון וינגייט",
+    "migun_time": 90
+  },
+  {
+    "name": "מכורה",
+    "migun_time": 90
+  },
+  {
+    "name": "מכינת אלישע",
+    "migun_time": 90
+  },
+  {
+    "name": "מכמורת",
+    "migun_time": 90
+  },
+  {
+    "name": "מכמנים - כמאנה מערבית",
+    "migun_time": 30
+  },
+  {
+    "name": "מלאכי השלום",
+    "migun_time": 90
+  },
+  {
+    "name": "מלונות ים המלח מרכז",
+    "migun_time": 90
+  },
+  {
+    "name": "מלכיה",
+    "migun_time": 0
+  },
+  {
+    "name": "מנוחה",
+    "migun_time": 45
+  },
+  {
+    "name": "מנוף",
+    "migun_time": 60
+  },
+  {
+    "name": "מנות",
+    "migun_time": 0
+  },
+  {
+    "name": "מנחמיה",
+    "migun_time": 60
+  },
+  {
+    "name": "מנחת מחניים",
+    "migun_time": 30
+  },
+  {
+    "name": "מנרה",
+    "migun_time": 0
+  },
+  {
+    "name": "מנשית זבדה",
+    "migun_time": 60
+  },
+  {
+    "name": "מסד",
+    "migun_time": 60
+  },
+  {
+    "name": "מסדה",
+    "migun_time": 30
+  },
+  {
+    "name": "מסוף אורנית",
+    "migun_time": 90
+  },
+  {
+    "name": "מסילות",
+    "migun_time": 60
+  },
+  {
+    "name": "מסילת ציון",
+    "migun_time": 90
+  },
+  {
+    "name": "מסלול",
+    "migun_time": 30
+  },
+  {
+    "name": "מסעדה",
+    "migun_time": 0
+  },
+  {
+    "name": "מע'אר",
+    "migun_time": 60
+  },
+  {
+    "name": "מעברות",
+    "migun_time": 90
+  },
+  {
+    "name": "מעגלים, גבעולים, מלילות",
+    "migun_time": 30
+  },
+  {
+    "name": "מעגן",
+    "migun_time": 30
+  },
+  {
+    "name": "מעגן מיכאל",
+    "migun_time": 90
+  },
+  {
+    "name": "מעוז חיים",
+    "migun_time": 60
+  },
+  {
+    "name": "מעון",
+    "migun_time": 90
+  },
+  {
+    "name": "מעון צופיה",
+    "migun_time": 60
+  },
+  {
+    "name": "מעונה",
+    "migun_time": 0
+  },
+  {
+    "name": "מעיין ברוך",
+    "migun_time": 0
+  },
+  {
+    "name": "מעיין צבי",
+    "migun_time": 90
+  },
+  {
+    "name": "מעיליא",
+    "migun_time": 0
+  },
+  {
+    "name": "מעלה אדומים",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלה אפרים",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלה גלבוע",
+    "migun_time": 60
+  },
+  {
+    "name": "מעלה גמלא",
+    "migun_time": 15
+  },
+  {
+    "name": "מעלה החמישה",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלה חבר",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלה לבונה",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלה מכמש",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלה עירון",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלה עמוס",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלה צביה",
+    "migun_time": 60
+  },
+  {
+    "name": "מעלה רחבעם",
+    "migun_time": 90
+  },
+  {
+    "name": "מעלות תרשיחא",
+    "migun_time": 0
+  },
+  {
+    "name": "מענית, גבעת חביבה",
+    "migun_time": 90
+  },
+  {
+    "name": "מעש",
+    "migun_time": 90
+  },
+  {
+    "name": "מפלסים",
+    "migun_time": 15
+  },
+  {
+    "name": "מצדה",
+    "migun_time": 90
+  },
+  {
+    "name": "מצובה",
+    "migun_time": 0
+  },
+  {
+    "name": "מצוקי דרגות",
+    "migun_time": 90
+  },
+  {
+    "name": "מצליח",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה",
+    "migun_time": 60
+  },
+  {
+    "name": "מצפה אבי'ב",
+    "migun_time": 60
+  },
+  {
+    "name": "מצפה אילן",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה דני",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה זי\"ו",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה חגית",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה יאיר",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה יריחו",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה מדרג",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה נטופה",
+    "migun_time": 60
+  },
+  {
+    "name": "מצפה רמון",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפה שלם",
+    "migun_time": 90
+  },
+  {
+    "name": "מצפור פצאל",
+    "migun_time": 90
+  },
+  {
+    "name": "מצר",
+    "migun_time": 90
+  },
+  {
+    "name": "מקווה ישראל",
+    "migun_time": 90
+  },
+  {
+    "name": "מרגליות",
+    "migun_time": 0
+  },
+  {
+    "name": "מרום גולן",
+    "migun_time": 0
+  },
+  {
+    "name": "מרחב עם",
+    "migun_time": 90
+  },
+  {
+    "name": "מרחביה מושב",
+    "migun_time": 60
+  },
+  {
+    "name": "מרחביה קיבוץ",
+    "migun_time": 60
+  },
+  {
+    "name": "מרחצאות עין גדי",
+    "migun_time": 90
+  },
+  {
+    "name": "מרכז אזורי דרום השרון",
+    "migun_time": 90
+  },
+  {
+    "name": "מרכז אזורי מבואות חרמון",
+    "migun_time": 0
+  },
+  {
+    "name": "מרכז אזורי מגילות",
+    "migun_time": 90
+  },
+  {
+    "name": "מרכז אזורי מרום גליל",
+    "migun_time": 30
+  },
+  {
+    "name": "מרכז אזורי משגב",
+    "migun_time": 60
+  },
+  {
+    "name": "מרכז אזורי רמת כורזים",
+    "migun_time": 30
+  },
+  {
+    "name": "מרכז חבר",
+    "migun_time": 60
+  },
+  {
+    "name": "מרכז מיר'ב",
+    "migun_time": 60
+  },
+  {
+    "name": "מרכז שפירא",
+    "migun_time": 45
+  },
+  {
+    "name": "מרעית",
+    "migun_time": 90
+  },
+  {
+    "name": "משאבי שדה",
+    "migun_time": 90
+  },
+  {
+    "name": "משגב דב",
+    "migun_time": 60
+  },
+  {
+    "name": "משגב עם",
+    "migun_time": 0
+  },
+  {
+    "name": "משהד",
+    "migun_time": 60
+  },
+  {
+    "name": "משואה",
+    "migun_time": 90
+  },
+  {
+    "name": "משואות יצחק",
+    "migun_time": 45
+  },
+  {
+    "name": "משכיות",
+    "migun_time": 90
+  },
+  {
+    "name": "משמר איילון",
+    "migun_time": 90
+  },
+  {
+    "name": "משמר דוד",
+    "migun_time": 90
+  },
+  {
+    "name": "משמר הירדן",
+    "migun_time": 30
+  },
+  {
+    "name": "משמר הנגב",
+    "migun_time": 45
+  },
+  {
+    "name": "משמר העמק",
+    "migun_time": 90
+  },
+  {
+    "name": "משמר השבעה",
+    "migun_time": 90
+  },
+  {
+    "name": "משמר השרון",
+    "migun_time": 90
+  },
+  {
+    "name": "משמרות",
+    "migun_time": 90
+  },
+  {
+    "name": "משמרת",
+    "migun_time": 90
+  },
+  {
+    "name": "משען",
+    "migun_time": 30
+  },
+  {
+    "name": "מתחם בני דרום",
+    "migun_time": 45
+  },
+  {
+    "name": "מתחם גלילות",
+    "migun_time": 90
+  },
+  {
+    "name": "מתחם סקי גלבוע",
+    "migun_time": 60
+  },
+  {
+    "name": "מתחם פי גלילות",
+    "migun_time": 90
+  },
+  {
+    "name": "מתחם שביל התפוזים",
+    "migun_time": 90
+  },
+  {
+    "name": "מתן",
+    "migun_time": 90
+  },
+  {
+    "name": "מתת",
+    "migun_time": 0
+  },
+  {
+    "name": "מתתיהו",
+    "migun_time": 90
+  },
+  {
+    "name": "נאות גולן",
+    "migun_time": 15
+  },
+  {
+    "name": "נאות הכיכר",
+    "migun_time": 90
+  },
+  {
+    "name": "נאות מרדכי",
+    "migun_time": 0
+  },
+  {
+    "name": "נאות סמדר",
+    "migun_time": 90
+  },
+  {
+    "name": "נאות קדומים",
+    "migun_time": 90
+  },
+  {
+    "name": "נאעורה",
+    "migun_time": 60
+  },
+  {
+    "name": "נבטים",
+    "migun_time": 90
+  },
+  {
+    "name": "נבי שועייב",
+    "migun_time": 60
+  },
+  {
+    "name": "נגבה",
+    "migun_time": 30
+  },
+  {
+    "name": "נגוהות",
+    "migun_time": 60
+  },
+  {
+    "name": "נהורה",
+    "migun_time": 30
+  },
+  {
+    "name": "נהלל",
+    "migun_time": 60
+  },
+  {
+    "name": "נהריה",
+    "migun_time": 15
+  },
+  {
+    "name": "נוב",
+    "migun_time": 0
+  },
+  {
+    "name": "נוגה",
+    "migun_time": 30
+  },
+  {
+    "name": "נוה איתן",
+    "migun_time": 60
+  },
+  {
+    "name": "נווה",
+    "migun_time": 30
+  },
+  {
+    "name": "נווה אור",
+    "migun_time": 60
+  },
+  {
+    "name": "נווה אטי'ב",
+    "migun_time": 0
+  },
+  {
+    "name": "נווה אילן",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה ארז",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה דניאל",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה זוהר",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה זיו",
+    "migun_time": 0
+  },
+  {
+    "name": "נווה חריף",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה ים",
+    "migun_time": 60
+  },
+  {
+    "name": "נווה ימין",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה ירק",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה מבטח",
+    "migun_time": 60
+  },
+  {
+    "name": "נווה מיכאל - רוגלית",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה צוף",
+    "migun_time": 90
+  },
+  {
+    "name": "נווה שלום",
+    "migun_time": 90
+  },
+  {
+    "name": "נועם",
+    "migun_time": 45
+  },
+  {
+    "name": "נוף איילון, שעלבים",
+    "migun_time": 90
+  },
+  {
+    "name": "נוף הגליל",
+    "migun_time": 60
+  },
+  {
+    "name": "נופי נחמיה",
+    "migun_time": 90
+  },
+  {
+    "name": "נופי פרת",
+    "migun_time": 90
+  },
+  {
+    "name": "נופים",
+    "migun_time": 90
+  },
+  {
+    "name": "נופית",
+    "migun_time": 60
+  },
+  {
+    "name": "נופך",
+    "migun_time": 90
+  },
+  {
+    "name": "נוקדים",
+    "migun_time": 90
+  },
+  {
+    "name": "נורדיה",
+    "migun_time": 90
+  },
+  {
+    "name": "נורית",
+    "migun_time": 60
+  },
+  {
+    "name": "נחושה",
+    "migun_time": 60
+  },
+  {
+    "name": "נחל עוז",
+    "migun_time": 15
+  },
+  {
+    "name": "נחלה",
+    "migun_time": 45
+  },
+  {
+    "name": "נחליאל",
+    "migun_time": 90
+  },
+  {
+    "name": "נחלים",
+    "migun_time": 90
+  },
+  {
+    "name": "נחם",
+    "migun_time": 90
+  },
+  {
+    "name": "נחף",
+    "migun_time": 30
+  },
+  {
+    "name": "נחשון",
+    "migun_time": 90
+  },
+  {
+    "name": "נחשונים",
+    "migun_time": 90
+  },
+  {
+    "name": "נטועה",
+    "migun_time": 0
+  },
+  {
+    "name": "נטור",
+    "migun_time": 0
+  },
+  {
+    "name": "נטע",
+    "migun_time": 60
+  },
+  {
+    "name": "נטעים",
+    "migun_time": 90
+  },
+  {
+    "name": "נטף",
+    "migun_time": 90
+  },
+  {
+    "name": "נילי",
+    "migun_time": 90
+  },
+  {
+    "name": "נין",
+    "migun_time": 60
+  },
+  {
+    "name": "ניצן",
+    "migun_time": 45
+  },
+  {
+    "name": "ניצנה",
+    "migun_time": 60
+  },
+  {
+    "name": "ניצני עוז",
+    "migun_time": 90
+  },
+  {
+    "name": "ניצנים",
+    "migun_time": 30
+  },
+  {
+    "name": "ניר אליהו",
+    "migun_time": 90
+  },
+  {
+    "name": "ניר בנים",
+    "migun_time": 45
+  },
+  {
+    "name": "ניר גלים",
+    "migun_time": 45
+  },
+  {
+    "name": "ניר דוד",
+    "migun_time": 60
+  },
+  {
+    "name": "ניר ח'ן",
+    "migun_time": 30
+  },
+  {
+    "name": "ניר יצחק",
+    "migun_time": 15
+  },
+  {
+    "name": "ניר ישראל",
+    "migun_time": 30
+  },
+  {
+    "name": "ניר משה",
+    "migun_time": 30
+  },
+  {
+    "name": "ניר עוז",
+    "migun_time": 15
+  },
+  {
+    "name": "ניר עם",
+    "migun_time": 15
+  },
+  {
+    "name": "ניר עציון, ימין אורד",
+    "migun_time": 60
+  },
+  {
+    "name": "ניר עקיבא",
+    "migun_time": 30
+  },
+  {
+    "name": "ניר צבי",
+    "migun_time": 90
+  },
+  {
+    "name": "נירים",
+    "migun_time": 15
+  },
+  {
+    "name": "נירית",
+    "migun_time": 90
+  },
+  {
+    "name": "נמל קיסריה",
+    "migun_time": 90
+  },
+  {
+    "name": "נמרוד",
+    "migun_time": 0
+  },
+  {
+    "name": "נס הרים",
+    "migun_time": 90
+  },
+  {
+    "name": "נס עמים",
+    "migun_time": 30
+  },
+  {
+    "name": "נס ציונה",
+    "migun_time": 90
+  },
+  {
+    "name": "נעורים",
+    "migun_time": 90
+  },
+  {
+    "name": "נעלה",
+    "migun_time": 90
+  },
+  {
+    "name": "נעמה",
+    "migun_time": 90
+  },
+  {
+    "name": "נען",
+    "migun_time": 90
+  },
+  {
+    "name": "נערן",
+    "migun_time": 90
+  },
+  {
+    "name": "נצר חזני",
+    "migun_time": 90
+  },
+  {
+    "name": "נצר סרני",
+    "migun_time": 90
+  },
+  {
+    "name": "נצרת",
+    "migun_time": 60
+  },
+  {
+    "name": "נריה",
+    "migun_time": 90
+  },
+  {
+    "name": "נשר",
+    "migun_time": 60
+  },
+  {
+    "name": "נתיב הגדוד",
+    "migun_time": 90
+  },
+  {
+    "name": "נתיב הל'ה",
+    "migun_time": 90
+  },
+  {
+    "name": "נתיב העשרה",
+    "migun_time": 15
+  },
+  {
+    "name": "נתיב השיירה",
+    "migun_time": 30
+  },
+  {
+    "name": "נתיבות",
+    "migun_time": 30
+  },
+  {
+    "name": "נתניה - מזרח",
+    "migun_time": 90
+  },
+  {
+    "name": "נתניה - מערב",
+    "migun_time": 90
+  },
+  {
+    "name": "סאג'ור",
+    "migun_time": 30
+  },
+  {
+    "name": "סאסא",
+    "migun_time": 0
+  },
+  {
+    "name": "סביון",
+    "migun_time": 90
+  },
+  {
+    "name": "סגולה",
+    "migun_time": 45
+  },
+  {
+    "name": "סואעד חמירה",
+    "migun_time": 60
+  },
+  {
+    "name": "סולם",
+    "migun_time": 60
+  },
+  {
+    "name": "סוסיא",
+    "migun_time": 90
+  },
+  {
+    "name": "סוסיא הקדומה",
+    "migun_time": 90
+  },
+  {
+    "name": "סופה",
+    "migun_time": 15
+  },
+  {
+    "name": "סכנין",
+    "migun_time": 60
+  },
+  {
+    "name": "סלמה",
+    "migun_time": 60
+  },
+  {
+    "name": "סלעית",
+    "migun_time": 90
+  },
+  {
+    "name": "סמר",
+    "migun_time": 90
+  },
+  {
+    "name": "סנדלה",
+    "migun_time": 60
+  },
+  {
+    "name": "סנסנה",
+    "migun_time": 60
+  },
+  {
+    "name": "סעד",
+    "migun_time": 15
+  },
+  {
+    "name": "סעווה",
+    "migun_time": 90
+  },
+  {
+    "name": "סער",
+    "migun_time": 0
+  },
+  {
+    "name": "ספיר",
+    "migun_time": 90
+  },
+  {
+    "name": "ספסופה - כפר חושן",
+    "migun_time": 30
+  },
+  {
+    "name": "סתריה",
+    "migun_time": 90
+  },
+  {
+    "name": "ע'ג'ר",
+    "migun_time": 0
+  },
+  {
+    "name": "עבדון",
+    "migun_time": 0
+  },
+  {
+    "name": "עברון",
+    "migun_time": 15
+  },
+  {
+    "name": "עגור",
+    "migun_time": 60
+  },
+  {
+    "name": "עדי",
+    "migun_time": 60
+  },
+  {
+    "name": "עדי עד",
+    "migun_time": 90
+  },
+  {
+    "name": "עדנים",
+    "migun_time": 90
+  },
+  {
+    "name": "עוז וגאון",
+    "migun_time": 90
+  },
+  {
+    "name": "עוזה",
+    "migun_time": 30
+  },
+  {
+    "name": "עוזייר, רומאנה",
+    "migun_time": 60
+  },
+  {
+    "name": "עולש",
+    "migun_time": 90
+  },
+  {
+    "name": "עומר",
+    "migun_time": 60
+  },
+  {
+    "name": "עופר",
+    "migun_time": 60
+  },
+  {
+    "name": "עופרים",
+    "migun_time": 90
+  },
+  {
+    "name": "עוצם",
+    "migun_time": 30
+  },
+  {
+    "name": "עזוז",
+    "migun_time": 90
+  },
+  {
+    "name": "עזר",
+    "migun_time": 45
+  },
+  {
+    "name": "עזריאל",
+    "migun_time": 90
+  },
+  {
+    "name": "עזריה",
+    "migun_time": 90
+  },
+  {
+    "name": "עזריקם",
+    "migun_time": 45
+  },
+  {
+    "name": "עטרת",
+    "migun_time": 90
+  },
+  {
+    "name": "עידן",
+    "migun_time": 90
+  },
+  {
+    "name": "עיינות",
+    "migun_time": 90
+  },
+  {
+    "name": "עילבון",
+    "migun_time": 60
+  },
+  {
+    "name": "עילוט",
+    "migun_time": 60
+  },
+  {
+    "name": "עין איילה",
+    "migun_time": 60
+  },
+  {
+    "name": "עין אל אסד",
+    "migun_time": 30
+  },
+  {
+    "name": "עין אל סהלה",
+    "migun_time": 90
+  },
+  {
+    "name": "עין בוקק",
+    "migun_time": 90
+  },
+  {
+    "name": "עין גב",
+    "migun_time": 15
+  },
+  {
+    "name": "עין גדי",
+    "migun_time": 90
+  },
+  {
+    "name": "עין דור",
+    "migun_time": 60
+  },
+  {
+    "name": "עין הבשור",
+    "migun_time": 15
+  },
+  {
+    "name": "עין הוד",
+    "migun_time": 60
+  },
+  {
+    "name": "עין החורש",
+    "migun_time": 90
+  },
+  {
+    "name": "עין המפרץ",
+    "migun_time": 30
+  },
+  {
+    "name": "עין הנצי'ב",
+    "migun_time": 60
+  },
+  {
+    "name": "עין העמק",
+    "migun_time": 90
+  },
+  {
+    "name": "עין השופט",
+    "migun_time": 90
+  },
+  {
+    "name": "עין השלושה",
+    "migun_time": 15
+  },
+  {
+    "name": "עין ורד",
+    "migun_time": 90
+  },
+  {
+    "name": "עין זיוון",
+    "migun_time": 0
+  },
+  {
+    "name": "עין חוד",
+    "migun_time": 60
+  },
+  {
+    "name": "עין חצבה",
+    "migun_time": 90
+  },
+  {
+    "name": "עין חרוד, תל יוסף",
+    "migun_time": 60
+  },
+  {
+    "name": "עין יהב",
+    "migun_time": 90
+  },
+  {
+    "name": "עין יעקב",
+    "migun_time": 15
+  },
+  {
+    "name": "עין כרמל",
+    "migun_time": 60
+  },
+  {
+    "name": "עין מאהל",
+    "migun_time": 60
+  },
+  {
+    "name": "עין נקובא",
+    "migun_time": 90
+  },
+  {
+    "name": "עין עירון",
+    "migun_time": 90
+  },
+  {
+    "name": "עין צורים",
+    "migun_time": 45
+  },
+  {
+    "name": "עין קנייא",
+    "migun_time": 0
+  },
+  {
+    "name": "עין ראפה",
+    "migun_time": 90
+  },
+  {
+    "name": "עין שמר",
+    "migun_time": 90
+  },
+  {
+    "name": "עין שריד",
+    "migun_time": 90
+  },
+  {
+    "name": "עין תמר",
+    "migun_time": 90
+  },
+  {
+    "name": "עינות קדם",
+    "migun_time": 90
+  },
+  {
+    "name": "עינת",
+    "migun_time": 90
+  },
+  {
+    "name": "עכו",
+    "migun_time": 30
+  },
+  {
+    "name": "עכו - אזור תעשייה",
+    "migun_time": 30
+  },
+  {
+    "name": "עכו - רמות ים",
+    "migun_time": 30
+  },
+  {
+    "name": "עלומים",
+    "migun_time": 15
+  },
+  {
+    "name": "עלי",
+    "migun_time": 90
+  },
+  {
+    "name": "עלי זהב - לשם",
+    "migun_time": 90
+  },
+  {
+    "name": "עלמה",
+    "migun_time": 0
+  },
+  {
+    "name": "עלמון",
+    "migun_time": 90
+  },
+  {
+    "name": "עמוקה",
+    "migun_time": 30
+  },
+  {
+    "name": "עמיחי",
+    "migun_time": 90
+  },
+  {
+    "name": "עמינדב",
+    "migun_time": 90
+  },
+  {
+    "name": "עמיעד",
+    "migun_time": 30
+  },
+  {
+    "name": "עמיקם",
+    "migun_time": 90
+  },
+  {
+    "name": "עמיר",
+    "migun_time": 15
+  },
+  {
+    "name": "עמנואל",
+    "migun_time": 90
+  },
+  {
+    "name": "עמקה",
+    "migun_time": 30
+  },
+  {
+    "name": "ענב",
+    "migun_time": 90
+  },
+  {
+    "name": "עספיא",
+    "migun_time": 60
+  },
+  {
+    "name": "עפולה",
+    "migun_time": 60
+  },
+  {
+    "name": "עפרה",
+    "migun_time": 90
+  },
+  {
+    "name": "עץ אפרים",
+    "migun_time": 90
+  },
+  {
+    "name": "עצמון - שגב",
+    "migun_time": 60
+  },
+  {
+    "name": "עראבה",
+    "migun_time": 60
+  },
+  {
+    "name": "ערב אל נעים",
+    "migun_time": 30
+  },
+  {
+    "name": "ערב אל עראמשה",
+    "migun_time": 0
+  },
+  {
+    "name": "ערד",
+    "migun_time": 90
+  },
+  {
+    "name": "ערוגות",
+    "migun_time": 45
+  },
+  {
+    "name": "ערערה",
+    "migun_time": 90
+  },
+  {
+    "name": "ערערה בנגב",
+    "migun_time": 90
+  },
+  {
+    "name": "עשהאל",
+    "migun_time": 90
+  },
+  {
+    "name": "עשרת",
+    "migun_time": 60
+  },
+  {
+    "name": "עתלית",
+    "migun_time": 60
+  },
+  {
+    "name": "עתניאל",
+    "migun_time": 90
+  },
+  {
+    "name": "פארן",
+    "migun_time": 90
+  },
+  {
+    "name": "פארק אריאל שרון",
+    "migun_time": 90
+  },
+  {
+    "name": "פארק תעשיות מגדל עוז",
+    "migun_time": 90
+  },
+  {
+    "name": "פארק תעשיות פלמחים",
+    "migun_time": 90
+  },
+  {
+    "name": "פארק תעשייה ראם",
+    "migun_time": 60
+  },
+  {
+    "name": "פדואל",
+    "migun_time": 90
+  },
+  {
+    "name": "פדויים",
+    "migun_time": 45
+  },
+  {
+    "name": "פדיה",
+    "migun_time": 90
+  },
+  {
+    "name": "פוריה כפר עבודה",
+    "migun_time": 60
+  },
+  {
+    "name": "פוריה נווה עובד",
+    "migun_time": 60
+  },
+  {
+    "name": "פוריה עילית",
+    "migun_time": 60
+  },
+  {
+    "name": "פוריידיס",
+    "migun_time": 60
+  },
+  {
+    "name": "פורת",
+    "migun_time": 90
+  },
+  {
+    "name": "פטיש",
+    "migun_time": 30
+  },
+  {
+    "name": "פלך",
+    "migun_time": 30
+  },
+  {
+    "name": "פלמחים",
+    "migun_time": 90
+  },
+  {
+    "name": "פני קדם",
+    "migun_time": 90
+  },
+  {
+    "name": "פנימיית עין כרם",
+    "migun_time": 90
+  },
+  {
+    "name": "פסגות",
+    "migun_time": 90
+  },
+  {
+    "name": "פסוטה",
+    "migun_time": 0
+  },
+  {
+    "name": "פעמי תש'ז",
+    "migun_time": 30
+  },
+  {
+    "name": "פצאל",
+    "migun_time": 90
+  },
+  {
+    "name": "פקיעין",
+    "migun_time": 15
+  },
+  {
+    "name": "פקיעין החדשה",
+    "migun_time": 0
+  },
+  {
+    "name": "פרדס חנה כרכור",
+    "migun_time": 90
+  },
+  {
+    "name": "פרדסיה",
+    "migun_time": 90
+  },
+  {
+    "name": "פרוד",
+    "migun_time": 30
+  },
+  {
+    "name": "פרי גן",
+    "migun_time": 15
+  },
+  {
+    "name": "פתח תקווה",
+    "migun_time": 90
+  },
+  {
+    "name": "פתחיה",
+    "migun_time": 90
+  },
+  {
+    "name": "צאלים",
+    "migun_time": 30
+  },
+  {
+    "name": "צבעון",
+    "migun_time": 0
+  },
+  {
+    "name": "צובה",
+    "migun_time": 90
+  },
+  {
+    "name": "צוחר, אוהד",
+    "migun_time": 15
+  },
+  {
+    "name": "צומת אלמוג",
+    "migun_time": 90
+  },
+  {
+    "name": "צומת הגוש",
+    "migun_time": 90
+  },
+  {
+    "name": "צופים",
+    "migun_time": 90
+  },
+  {
+    "name": "צופית",
+    "migun_time": 90
+  },
+  {
+    "name": "צופר",
+    "migun_time": 90
+  },
+  {
+    "name": "צוקים",
+    "migun_time": 90
+  },
+  {
+    "name": "צור הדסה",
+    "migun_time": 90
+  },
+  {
+    "name": "צור יצחק",
+    "migun_time": 90
+  },
+  {
+    "name": "צור משה",
+    "migun_time": 90
+  },
+  {
+    "name": "צור נתן",
+    "migun_time": 90
+  },
+  {
+    "name": "צוריאל",
+    "migun_time": 0
+  },
+  {
+    "name": "צורית גילון",
+    "migun_time": 30
+  },
+  {
+    "name": "ציפורי",
+    "migun_time": 60
+  },
+  {
+    "name": "צלפון",
+    "migun_time": 90
+  },
+  {
+    "name": "צמח",
+    "migun_time": 30
+  },
+  {
+    "name": "צפריה",
+    "migun_time": 90
+  },
+  {
+    "name": "צפרירים",
+    "migun_time": 60
+  },
+  {
+    "name": "צפת - נוף כנרת",
+    "migun_time": 30
+  },
+  {
+    "name": "צפת - עיר",
+    "migun_time": 30
+  },
+  {
+    "name": "צפת - עכברה",
+    "migun_time": 30
+  },
+  {
+    "name": "צרופה",
+    "migun_time": 60
+  },
+  {
+    "name": "צרעה",
+    "migun_time": 90
+  },
+  {
+    "name": "קבוצת גבע",
+    "migun_time": 60
+  },
+  {
+    "name": "קבוצת יבנה",
+    "migun_time": 60
+  },
+  {
+    "name": "קדומים",
+    "migun_time": 90
+  },
+  {
+    "name": "קדימה צורן",
+    "migun_time": 90
+  },
+  {
+    "name": "קדיתא",
+    "migun_time": 30
+  },
+  {
+    "name": "קדם ערבה",
+    "migun_time": 90
+  },
+  {
+    "name": "קדמה",
+    "migun_time": 45
+  },
+  {
+    "name": "קדמת צבי",
+    "migun_time": 15
+  },
+  {
+    "name": "קדר",
+    "migun_time": 90
+  },
+  {
+    "name": "קדר דרום",
+    "migun_time": 90
+  },
+  {
+    "name": "קדרון",
+    "migun_time": 60
+  },
+  {
+    "name": "קדרים",
+    "migun_time": 60
+  },
+  {
+    "name": "קדש ברנע",
+    "migun_time": 60
+  },
+  {
+    "name": "קוממיות",
+    "migun_time": 45
+  },
+  {
+    "name": "קורנית",
+    "migun_time": 60
+  },
+  {
+    "name": "קטורה",
+    "migun_time": 90
+  },
+  {
+    "name": "קיבוץ דן",
+    "migun_time": 0
+  },
+  {
+    "name": "קיבוץ מגידו",
+    "migun_time": 90
+  },
+  {
+    "name": "קידה",
+    "migun_time": 90
+  },
+  {
+    "name": "קיסריה",
+    "migun_time": 90
+  },
+  {
+    "name": "קלחים",
+    "migun_time": 30
+  },
+  {
+    "name": "קליה",
+    "migun_time": 90
+  },
+  {
+    "name": "קלנסווה",
+    "migun_time": 90
+  },
+  {
+    "name": "קלע אלון",
+    "migun_time": 15
+  },
+  {
+    "name": "קסר א-סר",
+    "migun_time": 90
+  },
+  {
+    "name": "קציר",
+    "migun_time": 90
+  },
+  {
+    "name": "קצרין",
+    "migun_time": 30
+  },
+  {
+    "name": "קצרין - אזור תעשייה",
+    "migun_time": 30
+  },
+  {
+    "name": "קריית אונו",
+    "migun_time": 90
+  },
+  {
+    "name": "קריית אתא",
+    "migun_time": 60
+  },
+  {
+    "name": "קריית ביאליק",
+    "migun_time": 60
+  },
+  {
+    "name": "קריית גת, כרמי גת",
+    "migun_time": 45
+  },
+  {
+    "name": "קריית חינוך מרחבים",
+    "migun_time": 45
+  },
+  {
+    "name": "קריית טבעון - בית זייד",
+    "migun_time": 60
+  },
+  {
+    "name": "קריית ים",
+    "migun_time": 60
+  },
+  {
+    "name": "קריית יערים",
+    "migun_time": 90
+  },
+  {
+    "name": "קריית מוצקין",
+    "migun_time": 60
+  },
+  {
+    "name": "קריית מלאכי",
+    "migun_time": 45
+  },
+  {
+    "name": "קריית נטפים",
+    "migun_time": 90
+  },
+  {
+    "name": "קריית ענבים",
+    "migun_time": 90
+  },
+  {
+    "name": "קריית עקרון",
+    "migun_time": 90
+  },
+  {
+    "name": "קריית שמונה",
+    "migun_time": 0
+  },
+  {
+    "name": "קרית ארבע",
+    "migun_time": 90
+  },
+  {
+    "name": "קרני שומרון",
+    "migun_time": 90
+  },
+  {
+    "name": "קשת",
+    "migun_time": 0
+  },
+  {
+    "name": "ראמה",
+    "migun_time": 30
+  },
+  {
+    "name": "ראס אל-עין",
+    "migun_time": 60
+  },
+  {
+    "name": "ראס עלי",
+    "migun_time": 60
+  },
+  {
+    "name": "ראש הנקרה",
+    "migun_time": 0
+  },
+  {
+    "name": "ראש העין",
+    "migun_time": 90
+  },
+  {
+    "name": "ראש פינה",
+    "migun_time": 30
+  },
+  {
+    "name": "ראש צורים",
+    "migun_time": 90
+  },
+  {
+    "name": "ראשון לציון - מזרח",
+    "migun_time": 90
+  },
+  {
+    "name": "ראשון לציון - מערב",
+    "migun_time": 90
+  },
+  {
+    "name": "רבבה",
+    "migun_time": 90
+  },
+  {
+    "name": "רבדים",
+    "migun_time": 60
+  },
+  {
+    "name": "רביבים",
+    "migun_time": 90
+  },
+  {
+    "name": "רביד",
+    "migun_time": 60
+  },
+  {
+    "name": "רגבה",
+    "migun_time": 30
+  },
+  {
+    "name": "רגבים",
+    "migun_time": 90
+  },
+  {
+    "name": "רהט",
+    "migun_time": 45
+  },
+  {
+    "name": "רווחה",
+    "migun_time": 45
+  },
+  {
+    "name": "רוויה",
+    "migun_time": 60
+  },
+  {
+    "name": "רוחמה",
+    "migun_time": 30
+  },
+  {
+    "name": "רומת אל הייב",
+    "migun_time": 60
+  },
+  {
+    "name": "רועי",
+    "migun_time": 90
+  },
+  {
+    "name": "רותם",
+    "migun_time": 90
+  },
+  {
+    "name": "רחוב",
+    "migun_time": 60
+  },
+  {
+    "name": "רחובות",
+    "migun_time": 90
+  },
+  {
+    "name": "רחלים",
+    "migun_time": 90
+  },
+  {
+    "name": "רטורנו - גבעת שמש",
+    "migun_time": 90
+  },
+  {
+    "name": "ריחאנייה",
+    "migun_time": 0
+  },
+  {
+    "name": "ריחן",
+    "migun_time": 90
+  },
+  {
+    "name": "ריינה",
+    "migun_time": 60
+  },
+  {
+    "name": "רימונים",
+    "migun_time": 90
+  },
+  {
+    "name": "רינתיה",
+    "migun_time": 90
+  },
+  {
+    "name": "רכסים",
+    "migun_time": 60
+  },
+  {
+    "name": "רם און",
+    "migun_time": 60
+  },
+  {
+    "name": "רמות",
+    "migun_time": 15
+  },
+  {
+    "name": "רמות השבים",
+    "migun_time": 90
+  },
+  {
+    "name": "רמות מאיר",
+    "migun_time": 90
+  },
+  {
+    "name": "רמות מנשה",
+    "migun_time": 90
+  },
+  {
+    "name": "רמות נפתלי",
+    "migun_time": 0
+  },
+  {
+    "name": "רמלה",
+    "migun_time": 90
+  },
+  {
+    "name": "רמת גן - מזרח",
+    "migun_time": 90
+  },
+  {
+    "name": "רמת גן - מערב",
+    "migun_time": 90
+  },
+  {
+    "name": "רמת דוד",
+    "migun_time": 60
+  },
+  {
+    "name": "רמת הכובש",
+    "migun_time": 90
+  },
+  {
+    "name": "רמת השופט",
+    "migun_time": 90
+  },
+  {
+    "name": "רמת השרון",
+    "migun_time": 90
+  },
+  {
+    "name": "רמת טראמפ",
+    "migun_time": 15
+  },
+  {
+    "name": "רמת יוחנן",
+    "migun_time": 60
+  },
+  {
+    "name": "רמת ישי",
+    "migun_time": 60
+  },
+  {
+    "name": "רמת מגרון",
+    "migun_time": 90
+  },
+  {
+    "name": "רמת מגשימים",
+    "migun_time": 0
+  },
+  {
+    "name": "רמת צבי",
+    "migun_time": 60
+  },
+  {
+    "name": "רמת רזיאל",
+    "migun_time": 90
+  },
+  {
+    "name": "רנן",
+    "migun_time": 30
+  },
+  {
+    "name": "רעים",
+    "migun_time": 15
+  },
+  {
+    "name": "רעננה",
+    "migun_time": 90
+  },
+  {
+    "name": "רקפת",
+    "migun_time": 60
+  },
+  {
+    "name": "רשפון",
+    "migun_time": 90
+  },
+  {
+    "name": "רשפים, שלוחות, שלפים",
+    "migun_time": 60
+  },
+  {
+    "name": "רתמים",
+    "migun_time": 90
+  },
+  {
+    "name": "שאנטי במדבר",
+    "migun_time": 90
+  },
+  {
+    "name": "שאר ישוב",
+    "migun_time": 0
+  },
+  {
+    "name": "שבות רחל",
+    "migun_time": 90
+  },
+  {
+    "name": "שבי דרום",
+    "migun_time": 30
+  },
+  {
+    "name": "שבי ציון",
+    "migun_time": 30
+  },
+  {
+    "name": "שבי שומרון",
+    "migun_time": 90
+  },
+  {
+    "name": "שגב שלום",
+    "migun_time": 90
+  },
+  {
+    "name": "שדה אילן",
+    "migun_time": 60
+  },
+  {
+    "name": "שדה אליהו",
+    "migun_time": 60
+  },
+  {
+    "name": "שדה אליעזר",
+    "migun_time": 30
+  },
+  {
+    "name": "שדה אפרים",
+    "migun_time": 90
+  },
+  {
+    "name": "שדה בועז",
+    "migun_time": 90
+  },
+  {
+    "name": "שדה בוקר",
+    "migun_time": 90
+  },
+  {
+    "name": "שדה בר",
+    "migun_time": 90
+  },
+  {
+    "name": "שדה דוד",
+    "migun_time": 30
+  },
+  {
+    "name": "שדה ורבורג",
+    "migun_time": 90
+  },
+  {
+    "name": "שדה יואב",
+    "migun_time": 30
+  },
+  {
+    "name": "שדה יעקב",
+    "migun_time": 60
+  },
+  {
+    "name": "שדה יצחק",
+    "migun_time": 90
+  },
+  {
+    "name": "שדה משה",
+    "migun_time": 45
+  },
+  {
+    "name": "שדה נחום",
+    "migun_time": 60
+  },
+  {
+    "name": "שדה נחמיה",
+    "migun_time": 0
+  },
+  {
+    "name": "שדה ניצן",
+    "migun_time": 15
+  },
+  {
+    "name": "שדה עוזיהו",
+    "migun_time": 45
+  },
+  {
+    "name": "שדה צבי",
+    "migun_time": 30
+  },
+  {
+    "name": "שדות ים",
+    "migun_time": 90
+  },
+  {
+    "name": "שדות מיכה",
+    "migun_time": 60
+  },
+  {
+    "name": "שדי אברהם",
+    "migun_time": 15
+  },
+  {
+    "name": "שדי חמד",
+    "migun_time": 90
+  },
+  {
+    "name": "שדי תרומות",
+    "migun_time": 60
+  },
+  {
+    "name": "שדמה",
+    "migun_time": 60
+  },
+  {
+    "name": "שדמות דבורה",
+    "migun_time": 60
+  },
+  {
+    "name": "שדמות מחולה",
+    "migun_time": 90
+  },
+  {
+    "name": "שדרות, איבים",
+    "migun_time": 15
+  },
+  {
+    "name": "שואבה",
+    "migun_time": 90
+  },
+  {
+    "name": "שובל",
+    "migun_time": 45
+  },
+  {
+    "name": "שוהם",
+    "migun_time": 90
+  },
+  {
+    "name": "שומרה",
+    "migun_time": 0
+  },
+  {
+    "name": "שומריה",
+    "migun_time": 60
+  },
+  {
+    "name": "שוקדה",
+    "migun_time": 15
+  },
+  {
+    "name": "שורש",
+    "migun_time": 90
+  },
+  {
+    "name": "שורשים",
+    "migun_time": 60
+  },
+  {
+    "name": "שושנת העמקים",
+    "migun_time": 90
+  },
+  {
+    "name": "שזור",
+    "migun_time": 30
+  },
+  {
+    "name": "שחר",
+    "migun_time": 30
+  },
+  {
+    "name": "שחרות",
+    "migun_time": 90
+  },
+  {
+    "name": "שיבולים",
+    "migun_time": 30
+  },
+  {
+    "name": "שיבלי אום אלג'נם",
+    "migun_time": 60
+  },
+  {
+    "name": "שיטים",
+    "migun_time": 90
+  },
+  {
+    "name": "שייח' דנון",
+    "migun_time": 30
+  },
+  {
+    "name": "שילה",
+    "migun_time": 90
+  },
+  {
+    "name": "שילת",
+    "migun_time": 90
+  },
+  {
+    "name": "שכניה",
+    "migun_time": 60
+  },
+  {
+    "name": "שלווה",
+    "migun_time": 30
+  },
+  {
+    "name": "שלומי",
+    "migun_time": 0
+  },
+  {
+    "name": "שלומית",
+    "migun_time": 30
+  },
+  {
+    "name": "שלומציון",
+    "migun_time": 90
+  },
+  {
+    "name": "שמיר",
+    "migun_time": 15
+  },
+  {
+    "name": "שמעה",
+    "migun_time": 90
+  },
+  {
+    "name": "שמרת",
+    "migun_time": 30
+  },
+  {
+    "name": "שמשית",
+    "migun_time": 60
+  },
+  {
+    "name": "שני ליבנה",
+    "migun_time": 90
+  },
+  {
+    "name": "שניר",
+    "migun_time": 0
+  },
+  {
+    "name": "שעב",
+    "migun_time": 60
+  },
+  {
+    "name": "שעל",
+    "migun_time": 15
+  },
+  {
+    "name": "שער אפרים",
+    "migun_time": 90
+  },
+  {
+    "name": "שער הגולן",
+    "migun_time": 30
+  },
+  {
+    "name": "שער העמקים",
+    "migun_time": 60
+  },
+  {
+    "name": "שער מנשה",
+    "migun_time": 90
+  },
+  {
+    "name": "שערי תקווה",
+    "migun_time": 90
+  },
+  {
+    "name": "שפיים",
+    "migun_time": 90
+  },
+  {
+    "name": "שפיר",
+    "migun_time": 45
+  },
+  {
+    "name": "שפר",
+    "migun_time": 30
+  },
+  {
+    "name": "שפרעם",
+    "migun_time": 60
+  },
+  {
+    "name": "שקד",
+    "migun_time": 90
+  },
+  {
+    "name": "שקף",
+    "migun_time": 60
+  },
+  {
+    "name": "שרונה",
+    "migun_time": 60
+  },
+  {
+    "name": "שריגים - לי-און",
+    "migun_time": 60
+  },
+  {
+    "name": "שריד",
+    "migun_time": 60
+  },
+  {
+    "name": "שרשרת",
+    "migun_time": 30
+  },
+  {
+    "name": "שתולה",
+    "migun_time": 0
+  },
+  {
+    "name": "שתולים",
+    "migun_time": 45
+  },
+  {
+    "name": "תארבין",
+    "migun_time": 45
+  },
+  {
+    "name": "תאשור",
+    "migun_time": 30
+  },
+  {
+    "name": "תדהר",
+    "migun_time": 30
+  },
+  {
+    "name": "תובל",
+    "migun_time": 30
+  },
+  {
+    "name": "תומר",
+    "migun_time": 90
+  },
+  {
+    "name": "תחנת רכבת כפר ברוך",
+    "migun_time": 60
+  },
+  {
+    "name": "תחנת רכבת כפר יהושוע",
+    "migun_time": 60
+  },
+  {
+    "name": "תחנת רכבת קריית מלאכי - יואב",
+    "migun_time": 60
+  },
+  {
+    "name": "תחנת רכבת ראש העין",
+    "migun_time": 90
+  },
+  {
+    "name": "תימורים",
+    "migun_time": 45
+  },
+  {
+    "name": "תירוש",
+    "migun_time": 60
+  },
+  {
+    "name": "תל אביב - דרום העיר ויפו",
+    "migun_time": 90
+  },
+  {
+    "name": "תל אביב - מזרח",
+    "migun_time": 90
+  },
+  {
+    "name": "תל אביב - מרכז העיר",
+    "migun_time": 90
+  },
+  {
+    "name": "תל אביב - עבר הירקון",
+    "migun_time": 90
+  },
+  {
+    "name": "תל חי",
+    "migun_time": 0
+  },
+  {
+    "name": "תל יצחק",
+    "migun_time": 90
+  },
+  {
+    "name": "תל מונד",
+    "migun_time": 90
+  },
+  {
+    "name": "תל עדשים",
+    "migun_time": 60
+  },
+  {
+    "name": "תל ערד",
+    "migun_time": 90
+  },
+  {
+    "name": "תל ציון",
+    "migun_time": 90
+  },
+  {
+    "name": "תל קציר",
+    "migun_time": 30
+  },
+  {
+    "name": "תל שבע",
+    "migun_time": 90
+  },
+  {
+    "name": "תל תאומים",
+    "migun_time": 60
+  },
+  {
+    "name": "תלם",
+    "migun_time": 90
+  },
+  {
+    "name": "תלמי אליהו",
+    "migun_time": 15
+  },
+  {
+    "name": "תלמי אלעזר",
+    "migun_time": 90
+  },
+  {
+    "name": "תלמי ביל'ו",
+    "migun_time": 30
+  },
+  {
+    "name": "תלמי יוסף",
+    "migun_time": 15
+  },
+  {
+    "name": "תלמי יחיאל",
+    "migun_time": 45
+  },
+  {
+    "name": "תלמי יפה",
+    "migun_time": 30
+  },
+  {
+    "name": "תלמים",
+    "migun_time": 30
+  },
+  {
+    "name": "תמרת",
+    "migun_time": 60
+  },
+  {
+    "name": "תנובות",
+    "migun_time": 90
+  },
+  {
+    "name": "תעוז",
+    "migun_time": 90
+  },
+  {
+    "name": "תעשיון צריפין",
+    "migun_time": 90
+  },
+  {
+    "name": "תפרח",
+    "migun_time": 45
+  },
+  {
+    "name": "תקומה",
+    "migun_time": 15
+  },
+  {
+    "name": "תקוע",
+    "migun_time": 90
+  },
+  {
+    "name": "תקוע ד' וה'",
+    "migun_time": 90
+  },
+  {
+    "name": "תרום",
+    "migun_time": 90
+  }
 ]
