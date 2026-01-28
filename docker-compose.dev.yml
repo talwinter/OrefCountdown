@@ -1,0 +1,7 @@
+# Development override - enables test endpoints
+# Usage: docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+
+services:
+  oref-timer:
+    environment:
+      - NODE_ENV=development

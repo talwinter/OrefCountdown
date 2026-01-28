@@ -8,6 +8,4 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=5300
-      - TEST_ALERT_KEY=oref-k7X9mPqL2wNvR4tF8sYcB3jH6aZdE1uG
-      - ALLOWED_ORIGINS=https://yourdomain.com
     restart: unless-stopped

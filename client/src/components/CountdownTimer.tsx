@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Alert, Area } from '../types';
+import { Alert, Area, NewsFlash } from '../types';
 
 interface CountdownTimerProps {
   selectedArea: Area;
   activeAlert: Alert | null;
   alertEnded: boolean;  // NEW: true when alert just ended (safe to exit per Pikud HaOref)
+  newsFlash: NewsFlash | null;  // Early warning (10 min before strike)
   getRemainingTime: () => number | null;
   onChangeArea: () => void;
   allAlerts: Alert[];
   timeOffset: number;
+  isCurrentLocation?: boolean;  // True when showing current location instead of home
 }
 
 // Phase definitions for calm UX
-type Phase = 'green' | 'yellow' | 'orange' | 'red' | 'sheltering' | 'canExit' | 'safe';
+type Phase = 'green' | 'yellow' | 'orange' | 'red' | 'sheltering' | 'canExit' | 'safe' | 'earlyWarning';
 
 interface PhaseConfig {
   color: string;
@@ -23,6 +25,13 @@ interface PhaseConfig {
 }
 
 const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
+  earlyWarning: {
+    color: '#f59e0b',
+    backgroundColor: '#451a03',
+    badgeColor: '#b45309',
+    text: 'התרעה מוקדמת',
+    instruction: 'יש להיכנס למרחב מוגן בהקדם'
+  },
   safe: {
     color: '#4ade80',
     backgroundColor: '#1a1a2e',
@@ -79,10 +88,12 @@ export function CountdownTimer({
   selectedArea,
   activeAlert,
   alertEnded,  // NEW: when true, alert ended per Pikud HaOref
+  newsFlash,   // Early warning (10 min before strike)
   getRemainingTime,
   onChangeArea,
   allAlerts,
-  timeOffset
+  timeOffset,
+  isCurrentLocation = false
 }: CountdownTimerProps) {
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -106,6 +117,34 @@ export function CountdownTimer({
     previousAlertProp.current = activeAlert;
   }, [activeAlert]);
 
+  // Track newsFlash sound separately
+  const hasPlayedNewsFlashSound = useRef(false);
+
+  // Calm notification sound (softer than alarm)
+  const playNotificationSound = useCallback(() => {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      // Lower, calmer frequency
+      oscillator.frequency.value = 440;
+      oscillator.type = 'sine';
+
+      // Gentler volume curve
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.8);
+    } catch (e) {
+      console.error('Could not play notification sound:', e);
+    }
+  }, []);
+
   // Update remaining time every 100ms for smooth progress
   useEffect(() => {
     const updateTime = () => {
@@ -126,12 +165,25 @@ export function CountdownTimer({
     } else if (!activeAlert) {
       hasPlayedSound.current = false;
     }
-  }, [activeAlert]);
+  }, [activeAlert, playNotificationSound]);
+
+  // Play notification for newsFlash (early warning)
+  useEffect(() => {
+    if (newsFlash && !hasPlayedNewsFlashSound.current) {
+      hasPlayedNewsFlashSound.current = true;
+      playNotificationSound();
+    } else if (!newsFlash) {
+      hasPlayedNewsFlashSound.current = false;
+    }
+  }, [newsFlash, playNotificationSound]);
 
   // Determine current phase
   const getPhase = (): Phase => {
     // Priority: Local exit state OR prop
     if (isExitState || alertEnded) return 'canExit';
+
+    // Early warning takes priority (10 min before strike)
+    if (newsFlash && !activeAlert) return 'earlyWarning';
 
     if (!activeAlert) return 'safe';
     if (remainingTime === null) return 'safe';
@@ -165,31 +217,6 @@ export function CountdownTimer({
 
   // Search logic removed
 
-  // Calm notification sound (softer than alarm)
-  const playNotificationSound = useCallback(() => {
-    try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-
-      // Lower, calmer frequency
-      oscillator.frequency.value = 440;
-      oscillator.type = 'sine';
-
-      // Gentler volume curve
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
-
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.8);
-    } catch (e) {
-      console.error('Could not play notification sound:', e);
-    }
-  }, []);
-
   // Test alert function removed
 
   const hasAlert = activeAlert !== null;
@@ -218,8 +245,13 @@ export function CountdownTimer({
     }}>
       {/* Header */}
       <div style={styles.header}>
-        <span style={styles.areaName}>{selectedArea.name}</span>
-        {!hasAlert && (
+        <div style={styles.areaHeader}>
+          <span style={styles.areaName}>{selectedArea.name}</span>
+          {isCurrentLocation && (
+            <span style={styles.locationBadge}>📍 מיקום נוכחי</span>
+          )}
+        </div>
+        {!hasAlert && !isCurrentLocation && (
           <button onClick={onChangeArea} style={styles.changeButton}>
             החלף אזור
           </button>
@@ -235,11 +267,31 @@ export function CountdownTimer({
         }}>
           {hasAlert ? (
             <>אזעקה נשמעה באזור</>
+          ) : phase === 'earlyWarning' ? (
+            <>התרעה מוקדמת</>
           ) : (
             <>{config.text}</>
           )}
         </div>
       </div>
+
+      {/* NewsFlash Banner - Early Warning */}
+      {newsFlash && (
+        <div style={styles.newsFlashBanner}>
+          <div style={styles.newsFlashIcon}>⚠️</div>
+          <div style={styles.newsFlashContent}>
+            <div style={styles.newsFlashTitle}>התרעה מוקדמת</div>
+            <div style={styles.newsFlashInstructions}>
+              {newsFlash.instructions || 'יש להיכנס למרחב מוגן'}
+            </div>
+            {newsFlash.areas.length > 0 && (
+              <div style={styles.newsFlashAreas}>
+                אזורים: {newsFlash.areas.join(', ')}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Main Alert Area */}
       {hasAlert && (
@@ -344,7 +396,7 @@ export function CountdownTimer({
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
-    height: '100%',
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     color: '#ffffff',
@@ -358,9 +410,21 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: '16px',
     borderBottom: '1px solid #333'
   },
+  areaHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px'
+  },
   areaName: {
     fontSize: '18px',
     fontWeight: 600
+  },
+  locationBadge: {
+    fontSize: '12px',
+    color: '#94a3b8',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px'
   },
   changeButton: {
     padding: '8px 16px',
@@ -549,5 +613,39 @@ const styles: { [key: string]: React.CSSProperties } = {
     textAlign: 'center',
     margin: 0,
     lineHeight: 1.5
+  },
+  newsFlashBanner: {
+    margin: '12px 16px',
+    padding: '16px',
+    backgroundColor: '#451a03',
+    border: '2px solid #f59e0b',
+    borderRadius: '12px',
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '12px'
+  },
+  newsFlashIcon: {
+    fontSize: '28px',
+    lineHeight: 1
+  },
+  newsFlashContent: {
+    flex: 1
+  },
+  newsFlashTitle: {
+    fontSize: '20px',
+    fontWeight: 700,
+    color: '#f59e0b',
+    marginBottom: '8px'
+  },
+  newsFlashInstructions: {
+    fontSize: '16px',
+    color: '#fcd34d',
+    lineHeight: 1.4,
+    marginBottom: '8px'
+  },
+  newsFlashAreas: {
+    fontSize: '14px',
+    color: '#fbbf24',
+    opacity: 0.8
   }
 };

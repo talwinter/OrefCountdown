@@ -8,9 +8,6 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// API Key for test-alert endpoint (set in environment or use default for dev)
-const TEST_ALERT_KEY = process.env.TEST_ALERT_KEY || 'dev-key-not-for-production';
-
 // CORS configuration - allow all origins in dev, restrict in production
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
@@ -43,6 +40,10 @@ const testAlertLimiter = rateLimit({
 const areasPath = path.join(__dirname, '..', 'data', 'areas.json');
 const areas = JSON.parse(fs.readFileSync(areasPath, 'utf8'));
 
+// Load cities-geo data (for geolocation lookup)
+const citiesGeoPath = path.join(__dirname, '..', 'data', 'cities-geo.json');
+const citiesGeo = JSON.parse(fs.readFileSync(citiesGeoPath, 'utf8'));
+
 // Create a map for quick lookup
 const areaTimeMap = new Map();
 areas.forEach(area => {
@@ -50,17 +51,62 @@ areas.forEach(area => {
 });
 
 // In-memory storage for current alerts
-let currentAlerts = new Map(); // area -> { area, migun_time, started_at }
+let currentAlerts = new Map(); // area -> { area, migun_time, started_at, type, instructions }
 let testAlerts = new Map(); // For test alerts
+let currentNewsFlash = null; // { type, instructions, timestamp, areas }
 
 // Oref API configuration
-const OREF_URL = 'https://www.oref.org.il/WarningMessages/alert/alerts.json';
+const OREF_ALERTS_URL = 'https://www.oref.org.il/WarningMessages/alert/alerts.json';
+const OREF_HISTORY_URL = 'https://www.oref.org.il/warningMessages/alert/History/AlertsHistory.json';
 const POLL_INTERVAL = 2000; // 2 seconds
 
-// Fetch alerts from Oref API
-async function fetchOrefAlerts() {
+// Alert category mappings (from pikud-haoref-api)
+// Regular alerts (alerts.json)
+const ALERT_CATEGORIES = {
+  1: 'missiles',
+  2: 'general',
+  3: 'earthQuake',
+  4: 'radiologicalEvent',
+  5: 'tsunami',
+  6: 'hostileAircraftIntrusion',
+  7: 'hazardousMaterials',
+  10: 'newsFlash',
+  13: 'terroristInfiltration',
+  101: 'missilesDrill',
+  102: 'generalDrill',
+  103: 'earthQuakeDrill',
+  104: 'radiologicalEventDrill',
+  105: 'tsunamiDrill',
+  106: 'hostileAircraftIntrusionDrill',
+  107: 'hazardousMaterialsDrill',
+  113: 'terroristInfiltrationDrill'
+};
+
+// Historical alerts (AlertsHistory.json) have different category numbers
+const HISTORICAL_CATEGORIES = {
+  1: 'missiles',
+  2: 'hostileAircraftIntrusion',
+  3: 'general', 4: 'general', 5: 'general', 6: 'general',
+  7: 'earthQuake', 8: 'earthQuake',
+  9: 'radiologicalEvent',
+  10: 'terroristInfiltration',
+  11: 'tsunami',
+  12: 'hazardousMaterials',
+  13: 'newsFlash', 14: 'newsFlash',
+  15: 'missilesDrill',
+  16: 'hostileAircraftIntrusionDrill',
+  17: 'generalDrill', 18: 'generalDrill', 19: 'generalDrill', 20: 'generalDrill',
+  21: 'earthQuakeDrill', 22: 'earthQuakeDrill',
+  23: 'radiologicalEventDrill',
+  24: 'terroristInfiltrationDrill',
+  25: 'tsunamiDrill',
+  26: 'hazardousMaterialsDrill'
+};
+
+// Fetch from a URL with standard Oref headers
+async function fetchOrefUrl(url) {
   try {
-    const response = await fetch(OREF_URL, {
+    const response = await fetch(url, {
       headers: {
         'Referer': 'https://www.oref.org.il/',
         'X-Requested-With': 'XMLHttpRequest',
@@ -71,7 +117,7 @@ async function fetchOrefAlerts() {
     });
 
     if (!response.ok) {
-      console.error(`Oref API returned status: ${response.status}`);
+      console.error(`Oref API returned status: ${response.status} for ${url}`);
       return null;
     }
 
@@ -79,7 +125,7 @@ async function fetchOrefAlerts() {
 
     // Handle empty response (no alerts)
     if (!text || text.trim() === '') {
-      return { data: [] };
+      return null;
     }
 
     // Remove BOM if present
@@ -92,26 +138,60 @@ async function fetchOrefAlerts() {
       return null;
     }
   } catch (error) {
-    console.error('Error fetching Oref alerts:', error.message);
+    console.error(`Error fetching ${url}:`, error.message);
     return null;
   }
 }
 
-// Process alerts from Oref
+// Fetch alerts from main Oref API
+async function fetchOrefAlerts() {
+  return await fetchOrefUrl(OREF_ALERTS_URL);
+}
+
+// Fetch alerts history (contains newsFlash with different category numbers)
+async function fetchOrefHistory() {
+  return await fetchOrefUrl(OREF_HISTORY_URL);
+}
+
+// Process alerts from Oref (main alerts.json endpoint)
 function processOrefAlerts(orefData) {
-  if (!orefData || !orefData.data) {
+  if (!orefData) {
     return;
   }
 
   const now = Date.now();
   const activeAreas = new Set();
 
-  // Process new alerts
-  for (const alert of orefData.data) {
-    // Oref API returns alerts with 'data' array containing area names
-    const areaName = alert;
+  // Determine alert type and areas from the response
+  // The API can return either:
+  // 1. Object with id, cat, title, data array: { id: "...", cat: 1, title: "...", data: ["area1", "area2"] }
+  // 2. Object with just data array: { data: ["area1", "area2"] }
 
+  const category = orefData.cat || 1; // Default to missiles if not specified
+  const alertType = ALERT_CATEGORIES[category] || 'unknown';
+  const instructions = orefData.title || null;
+  const areas = orefData.data || [];
+
+  // Handle newsFlash alerts separately
+  if (alertType === 'newsFlash') {
+    currentNewsFlash = {
+      type: 'newsFlash',
+      instructions: instructions,
+      timestamp: now,
+      areas: areas.filter(a => typeof a === 'string' && !a.includes('בדיקה'))
+    };
+    console.log(`NewsFlash received: ${instructions || 'No instructions'}`);
+    return; // newsFlash doesn't have migun time countdown
+  }
+
+  // Process regular alerts (missiles, etc.)
+  for (const areaName of areas) {
     if (typeof areaName !== 'string') {
+      continue;
+    }
+
+    // Skip test alerts
+    if (areaName.includes('בדיקה')) {
       continue;
     }
 
@@ -123,9 +203,11 @@ function processOrefAlerts(orefData) {
       currentAlerts.set(areaName, {
         area: areaName,
         migun_time: migunTime,
-        started_at: now
+        started_at: now,
+        type: alertType,
+        instructions: instructions
       });
-      console.log(`New alert for: ${areaName} (${migunTime}s)`);
+      console.log(`New ${alertType} alert for: ${areaName} (${migunTime}s)`);
     }
   }
 
@@ -141,17 +223,86 @@ function processOrefAlerts(orefData) {
   }
 }
 
+// Process alerts from history endpoint (AlertsHistory.json)
+function processOrefHistory(historyData) {
+  if (!historyData || !Array.isArray(historyData)) {
+    return;
+  }
+
+  const now = Date.now();
+
+  for (const alert of historyData) {
+    // Skip alerts older than 120 seconds
+    const alertTime = new Date(alert.alertDate).getTime();
+    if (now - alertTime > 120000) {
+      continue;
+    }
+
+    const category = alert.category;
+    const alertType = HISTORICAL_CATEGORIES[category] || 'unknown';
+    const areaName = alert.data;
+    const instructions = alert.title || null;
+
+    // Skip test alerts
+    if (typeof areaName === 'string' && areaName.includes('בדיקה')) {
+      continue;
+    }
+
+    // Handle newsFlash from history
+    if (alertType === 'newsFlash') {
+      // Only update if newer than current
+      if (!currentNewsFlash || alertTime > currentNewsFlash.timestamp) {
+        currentNewsFlash = {
+          type: 'newsFlash',
+          instructions: instructions,
+          timestamp: alertTime,
+          areas: typeof areaName === 'string' ? [areaName] : []
+        };
+        console.log(`NewsFlash from history: ${instructions || 'No instructions'}`);
+      }
+      continue;
+    }
+
+    // Process as regular alert if it's a missile/threat alert
+    if (alertType === 'missiles' || alertType === 'hostileAircraftIntrusion' || alertType === 'terroristInfiltration') {
+      if (typeof areaName === 'string' && !currentAlerts.has(areaName)) {
+        const migunTime = areaTimeMap.get(areaName) || 90;
+        currentAlerts.set(areaName, {
+          area: areaName,
+          migun_time: migunTime,
+          started_at: alertTime,
+          type: alertType,
+          instructions: instructions
+        });
+        console.log(`New ${alertType} alert from history for: ${areaName} (${migunTime}s)`);
+      }
+    }
+  }
+
+  // Clear old newsFlash (older than 10 minutes)
+  if (currentNewsFlash && (now - currentNewsFlash.timestamp) > 600000) {
+    currentNewsFlash = null;
+  }
+}
+
 // Start polling
 async function startPolling() {
   console.log('Starting Oref alert polling...');
 
-  // Initial fetch
-  const initialData = await fetchOrefAlerts();
-  if (initialData) {
-    processOrefAlerts(initialData);
+  // Initial fetch from both endpoints
+  const [alertsData, historyData] = await Promise.all([
+    fetchOrefAlerts(),
+    fetchOrefHistory()
+  ]);
+
+  if (alertsData) {
+    processOrefAlerts(alertsData);
+  }
+  if (historyData) {
+    processOrefHistory(historyData);
   }
 
-  // Continue polling
+  // Continue polling main alerts frequently
   setInterval(async () => {
     const data = await fetchOrefAlerts();
     if (data) {
@@ -167,6 +318,14 @@ async function startPolling() {
       }
     }
   }, POLL_INTERVAL);
+
+  // Poll history less frequently (every 10 seconds) for newsFlash
+  setInterval(async () => {
+    const data = await fetchOrefHistory();
+    if (data) {
+      processOrefHistory(data);
+    }
+  }, 10000);
 }
 
 // API Routes
@@ -187,10 +346,37 @@ app.get('/api/alerts', (req, res) => {
     }
   }
 
+  // Include newsFlash if active (within last 10 minutes)
+  let newsFlash = null;
+  if (currentNewsFlash && (now - currentNewsFlash.timestamp) <= 600000) {
+    newsFlash = currentNewsFlash;
+  }
+
   res.json({
     alerts: activeAlerts,
+    newsFlash: newsFlash,
     server_time: now
   });
+});
+
+// Get current newsFlash only
+app.get('/api/news-flash', (req, res) => {
+  const now = Date.now();
+
+  // Return newsFlash if active (within last 10 minutes)
+  if (currentNewsFlash && (now - currentNewsFlash.timestamp) <= 600000) {
+    res.json({
+      active: true,
+      newsFlash: currentNewsFlash,
+      server_time: now
+    });
+  } else {
+    res.json({
+      active: false,
+      newsFlash: null,
+      server_time: now
+    });
+  }
 });
 
 // Get all areas
@@ -198,71 +384,94 @@ app.get('/api/areas', (req, res) => {
   res.json(areas);
 });
 
-// Test alert endpoint - supports multiple areas
-// Usage: ?areas=area1,area2,area3 OR ?area=single_area
-// Requires API key in production: X-API-Key header or ?key= param
-app.get('/api/test-alert', testAlertLimiter, (req, res) => {
-  const isDev = process.env.NODE_ENV !== 'production';
+// Get cities with geo coordinates (for geolocation lookup)
+app.get('/api/cities-geo', (req, res) => {
+  res.json(citiesGeo);
+});
 
-  // Check API key (header or query param)
-  const apiKey = req.headers['x-api-key'] || req.query.key;
+// Development-only test endpoints
+// These endpoints are completely disabled in production
+if (process.env.NODE_ENV !== 'production') {
+  // Test alert endpoint - supports multiple areas
+  // Usage: ?areas=area1,area2,area3 OR ?area=single_area
+  app.get('/api/test-alert', testAlertLimiter, (req, res) => {
+    // Support both single area (?area=) and multiple areas (?areas=)
+    let areaNames = [];
 
-  if (!isDev && apiKey !== TEST_ALERT_KEY) {
-    return res.status(401).json({ error: 'Invalid or missing API key' });
-  }
+    if (req.query.areas) {
+      // Multiple areas - comma separated
+      areaNames = req.query.areas.split(',').map(a => a.trim()).filter(a => a);
+    } else if (req.query.area) {
+      // Single area (backward compatible)
+      areaNames = [req.query.area];
+    }
 
-  // Support both single area (?area=) and multiple areas (?areas=)
-  let areaNames = [];
+    if (areaNames.length === 0) {
+      return res.status(400).json({
+        error: 'Area name(s) required. Use ?area=אזור or ?areas=אזור1,אזור2,אזור3'
+      });
+    }
 
-  if (req.query.areas) {
-    // Multiple areas - comma separated
-    areaNames = req.query.areas.split(',').map(a => a.trim()).filter(a => a);
-  } else if (req.query.area) {
-    // Single area (backward compatible)
-    areaNames = [req.query.area];
-  }
+    const now = Date.now();
+    const createdAlerts = [];
 
-  if (areaNames.length === 0) {
-    return res.status(400).json({
-      error: 'Area name(s) required. Use ?area=אזור or ?areas=אזור1,אזור2,אזור3'
+    for (const areaName of areaNames) {
+      // Query param takes priority for testing, then area map, then default 90
+      const queryMigunTime = parseInt(req.query.migun_time);
+      const migunTime = !isNaN(queryMigunTime) ? queryMigunTime : (areaTimeMap.get(areaName) || 90);
+
+      testAlerts.set(areaName, {
+        area: areaName,
+        migun_time: migunTime,
+        started_at: now
+      });
+
+      createdAlerts.push({
+        area: areaName,
+        migun_time: migunTime,
+        started_at: now
+      });
+
+      console.log(`Test alert created for: ${areaName} (${migunTime}s)`);
+    }
+
+    res.json({
+      success: true,
+      count: createdAlerts.length,
+      alerts: createdAlerts
     });
-  }
-
-  const now = Date.now();
-  const createdAlerts = [];
-
-  for (const areaName of areaNames) {
-    // Query param takes priority for testing, then area map, then default 90
-    const queryMigunTime = parseInt(req.query.migun_time);
-    const migunTime = !isNaN(queryMigunTime) ? queryMigunTime : (areaTimeMap.get(areaName) || 90);
-
-    testAlerts.set(areaName, {
-      area: areaName,
-      migun_time: migunTime,
-      started_at: now
-    });
-
-    createdAlerts.push({
-      area: areaName,
-      migun_time: migunTime,
-      started_at: now
-    });
-
-    console.log(`Test alert created for: ${areaName} (${migunTime}s)`);
-  }
-
-  res.json({
-    success: true,
-    count: createdAlerts.length,
-    alerts: createdAlerts
   });
-});
 
-// Clear test alerts
-app.get('/api/clear-test-alerts', (req, res) => {
-  testAlerts.clear();
-  res.json({ success: true, message: 'Test alerts cleared' });
-});
+  // Clear test alerts
+  app.get('/api/clear-test-alerts', (req, res) => {
+    testAlerts.clear();
+    currentNewsFlash = null;
+    res.json({ success: true, message: 'Test alerts and newsFlash cleared' });
+  });
+
+  // Test newsFlash endpoint
+  // Usage: ?instructions=התרעה מוקדמת - איום טילים מאיראן
+  app.get('/api/test-news-flash', testAlertLimiter, (req, res) => {
+    const instructions = req.query.instructions || 'התרעה מוקדמת - יש להיכנס למרחב מוגן';
+    const areas = req.query.areas ? req.query.areas.split(',').map(a => a.trim()) : [];
+
+    currentNewsFlash = {
+      type: 'newsFlash',
+      instructions: instructions,
+      timestamp: Date.now(),
+      areas: areas
+    };
+
+    console.log(`Test newsFlash created: ${instructions}`);
+
+    res.json({
+      success: true,
+      newsFlash: currentNewsFlash
+    });
+  });
+
+  console.log('Development mode: Test endpoints enabled (/api/test-alert, /api/test-news-flash, /api/clear-test-alerts)');
+}
 
 // Serve static files from React build
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));

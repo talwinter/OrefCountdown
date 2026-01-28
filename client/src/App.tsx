@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AreaSelector } from './components/AreaSelector';
 import { CountdownTimer } from './components/CountdownTimer';
+import { LocationPermissionModal } from './components/LocationPermissionModal';
+import { LocationToggle } from './components/LocationToggle';
+import { DualAlertBanner } from './components/DualAlertBanner';
 import { useAlerts } from './hooks/useAlerts';
 import { useAreas } from './hooks/useAreas';
+import { useCitiesGeo } from './hooks/useCitiesGeo';
+import { useGeolocation } from './hooks/useGeolocation';
 import { Area } from './types';
 
 const STORAGE_KEY = 'oref-selected-area';
@@ -10,17 +15,39 @@ const STORAGE_KEY = 'oref-selected-area';
 function App() {
   const [selectedArea, setSelectedArea] = useState<Area | null>(null);
   const [isSelectingArea, setIsSelectingArea] = useState(false);
+  const [activeView, setActiveView] = useState<'home' | 'current'>('home');
 
   const { areas, isLoading: areasLoading, error: areasError } = useAreas();
+  const { citiesGeo } = useCitiesGeo();
   const {
-    alerts,
-    activeAlert,
-    alertEnded,  // NEW: true when alert just ended (safe to exit)
-    getRemainingTime,
-    timeOffset,
-    isLoading: alertsLoading,
-    error: alertsError
+    locationState,
+    hasAskedPermission,
+    requestLocation,
+    dismissPermission
+  } = useGeolocation(citiesGeo);
+
+  // Alerts for home area
+  const {
+    alerts: homeAlerts,
+    activeAlert: homeActiveAlert,
+    alertEnded: homeAlertEnded,
+    newsFlash: homeNewsFlash,
+    getRemainingTime: homeGetRemainingTime,
+    timeOffset: homeTimeOffset
   } = useAlerts(selectedArea?.name || null);
+
+  // Alerts for current location (only if different from home)
+  const currentAreaName = locationState.nearestCity?.name || null;
+  const isSameAsHome = currentAreaName === selectedArea?.name;
+
+  const {
+    alerts: currentAlerts,
+    activeAlert: currentActiveAlert,
+    alertEnded: currentAlertEnded,
+    newsFlash: currentNewsFlash,
+    getRemainingTime: currentGetRemainingTime,
+    timeOffset: currentTimeOffset
+  } = useAlerts(isSameAsHome ? null : currentAreaName);
 
   // Load saved area from localStorage
   useEffect(() => {
@@ -61,6 +88,57 @@ function App() {
     setIsSelectingArea(true);
   };
 
+  const handleToggleView = useCallback((view: 'home' | 'current') => {
+    setActiveView(view);
+  }, []);
+
+  const handleSwitchView = useCallback(() => {
+    setActiveView(prev => prev === 'home' ? 'current' : 'home');
+  }, []);
+
+  // Determine what to display based on active view
+  const displayArea = activeView === 'home'
+    ? selectedArea
+    : locationState.nearestCity;
+
+  const displayActiveAlert = activeView === 'home'
+    ? homeActiveAlert
+    : currentActiveAlert;
+
+  const displayAlertEnded = activeView === 'home'
+    ? homeAlertEnded
+    : currentAlertEnded;
+
+  const displayNewsFlash = activeView === 'home'
+    ? homeNewsFlash
+    : currentNewsFlash;
+
+  const displayGetRemainingTime = activeView === 'home'
+    ? homeGetRemainingTime
+    : currentGetRemainingTime;
+
+  const displayTimeOffset = activeView === 'home'
+    ? homeTimeOffset
+    : currentTimeOffset;
+
+  const displayAlerts = activeView === 'home'
+    ? homeAlerts
+    : currentAlerts;
+
+  // Check if both locations have alerts
+  const bothHaveAlerts = homeActiveAlert !== null && currentActiveAlert !== null && !isSameAsHome;
+
+  // Should show location toggle (has valid current location different from home)
+  const showLocationToggle = locationState.permission === 'granted'
+    && locationState.nearestCity !== null
+    && !isSameAsHome;
+
+  // Should show permission modal
+  const showPermissionModal = selectedArea
+    && !isSelectingArea
+    && !hasAskedPermission
+    && locationState.permission === 'prompt';
+
   // Loading state
   if (areasLoading) {
     return (
@@ -91,19 +169,61 @@ function App() {
 
   // Main timer screen
   return (
-    <CountdownTimer
-      selectedArea={selectedArea}
-      activeAlert={activeAlert}
-      alertEnded={alertEnded}  // NEW: pass alertEnded to CountdownTimer
-      getRemainingTime={getRemainingTime}
-      onChangeArea={handleChangeArea}
-      allAlerts={alerts}
-      timeOffset={timeOffset}
-    />
+    <div style={styles.mainContainer}>
+      {/* Location Permission Modal */}
+      {showPermissionModal && (
+        <LocationPermissionModal
+          onApprove={requestLocation}
+          onDismiss={dismissPermission}
+        />
+      )}
+
+      {/* Dual Alert Banner */}
+      {bothHaveAlerts && selectedArea && locationState.nearestCity && (
+        <DualAlertBanner
+          homeAreaName={selectedArea.name}
+          currentAreaName={locationState.nearestCity.name}
+          activeView={activeView}
+          onSwitchView={handleSwitchView}
+        />
+      )}
+
+      {/* Location Toggle */}
+      {showLocationToggle && (
+        <LocationToggle
+          activeView={activeView}
+          onToggle={handleToggleView}
+          homeHasAlert={homeActiveAlert !== null}
+          currentHasAlert={currentActiveAlert !== null}
+          currentLocationName={locationState.nearestCity?.name}
+        />
+      )}
+
+      {/* Main Timer */}
+      {displayArea && (
+        <CountdownTimer
+          selectedArea={displayArea}
+          activeAlert={displayActiveAlert}
+          alertEnded={displayAlertEnded}
+          newsFlash={displayNewsFlash}
+          getRemainingTime={displayGetRemainingTime}
+          onChangeArea={handleChangeArea}
+          allAlerts={displayAlerts}
+          timeOffset={displayTimeOffset}
+          isCurrentLocation={activeView === 'current'}
+        />
+      )}
+    </div>
   );
 }
 
 const styles: { [key: string]: React.CSSProperties } = {
+  mainContainer: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: '#1a1a2e'
+  },
   loadingContainer: {
     height: '100%',
     display: 'flex',
