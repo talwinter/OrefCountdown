@@ -120,6 +120,7 @@ export function CountdownTimer({
   // Track sounds separately
   const hasPlayedNewsFlashSound = useRef(false);
   const hasPlayedExitSound = useRef(false);
+  const repeatSoundInterval = useRef<NodeJS.Timeout | null>(null);
 
   // Vibration helper
   const vibrate = useCallback((pattern: number | number[]) => {
@@ -132,7 +133,33 @@ export function CountdownTimer({
     }
   }, []);
 
-  // Alert notification sound (calm but attention-getting)
+  // Hebrew voice announcement using Web Speech API
+  const speak = useCallback((text: string) => {
+    try {
+      if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'he-IL';
+        utterance.rate = 0.9;
+        utterance.volume = 1;
+
+        // Try to find Hebrew voice
+        const voices = window.speechSynthesis.getVoices();
+        const hebrewVoice = voices.find(v => v.lang.startsWith('he'));
+        if (hebrewVoice) {
+          utterance.voice = hebrewVoice;
+        }
+
+        window.speechSynthesis.speak(utterance);
+      }
+    } catch (e) {
+      console.error('Speech synthesis error:', e);
+    }
+  }, []);
+
+  // Alert notification sound (attention-getting)
   const playAlertSound = useCallback(() => {
     try {
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -142,20 +169,55 @@ export function CountdownTimer({
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
 
-      // Calm notification tone
+      // Alert tone
       oscillator.frequency.value = 440;
       oscillator.type = 'sine';
 
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+      gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
 
       oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.8);
+      oscillator.stop(audioContext.currentTime + 1);
 
       // Vibrate: long pulse
-      vibrate([300, 100, 300]);
+      vibrate([300, 100, 300, 100, 300]);
     } catch (e) {
       console.error('Could not play alert sound:', e);
+    }
+  }, [vibrate]);
+
+  // Full alert with sound + voice
+  const playFullAlert = useCallback(() => {
+    playAlertSound();
+    // Slight delay before voice so sound plays first
+    setTimeout(() => {
+      speak('יש להיכנס למרחב מוגן');
+    }, 500);
+  }, [playAlertSound, speak]);
+
+  // Reminder sound (softer, for repeat alerts)
+  const playReminderSound = useCallback(() => {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.frequency.value = 440;
+      oscillator.type = 'sine';
+
+      // Softer than main alert
+      gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.5);
+
+      vibrate([200, 100, 200]);
+    } catch (e) {
+      console.error('Could not play reminder sound:', e);
     }
   }, [vibrate]);
 
@@ -171,7 +233,7 @@ export function CountdownTimer({
       gain1.connect(audioContext.destination);
       osc1.frequency.value = 392; // G4
       osc1.type = 'sine';
-      gain1.gain.setValueAtTime(0.25, audioContext.currentTime);
+      gain1.gain.setValueAtTime(0.3, audioContext.currentTime);
       gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
       osc1.start(audioContext.currentTime);
       osc1.stop(audioContext.currentTime + 0.3);
@@ -183,7 +245,7 @@ export function CountdownTimer({
       gain2.connect(audioContext.destination);
       osc2.frequency.value = 523; // C5
       osc2.type = 'sine';
-      gain2.gain.setValueAtTime(0.25, audioContext.currentTime + 0.35);
+      gain2.gain.setValueAtTime(0.3, audioContext.currentTime + 0.35);
       gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.7);
       osc2.start(audioContext.currentTime + 0.35);
       osc2.stop(audioContext.currentTime + 0.7);
@@ -195,26 +257,31 @@ export function CountdownTimer({
       gain3.connect(audioContext.destination);
       osc3.frequency.value = 659; // E5
       osc3.type = 'sine';
-      gain3.gain.setValueAtTime(0.25, audioContext.currentTime + 0.75);
+      gain3.gain.setValueAtTime(0.3, audioContext.currentTime + 0.75);
       gain3.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.1);
       osc3.start(audioContext.currentTime + 0.75);
       osc3.stop(audioContext.currentTime + 1.1);
 
       // Vibrate: short pulses (warning pattern)
       vibrate([200, 100, 200, 100, 200]);
+
+      // Voice announcement for early warning
+      setTimeout(() => {
+        speak('התרעה מוקדמת. יש להתכונן להיכנס למרחב מוגן');
+      }, 1200);
     } catch (e) {
       console.error('Could not play newsFlash sound:', e);
     }
-  }, [vibrate]);
+  }, [vibrate, speak]);
 
-  // All clear sound (pleasant ascending chime)
+  // All clear sound (loud, pleasant ascending chime + voice)
   const playAllClearSound = useCallback(() => {
     try {
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
 
-      // Pleasant ascending arpeggio (C-E-G-C)
-      const frequencies = [523, 659, 784, 1047]; // C5, E5, G5, C6
-      const duration = 0.25;
+      // Louder, longer ascending arpeggio (C-E-G-C played twice)
+      const frequencies = [523, 659, 784, 1047, 523, 659, 784, 1047]; // C5, E5, G5, C6 x2
+      const duration = 0.2;
 
       frequencies.forEach((freq, i) => {
         const osc = audioContext.createOscillator();
@@ -225,18 +292,24 @@ export function CountdownTimer({
         osc.type = 'sine';
 
         const startTime = audioContext.currentTime + (i * duration);
-        gain.gain.setValueAtTime(0.2, startTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration + 0.1);
+        // Louder volume
+        gain.gain.setValueAtTime(0.4, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration + 0.15);
         osc.start(startTime);
-        osc.stop(startTime + duration + 0.15);
+        osc.stop(startTime + duration + 0.2);
       });
 
-      // Vibrate: gentle double pulse (positive signal)
-      vibrate([100, 50, 100]);
+      // Strong vibration for exit
+      vibrate([200, 100, 200, 100, 200, 100, 200]);
+
+      // Voice announcement
+      setTimeout(() => {
+        speak('ניתן לצאת מהמרחב המוגן');
+      }, 1800);
     } catch (e) {
       console.error('Could not play all clear sound:', e);
     }
-  }, [vibrate]);
+  }, [vibrate, speak]);
 
   // Update remaining time every 100ms for smooth progress
   useEffect(() => {
@@ -250,17 +323,35 @@ export function CountdownTimer({
     return () => clearInterval(interval);
   }, [getRemainingTime]);
 
-  // Play alert sound when new alert starts
+  // Play alert sound + voice when new alert starts, and repeat every 30 seconds
   useEffect(() => {
     if (activeAlert && !hasPlayedSound.current) {
       hasPlayedSound.current = true;
-      playAlertSound();
+      playFullAlert();
+
+      // Set up repeat sound every 30 seconds
+      repeatSoundInterval.current = setInterval(() => {
+        playReminderSound();
+      }, 30000);
     } else if (!activeAlert) {
       hasPlayedSound.current = false;
+      // Clear repeat interval when alert ends
+      if (repeatSoundInterval.current) {
+        clearInterval(repeatSoundInterval.current);
+        repeatSoundInterval.current = null;
+      }
     }
-  }, [activeAlert, playAlertSound]);
 
-  // Play distinct sound for newsFlash (early warning)
+    // Cleanup on unmount
+    return () => {
+      if (repeatSoundInterval.current) {
+        clearInterval(repeatSoundInterval.current);
+        repeatSoundInterval.current = null;
+      }
+    };
+  }, [activeAlert, playFullAlert, playReminderSound]);
+
+  // Play distinct sound + voice for newsFlash (early warning)
   useEffect(() => {
     if (newsFlash && !hasPlayedNewsFlashSound.current) {
       hasPlayedNewsFlashSound.current = true;
@@ -270,7 +361,7 @@ export function CountdownTimer({
     }
   }, [newsFlash, playNewsFlashSound]);
 
-  // Play all clear sound when alert ends (canExit phase)
+  // Play all clear sound + voice when alert ends (canExit phase)
   useEffect(() => {
     if ((isExitState || alertEnded) && !hasPlayedExitSound.current) {
       hasPlayedExitSound.current = true;
@@ -292,12 +383,12 @@ export function CountdownTimer({
     if (remainingTime === null) return 'safe';
 
     // If migun time hasn't expired yet, show progress phases
+    // Never show green during active alert - start with yellow for urgency
     if (remainingTime > 0) {
       const percentRemaining = (remainingTime / activeAlert.migun_time) * 100;
 
-      if (percentRemaining > 60) return 'green';
-      if (percentRemaining > 30) return 'yellow';
-      if (percentRemaining > 15) return 'orange';
+      if (percentRemaining > 50) return 'yellow';
+      if (percentRemaining > 25) return 'orange';
       return 'red';
     }
 
