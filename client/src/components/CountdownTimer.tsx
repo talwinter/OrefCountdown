@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Alert, Area, NewsFlash } from '../types';
+import { useLanguage } from '../i18n';
 
 interface CountdownTimerProps {
   selectedArea: Area;
@@ -114,6 +115,7 @@ export function CountdownTimer({
   timeOffset,
   isCurrentLocation = false
 }: CountdownTimerProps) {
+  const { t, language } = useLanguage();
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const hasPlayedSound = useRef(false);
@@ -153,7 +155,7 @@ export function CountdownTimer({
     }
   }, []);
 
-  // Hebrew voice announcement using Web Speech API
+  // Voice announcement using Web Speech API (supports Hebrew/English)
   const speak = useCallback((text: string) => {
     try {
       if ('speechSynthesis' in window) {
@@ -161,15 +163,16 @@ export function CountdownTimer({
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'he-IL';
+        utterance.lang = language === 'he' ? 'he-IL' : 'en-US';
         utterance.rate = 0.9;
         utterance.volume = 1;
 
-        // Try to find Hebrew voice
+        // Try to find appropriate voice
         const voices = window.speechSynthesis.getVoices();
-        const hebrewVoice = voices.find(v => v.lang.startsWith('he'));
-        if (hebrewVoice) {
-          utterance.voice = hebrewVoice;
+        const langPrefix = language === 'he' ? 'he' : 'en';
+        const matchingVoice = voices.find(v => v.lang.startsWith(langPrefix));
+        if (matchingVoice) {
+          utterance.voice = matchingVoice;
         }
 
         window.speechSynthesis.speak(utterance);
@@ -177,7 +180,7 @@ export function CountdownTimer({
     } catch (e) {
       console.error('Speech synthesis error:', e);
     }
-  }, []);
+  }, [language]);
 
   // Alert notification sound (attention-getting)
   const playAlertSound = useCallback(() => {
@@ -212,12 +215,12 @@ export function CountdownTimer({
     // Slight delay before voice so sound plays first
     setTimeout(() => {
       if (isCritical) {
-        speak('הישאר במקום והתכופף. הגן על הראש');
+        speak(t('voice.braceYourself'));
       } else {
-        speak('יש להיכנס למרחב מוגן');
+        speak(t('voice.enterShelter'));
       }
     }, 500);
-  }, [playAlertSound, speak]);
+  }, [playAlertSound, speak, t]);
 
   // Reminder sound (softer, for repeat alerts)
   const playReminderSound = useCallback(() => {
@@ -291,12 +294,12 @@ export function CountdownTimer({
 
       // Voice announcement for early warning
       setTimeout(() => {
-        speak('התרעה מוקדמת. יש להתכונן להיכנס למרחב מוגן');
+        speak(t('voice.earlyWarning'));
       }, 1200);
     } catch (e) {
       console.error('Could not play newsFlash sound:', e);
     }
-  }, [vibrate, speak]);
+  }, [vibrate, speak, t]);
 
   // All clear sound (loud, pleasant ascending chime + voice)
   const playAllClearSound = useCallback(() => {
@@ -328,12 +331,12 @@ export function CountdownTimer({
 
       // Voice announcement
       setTimeout(() => {
-        speak('ניתן לצאת מהמרחב המוגן');
+        speak(t('voice.canExit'));
       }, 1800);
     } catch (e) {
       console.error('Could not play all clear sound:', e);
     }
-  }, [vibrate, speak]);
+  }, [vibrate, speak, t]);
 
   // Update remaining time every 100ms for smooth progress
   useEffect(() => {
@@ -395,12 +398,12 @@ export function CountdownTimer({
     } else if (!newsFlash) {
       // NewsFlash ended - announce if there's no active alert (threat passed)
       if (previousNewsFlash.current && !activeAlert) {
-        speak('ההתרעה המוקדמת הסתיימה');
+        speak(t('voice.earlyWarningEnded'));
       }
       hasPlayedNewsFlashSound.current = false;
     }
     previousNewsFlash.current = newsFlash;
-  }, [newsFlash, activeAlert, playNewsFlashSound, speak]);
+  }, [newsFlash, activeAlert, playNewsFlashSound, speak, t]);
 
   // Play all clear sound + voice when alert ends (canExit phase)
   useEffect(() => {
@@ -473,10 +476,10 @@ export function CountdownTimer({
 
   // Get phase percentage for display
   const getPhasePercentText = () => {
-    if (phase === 'critical') return 'מיידי!';
-    if (phase === 'yellow') return 'הערכה: זמן סביר';
-    if (phase === 'orange') return 'הערכה: זמן מוגבל';
-    if (phase === 'red') return 'הערכה: הזמן הסתיים';
+    if (phase === 'critical') return t('estimate.critical');
+    if (phase === 'yellow') return t('estimate.reasonable');
+    if (phase === 'orange') return t('estimate.limited');
+    if (phase === 'red') return t('estimate.ended');
     if (phase === 'sheltering') return '';
     return '';
   };
@@ -492,12 +495,12 @@ export function CountdownTimer({
         <div style={styles.areaHeader}>
           <span style={styles.areaName}>{selectedArea.name}</span>
           {isCurrentLocation && (
-            <span style={styles.locationBadge}>📍 מיקום נוכחי</span>
+            <span style={styles.locationBadge}>📍 {t('ui.currentLocation')}</span>
           )}
         </div>
         {!hasAlert && !isCurrentLocation && (
           <button onClick={onChangeArea} style={styles.changeButton}>
-            החלף אזור
+            {t('ui.changeArea')}
           </button>
         )}
       </div>
@@ -510,11 +513,11 @@ export function CountdownTimer({
           transition: 'background-color 2s ease'
         }}>
           {hasAlert ? (
-            <>אזעקה נשמעה באזור</>
+            <>{t('badge.alertActive')}</>
           ) : phase === 'earlyWarning' ? (
-            <>התרעה מוקדמת</>
+            <>{t('badge.earlyWarning')}</>
           ) : (
-            <>{config.text}</>
+            <>{config.textKey ? t(config.textKey as any) : config.text}</>
           )}
         </div>
       </div>
@@ -524,13 +527,13 @@ export function CountdownTimer({
         <div style={styles.newsFlashBanner}>
           <div style={styles.newsFlashIcon}>⚠️</div>
           <div style={styles.newsFlashContent}>
-            <div style={styles.newsFlashTitle}>התרעה מוקדמת</div>
+            <div style={styles.newsFlashTitle}>{t('newsFlash.title')}</div>
             <div style={styles.newsFlashInstructions}>
-              {newsFlash.instructions || 'יש להיכנס למרחב מוגן'}
+              {newsFlash.instructions || t('newsFlash.defaultInstruction')}
             </div>
             {newsFlash.areas.length > 0 && (
               <div style={styles.newsFlashAreas}>
-                אזורים: {newsFlash.areas.join(', ')}
+                {t('newsFlash.areas')} {newsFlash.areas.join(', ')}
               </div>
             )}
           </div>
@@ -541,10 +544,10 @@ export function CountdownTimer({
       {hasAlert && (
         <div style={styles.alertMessage}>
           <p style={styles.calmInstruction}>
-            לפי הנחיות פיקוד העורף, קיים פרק זמן מוגדר להגעה למרחב מוגן באזור זה
+            {phase === 'critical' ? t('alert.criticalInstruction') : t('alert.calmInstruction')}
           </p>
           <p style={styles.reassurance}>
-            מומלץ לפעול ברוגע ובהתאם ליכולת האישית
+            {t('alert.reassurance')}
           </p>
         </div>
       )}
@@ -599,11 +602,11 @@ export function CountdownTimer({
       <div style={styles.instructions}>
         {(hasAlert || phase === 'canExit') ? (
           <p style={styles.instructionText}>
-            {config.instruction}
+            {config.instructionKey ? t(config.instructionKey as any) : config.instruction}
           </p>
         ) : (
           <p style={styles.instructionText}>
-            זמן המיגון באזור שלך: <strong>{selectedArea.migun_time} שניות</strong>
+            {t('ui.migunTime')} <strong>{selectedArea.migun_time} {t('ui.seconds')}</strong>
           </p>
         )}
       </div>
@@ -612,10 +615,10 @@ export function CountdownTimer({
       {hasAlert && (
         <div style={styles.reassuranceFooter}>
           <p style={styles.reassuranceText}>
-            שמירה על קור רוח חשובה לבטיחותך
+            {t('alert.stayCalm')}
           </p>
           <p style={styles.reassuranceSubtext}>
-            מדובר בהערכה כללית בהתאם לאזור ולהנחיות פיקוד העורף
+            {t('alert.estimate')}
           </p>
         </div>
       )}
@@ -627,9 +630,7 @@ export function CountdownTimer({
       {/* Disclaimer */}
       <div style={styles.disclaimer}>
         <p style={styles.disclaimerText}>
-          המידע מבוסס על נתונים ציבוריים מפיקוד העורף ומוצג כהערכה כללית בלבד.
-          <br />
-          אין מדובר בשירות חירום רשמי. יש לפעול תמיד לפי הנחיות פיקוד העורף.
+          {t('disclaimer.text')}
         </p>
       </div>
 
