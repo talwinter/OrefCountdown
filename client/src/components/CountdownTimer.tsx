@@ -324,33 +324,40 @@ export function CountdownTimer({
     return () => clearInterval(interval);
   }, [getRemainingTime]);
 
-  // Play alert sound + voice when new alert starts, and repeat every 30 seconds
+  // Play alert sound + voice when new alert starts
   useEffect(() => {
     if (activeAlert && !hasPlayedSound.current) {
       hasPlayedSound.current = true;
       playFullAlert();
-
-      // Set up repeat sound every 30 seconds
-      repeatSoundInterval.current = setInterval(() => {
-        playReminderSound();
-      }, 30000);
     } else if (!activeAlert) {
       hasPlayedSound.current = false;
-      // Clear repeat interval when alert ends
+    }
+  }, [activeAlert, playFullAlert]);
+
+  // Repeat reminder sound every 30 seconds while alert is active
+  useEffect(() => {
+    if (!activeAlert) {
+      // Clear interval when no alert
       if (repeatSoundInterval.current) {
         clearInterval(repeatSoundInterval.current);
         repeatSoundInterval.current = null;
       }
+      return;
     }
 
-    // Cleanup on unmount
+    // Set up repeat sound every 30 seconds
+    repeatSoundInterval.current = setInterval(() => {
+      playReminderSound();
+    }, 30000);
+
+    // Cleanup on unmount or when alert changes
     return () => {
       if (repeatSoundInterval.current) {
         clearInterval(repeatSoundInterval.current);
         repeatSoundInterval.current = null;
       }
     };
-  }, [activeAlert, playFullAlert, playReminderSound]);
+  }, [activeAlert, playReminderSound]);
 
   // Play distinct sound + voice for newsFlash (early warning)
   useEffect(() => {
