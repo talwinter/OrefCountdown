@@ -117,11 +117,23 @@ export function CountdownTimer({
     previousAlertProp.current = activeAlert;
   }, [activeAlert]);
 
-  // Track newsFlash sound separately
+  // Track sounds separately
   const hasPlayedNewsFlashSound = useRef(false);
+  const hasPlayedExitSound = useRef(false);
 
-  // Calm notification sound (softer than alarm)
-  const playNotificationSound = useCallback(() => {
+  // Vibration helper
+  const vibrate = useCallback((pattern: number | number[]) => {
+    try {
+      if (navigator.vibrate) {
+        navigator.vibrate(pattern);
+      }
+    } catch (e) {
+      // Vibration not supported
+    }
+  }, []);
+
+  // Alert notification sound (calm but attention-getting)
+  const playAlertSound = useCallback(() => {
     try {
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
@@ -130,20 +142,101 @@ export function CountdownTimer({
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
 
-      // Lower, calmer frequency
+      // Calm notification tone
       oscillator.frequency.value = 440;
       oscillator.type = 'sine';
 
-      // Gentler volume curve
       gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
 
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 0.8);
+
+      // Vibrate: long pulse
+      vibrate([300, 100, 300]);
     } catch (e) {
-      console.error('Could not play notification sound:', e);
+      console.error('Could not play alert sound:', e);
     }
-  }, []);
+  }, [vibrate]);
+
+  // NewsFlash sound (distinct warning tone - two-tone pattern)
+  const playNewsFlashSound = useCallback(() => {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+
+      // First tone (lower)
+      const osc1 = audioContext.createOscillator();
+      const gain1 = audioContext.createGain();
+      osc1.connect(gain1);
+      gain1.connect(audioContext.destination);
+      osc1.frequency.value = 392; // G4
+      osc1.type = 'sine';
+      gain1.gain.setValueAtTime(0.25, audioContext.currentTime);
+      gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+      osc1.start(audioContext.currentTime);
+      osc1.stop(audioContext.currentTime + 0.3);
+
+      // Second tone (higher)
+      const osc2 = audioContext.createOscillator();
+      const gain2 = audioContext.createGain();
+      osc2.connect(gain2);
+      gain2.connect(audioContext.destination);
+      osc2.frequency.value = 523; // C5
+      osc2.type = 'sine';
+      gain2.gain.setValueAtTime(0.25, audioContext.currentTime + 0.35);
+      gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.7);
+      osc2.start(audioContext.currentTime + 0.35);
+      osc2.stop(audioContext.currentTime + 0.7);
+
+      // Third tone (even higher for urgency)
+      const osc3 = audioContext.createOscillator();
+      const gain3 = audioContext.createGain();
+      osc3.connect(gain3);
+      gain3.connect(audioContext.destination);
+      osc3.frequency.value = 659; // E5
+      osc3.type = 'sine';
+      gain3.gain.setValueAtTime(0.25, audioContext.currentTime + 0.75);
+      gain3.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.1);
+      osc3.start(audioContext.currentTime + 0.75);
+      osc3.stop(audioContext.currentTime + 1.1);
+
+      // Vibrate: short pulses (warning pattern)
+      vibrate([200, 100, 200, 100, 200]);
+    } catch (e) {
+      console.error('Could not play newsFlash sound:', e);
+    }
+  }, [vibrate]);
+
+  // All clear sound (pleasant ascending chime)
+  const playAllClearSound = useCallback(() => {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+
+      // Pleasant ascending arpeggio (C-E-G-C)
+      const frequencies = [523, 659, 784, 1047]; // C5, E5, G5, C6
+      const duration = 0.25;
+
+      frequencies.forEach((freq, i) => {
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+
+        const startTime = audioContext.currentTime + (i * duration);
+        gain.gain.setValueAtTime(0.2, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration + 0.1);
+        osc.start(startTime);
+        osc.stop(startTime + duration + 0.15);
+      });
+
+      // Vibrate: gentle double pulse (positive signal)
+      vibrate([100, 50, 100]);
+    } catch (e) {
+      console.error('Could not play all clear sound:', e);
+    }
+  }, [vibrate]);
 
   // Update remaining time every 100ms for smooth progress
   useEffect(() => {
@@ -157,25 +250,35 @@ export function CountdownTimer({
     return () => clearInterval(interval);
   }, [getRemainingTime]);
 
-  // Play calm notification sound when new alert starts
+  // Play alert sound when new alert starts
   useEffect(() => {
     if (activeAlert && !hasPlayedSound.current) {
       hasPlayedSound.current = true;
-      playNotificationSound();
+      playAlertSound();
     } else if (!activeAlert) {
       hasPlayedSound.current = false;
     }
-  }, [activeAlert, playNotificationSound]);
+  }, [activeAlert, playAlertSound]);
 
-  // Play notification for newsFlash (early warning)
+  // Play distinct sound for newsFlash (early warning)
   useEffect(() => {
     if (newsFlash && !hasPlayedNewsFlashSound.current) {
       hasPlayedNewsFlashSound.current = true;
-      playNotificationSound();
+      playNewsFlashSound();
     } else if (!newsFlash) {
       hasPlayedNewsFlashSound.current = false;
     }
-  }, [newsFlash, playNotificationSound]);
+  }, [newsFlash, playNewsFlashSound]);
+
+  // Play all clear sound when alert ends (canExit phase)
+  useEffect(() => {
+    if ((isExitState || alertEnded) && !hasPlayedExitSound.current) {
+      hasPlayedExitSound.current = true;
+      playAllClearSound();
+    } else if (!isExitState && !alertEnded) {
+      hasPlayedExitSound.current = false;
+    }
+  }, [isExitState, alertEnded, playAllClearSound]);
 
   // Determine current phase
   const getPhase = (): Phase => {
