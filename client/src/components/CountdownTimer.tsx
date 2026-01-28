@@ -85,8 +85,6 @@ export function CountdownTimer({
   timeOffset
 }: CountdownTimerProps) {
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const hasPlayedSound = useRef(false);
 
@@ -165,12 +163,7 @@ export function CountdownTimer({
     return Math.max(0, alert.migun_time - elapsed);
   }, [timeOffset]);
 
-  // Filter alerts based on search query
-  const searchResults = searchQuery.trim()
-    ? allAlerts.filter(alert =>
-      alert.area.toLowerCase().includes(searchQuery.toLowerCase().trim())
-    )
-    : [];
+  // Search logic removed
 
   // Calm notification sound (softer than alarm)
   const playNotificationSound = useCallback(() => {
@@ -333,58 +326,7 @@ export function CountdownTimer({
 
       {/* Test button removed */}
 
-      {/* Search other areas section - Only show when NO alert */}
-      {!hasAlert && (
-        <div style={styles.searchSection}>
-          <button
-            onClick={() => setIsSearchOpen(!isSearchOpen)}
-            style={styles.searchToggle}
-          >
-            🔍 בדוק אזור אחר {isSearchOpen ? '▲' : '▼'}
-          </button>
-
-          {isSearchOpen && (
-            <div style={styles.searchContainer}>
-              <input
-                type="text"
-                placeholder="חפש עיר..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                style={styles.searchInput}
-                dir="rtl"
-              />
-
-              {searchQuery.trim() && (
-                <div style={styles.searchResults}>
-                  {searchResults.length > 0 ? (
-                    searchResults.map((alert) => {
-                      const alertTime = getAlertRemainingTime(alert);
-                      const alertPhase = alertTime <= 0 ? 'sheltering' :
-                        alertTime / alert.migun_time > 0.6 ? 'green' :
-                          alertTime / alert.migun_time > 0.3 ? 'yellow' : 'orange';
-                      return (
-                        <div key={alert.area} style={{
-                          ...styles.searchResultItem,
-                          backgroundColor: PHASE_CONFIGS[alertPhase].badgeColor
-                        }}>
-                          <span style={styles.searchResultArea}>{alert.area}</span>
-                          <span style={styles.searchResultStatus}>
-                            {PHASE_CONFIGS[alertPhase].text}
-                          </span>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div style={styles.noResults}>
-                      אין התראה פעילה ב{searchQuery}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
+      {/* Search section removed */}
 
       {/* Disclaimer */}
       <div style={styles.disclaimer}>
