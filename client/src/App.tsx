@@ -182,6 +182,11 @@ function App() {
   // Main timer screen
   return (
     <div style={styles.mainContainer}>
+      {/* Language Selector - top right corner */}
+      <div style={styles.languageSelectorContainer}>
+        <LanguageSelector />
+      </div>
+
       {/* Location Permission Modal */}
       {showPermissionModal && (
         <LocationPermissionModal
@@ -234,7 +239,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#1a1a2e'
+    backgroundColor: '#1a1a2e',
+    position: 'relative'
+  },
+  languageSelectorContainer: {
+    position: 'absolute',
+    top: '8px',
+    right: '8px',
+    zIndex: 100
   },
   loadingContainer: {
     height: '100%',
