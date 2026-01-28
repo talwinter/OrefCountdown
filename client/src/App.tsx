@@ -4,10 +4,12 @@ import { CountdownTimer } from './components/CountdownTimer';
 import { LocationPermissionModal } from './components/LocationPermissionModal';
 import { LocationToggle } from './components/LocationToggle';
 import { DualAlertBanner } from './components/DualAlertBanner';
+import { LanguageSelector } from './components/LanguageSelector';
 import { useAlerts } from './hooks/useAlerts';
 import { useAreas } from './hooks/useAreas';
 import { useCitiesGeo } from './hooks/useCitiesGeo';
 import { useGeolocation } from './hooks/useGeolocation';
+import { useLanguage } from './i18n';
 import { Area } from './types';
 
 const STORAGE_KEY = 'oref-selected-area';
@@ -16,6 +18,14 @@ function App() {
   const [selectedArea, setSelectedArea] = useState<Area | null>(null);
   const [isSelectingArea, setIsSelectingArea] = useState(false);
   const [activeView, setActiveView] = useState<'home' | 'current'>('home');
+
+  const { isRTL, t } = useLanguage();
+
+  // Set document direction based on language
+  useEffect(() => {
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.documentElement.lang = isRTL ? 'he' : 'en';
+  }, [isRTL]);
 
   const { areas, isLoading: areasLoading, error: areasError } = useAreas();
   const { citiesGeo } = useCitiesGeo();
@@ -143,8 +153,9 @@ function App() {
   if (areasLoading) {
     return (
       <div style={styles.loadingContainer}>
+        <LanguageSelector />
         <div style={styles.spinner} />
-        <p>טוען נתונים...</p>
+        <p>{t('ui.loading')}</p>
       </div>
     );
   }
@@ -153,10 +164,11 @@ function App() {
   if (areasError) {
     return (
       <div style={styles.errorContainer}>
-        <h2>שגיאה בטעינת נתונים</h2>
+        <LanguageSelector />
+        <h2>{t('ui.error')}</h2>
         <p>{areasError}</p>
         <button onClick={() => window.location.reload()} style={styles.retryButton}>
-          נסה שוב
+          {t('ui.retry')}
         </button>
       </div>
     );

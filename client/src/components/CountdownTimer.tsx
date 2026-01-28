@@ -14,12 +14,15 @@ interface CountdownTimerProps {
 }
 
 // Phase definitions for calm UX
-type Phase = 'green' | 'yellow' | 'orange' | 'red' | 'sheltering' | 'canExit' | 'safe' | 'earlyWarning';
+type Phase = 'critical' | 'yellow' | 'orange' | 'red' | 'sheltering' | 'canExit' | 'safe' | 'earlyWarning';
 
 interface PhaseConfig {
   color: string;
   backgroundColor: string;
   badgeColor: string;
+  textKey: string;
+  instructionKey: string;
+  // Fallback text for when translations aren't loaded yet
   text: string;
   instruction: string;
 }
@@ -29,6 +32,8 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
     color: '#f59e0b',
     backgroundColor: '#451a03',
     badgeColor: '#b45309',
+    textKey: 'phase.earlyWarning',
+    instructionKey: 'instruction.earlyWarning',
     text: 'התרעה מוקדמת',
     instruction: 'יש להיכנס למרחב מוגן בהקדם'
   },
@@ -36,20 +41,26 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
     color: '#4ade80',
     backgroundColor: '#1a1a2e',
     badgeColor: '#166534',
+    textKey: 'phase.safe',
+    instructionKey: '',
     text: 'אין התראה פעילה באזור',
     instruction: ''
   },
-  green: {
-    color: '#4ade80',
-    backgroundColor: '#1a2e1f',
-    badgeColor: '#166534',
-    text: 'נמצא בטווח הזמן המומלץ',
-    instruction: 'להגעה למרחב מוגן לפי הנחיות פיקוד העורף'
+  critical: {
+    color: '#ef4444',
+    backgroundColor: '#450a0a',
+    badgeColor: '#b91c1c',
+    textKey: 'phase.critical',
+    instructionKey: 'instruction.critical',
+    text: 'הישאר במקום והתכופף',
+    instruction: 'התכופף, הגן על הראש, התרחק מחלונות'
   },
   yellow: {
     color: '#fcd34d',
     backgroundColor: '#2e2a1a',
     badgeColor: '#92400e',
+    textKey: 'phase.yellow',
+    instructionKey: 'instruction.yellow',
     text: 'הזמן להגעה למרחב מוגן מוגבל',
     instruction: 'מומלץ לפעול ברוגע ובשיקול דעת'
   },
@@ -57,6 +68,8 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
     color: '#fb923c',
     backgroundColor: '#2e221a',
     badgeColor: '#9a3412',
+    textKey: 'phase.orange',
+    instructionKey: 'instruction.orange',
     text: 'הזמן המוערך מתקצר',
     instruction: 'מומלץ לפעול בהתאם להנחיות פיקוד העורף'
   },
@@ -64,6 +77,8 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
     color: '#f87171',
     backgroundColor: '#2e1f1f',
     badgeColor: '#991b1b',
+    textKey: 'phase.red',
+    instructionKey: 'instruction.red',
     text: 'הזמן המוערך הסתיים',
     instruction: 'יש לפעול לפי הנחיות פיקוד העורף'
   },
@@ -71,6 +86,8 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
     color: '#60a5fa',
     backgroundColor: '#1e293b',
     badgeColor: '#1e40af',
+    textKey: 'phase.sheltering',
+    instructionKey: 'instruction.sheltering',
     text: 'מומלץ להישאר במרחב מוגן',
     instruction: 'יש להמתין להודעת פיקוד העורף לפני יציאה'
   },
@@ -78,6 +95,8 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
     color: '#4ade80',
     backgroundColor: '#1a2e1f',
     badgeColor: '#166534',
+    textKey: 'phase.canExit',
+    instructionKey: 'instruction.canExit',
     text: 'ניתן לצאת מהמרחב המוגן',
     instruction: 'ההתראה הסתיימה לפי פיקוד העורף'
   }
@@ -187,12 +206,16 @@ export function CountdownTimer({
     }
   }, [vibrate]);
 
-  // Full alert with sound + voice
-  const playFullAlert = useCallback(() => {
+  // Full alert with sound + voice (critical mode for short migun times)
+  const playFullAlert = useCallback((isCritical: boolean = false) => {
     playAlertSound();
     // Slight delay before voice so sound plays first
     setTimeout(() => {
-      speak('יש להיכנס למרחב מוגן');
+      if (isCritical) {
+        speak('הישאר במקום והתכופף. הגן על הראש');
+      } else {
+        speak('יש להיכנס למרחב מוגן');
+      }
     }, 500);
   }, [playAlertSound, speak]);
 
@@ -328,13 +351,16 @@ export function CountdownTimer({
   useEffect(() => {
     if (activeAlert && !hasPlayedSound.current) {
       hasPlayedSound.current = true;
-      playFullAlert();
+      // Use critical voice for short migun times (≤30 seconds)
+      const isCritical = activeAlert.migun_time <= 30;
+      playFullAlert(isCritical);
     } else if (!activeAlert) {
       hasPlayedSound.current = false;
     }
   }, [activeAlert, playFullAlert]);
 
-  // Repeat reminder sound every 30 seconds while alert is active
+  // Repeat reminder sound while alert is active
+  // Interval depends on migun time: 10s for short alerts, 30s for longer ones
   useEffect(() => {
     if (!activeAlert) {
       // Clear interval when no alert
@@ -345,10 +371,12 @@ export function CountdownTimer({
       return;
     }
 
-    // Set up repeat sound every 30 seconds
+    // Shorter interval for short migun times
+    const intervalMs = activeAlert.migun_time <= 30 ? 10000 : 30000;
+
     repeatSoundInterval.current = setInterval(() => {
       playReminderSound();
-    }, 30000);
+    }, intervalMs);
 
     // Cleanup on unmount or when alert changes
     return () => {
@@ -395,9 +423,18 @@ export function CountdownTimer({
     if (!activeAlert) return 'safe';
     if (remainingTime === null) return 'safe';
 
+    // Critical phase for very short migun times (≤15 seconds) - no time to move
+    if (activeAlert.migun_time <= 15) {
+      return 'critical';
+    }
+
     // If migun time hasn't expired yet, show progress phases
-    // Never show green during active alert - start with yellow for urgency
     if (remainingTime > 0) {
+      // For short migun times (≤30 seconds), use critical phase throughout
+      if (activeAlert.migun_time <= 30) {
+        return 'critical';
+      }
+
       const percentRemaining = (remainingTime / activeAlert.migun_time) * 100;
 
       if (percentRemaining > 50) return 'yellow';
@@ -436,7 +473,7 @@ export function CountdownTimer({
 
   // Get phase percentage for display
   const getPhasePercentText = () => {
-    if (phase === 'green') return 'הערכה: זמן מספיק';
+    if (phase === 'critical') return 'מיידי!';
     if (phase === 'yellow') return 'הערכה: זמן סביר';
     if (phase === 'orange') return 'הערכה: זמן מוגבל';
     if (phase === 'red') return 'הערכה: הזמן הסתיים';
