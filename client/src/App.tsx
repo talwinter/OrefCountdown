@@ -6,6 +6,7 @@ import { LocationToggle } from './components/LocationToggle';
 import { DualAlertBanner } from './components/DualAlertBanner';
 import { LanguageSelector } from './components/LanguageSelector';
 import { AboutPage } from './components/AboutPage';
+import { SoundActivationOverlay } from './components/SoundActivationOverlay';
 import { useAlerts } from './hooks/useAlerts';
 import { useAreas } from './hooks/useAreas';
 import { useCitiesGeo } from './hooks/useCitiesGeo';
@@ -19,6 +20,10 @@ function App() {
   const [selectedArea, setSelectedArea] = useState<Area | null>(null);
   const [isSelectingArea, setIsSelectingArea] = useState(false);
   const [activeView, setActiveView] = useState<'home' | 'current' | 'about'>('home');
+  const [soundsEnabled, setSoundsEnabled] = useState(() => {
+    // Check if user has previously enabled sounds this session
+    return sessionStorage.getItem('sounds-enabled') === 'true';
+  });
 
   const { isRTL, t } = useLanguage();
 
@@ -188,6 +193,16 @@ function App() {
   // Main timer screen
   return (
     <div style={styles.mainContainer}>
+      {/* Sound Activation Overlay - show once per session */}
+      {!soundsEnabled && (
+        <SoundActivationOverlay
+          onActivate={() => {
+            setSoundsEnabled(true);
+            sessionStorage.setItem('sounds-enabled', 'true');
+          }}
+        />
+      )}
+
       {/* Location Permission Modal */}
       {showPermissionModal && (
         <LocationPermissionModal

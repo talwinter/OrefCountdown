@@ -121,6 +121,28 @@ export function CountdownTimer({
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const hasPlayedSound = useRef(false);
+  const audioContextRef = useRef<AudioContext | null>(null);
+
+  // Initialize AudioContext on first user interaction (required by browser autoplay policy)
+  useEffect(() => {
+    const initAudioContext = () => {
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      if (audioContextRef.current.state === 'suspended') {
+        audioContextRef.current.resume();
+      }
+    };
+
+    // Resume on any user interaction
+    document.addEventListener('click', initAudioContext, { once: false });
+    document.addEventListener('touchstart', initAudioContext, { once: false });
+
+    return () => {
+      document.removeEventListener('click', initAudioContext);
+      document.removeEventListener('touchstart', initAudioContext);
+    };
+  }, []);
 
   // Track local exit state (when alert disappears)
   const [isExitState, setIsExitState] = useState(false);
@@ -187,7 +209,17 @@ export function CountdownTimer({
   // Alert notification sound (attention-getting)
   const playAlertSound = useCallback(() => {
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      // Use shared audioContext or create one
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      const audioContext = audioContextRef.current;
+
+      // Resume if suspended
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
@@ -227,7 +259,12 @@ export function CountdownTimer({
   // Reminder sound (softer, for repeat alerts)
   const playReminderSound = useCallback(() => {
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      const audioContext = audioContextRef.current;
+      if (audioContext.state === 'suspended') audioContext.resume();
+
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
@@ -253,7 +290,11 @@ export function CountdownTimer({
   // NewsFlash sound (distinct warning tone - two-tone pattern)
   const playNewsFlashSound = useCallback(() => {
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      const audioContext = audioContextRef.current;
+      if (audioContext.state === 'suspended') audioContext.resume();
 
       // First tone (lower)
       const osc1 = audioContext.createOscillator();
@@ -306,7 +347,11 @@ export function CountdownTimer({
   // All clear sound (loud, pleasant ascending chime + voice)
   const playAllClearSound = useCallback(() => {
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      const audioContext = audioContextRef.current;
+      if (audioContext.state === 'suspended') audioContext.resume();
 
       // Louder, longer ascending arpeggio (C-E-G-C played twice)
       const frequencies = [523, 659, 784, 1047, 523, 659, 784, 1047]; // C5, E5, G5, C6 x2
@@ -400,12 +445,12 @@ export function CountdownTimer({
     } else if (!newsFlash) {
       // NewsFlash ended - announce if there's no active alert (threat passed)
       if (previousNewsFlash.current && !activeAlert) {
-        speak(t('voice.earlyWarningEnded'));
+        playAllClearSound(); // Play all clear sound when early warning ends
       }
       hasPlayedNewsFlashSound.current = false;
     }
     previousNewsFlash.current = newsFlash;
-  }, [newsFlash, activeAlert, playNewsFlashSound, speak, t]);
+  }, [newsFlash, activeAlert, playNewsFlashSound, playAllClearSound]);
 
   // Play all clear sound + voice when alert ends (canExit phase)
   useEffect(() => {
@@ -419,11 +464,11 @@ export function CountdownTimer({
 
   // Determine current phase
   const getPhase = (): Phase => {
-    // Priority: Local exit state OR prop
-    if (isExitState || alertEnded) return 'canExit';
-
-    // Early warning takes priority (10 min before strike)
+    // Early warning takes priority over everything except active alert
     if (newsFlash && !activeAlert) return 'earlyWarning';
+
+    // Exit state (alert just ended)
+    if (isExitState || alertEnded) return 'canExit';
 
     if (!activeAlert) return 'safe';
     if (remainingTime === null) return 'safe';

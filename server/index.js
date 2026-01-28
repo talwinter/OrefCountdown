@@ -8,6 +8,9 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Trust proxy (needed when behind nginx/reverse proxy)
+app.set('trust proxy', 1);
+
 // CORS configuration - allow all origins in dev, restrict in production
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
@@ -17,6 +20,21 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
+
+// Cache control - prevent aggressive caching on iOS/PWA
+app.use((req, res, next) => {
+  // API routes: no caching
+  if (req.path.startsWith('/api')) {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+  }
+  // Static files: short cache with revalidation
+  else {
+    res.set('Cache-Control', 'no-cache, must-revalidate');
+  }
+  next();
+});
 
 // Rate limiting - 100 requests per minute per IP
 const limiter = rateLimit({

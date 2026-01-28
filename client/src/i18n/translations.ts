@@ -7,7 +7,7 @@ export const translations = {
     en: 'No active alert in the area'
   },
   'phase.earlyWarning': {
-    he: 'התרעה מוקדמת',
+    he: 'התראה מוקדמת',
     en: 'Early Warning'
   },
   'phase.yellow': {
@@ -79,11 +79,11 @@ export const translations = {
     en: 'Stay in place and brace yourself. Protect your head'
   },
   'voice.earlyWarning': {
-    he: 'התרעה מוקדמת. יש להתכונן להיכנס למרחב מוגן',
+    he: 'התראה מוקדמת. יש להתכונן להיכנס למרחב מוגן',
     en: 'Early warning. Prepare to enter shelter'
   },
   'voice.earlyWarningEnded': {
-    he: 'ההתרעה המוקדמת הסתיימה',
+    he: 'ההתראה המוקדמת הסתיימה',
     en: 'The early warning has ended'
   },
   'voice.canExit': {
@@ -97,7 +97,7 @@ export const translations = {
     en: 'Alert sounded in the area'
   },
   'badge.earlyWarning': {
-    he: 'התרעה מוקדמת',
+    he: 'התראה מוקדמת',
     en: 'Early Warning'
   },
 
@@ -229,7 +229,7 @@ export const translations = {
 
   // NewsFlash
   'newsFlash.title': {
-    he: 'התרעה מוקדמת',
+    he: 'התראה מוקדמת',
     en: 'Early Warning'
   },
   'newsFlash.defaultInstruction': {
