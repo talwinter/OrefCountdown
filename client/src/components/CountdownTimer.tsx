@@ -5,13 +5,14 @@ import { useLanguage } from '../i18n';
 interface CountdownTimerProps {
   selectedArea: Area;
   activeAlert: Alert | null;
-  alertEnded: boolean;  // NEW: true when alert just ended (safe to exit per Pikud HaOref)
-  newsFlash: NewsFlash | null;  // Early warning (10 min before strike)
+  alertEnded: boolean;
+  newsFlash: NewsFlash | null;
   getRemainingTime: () => number | null;
   onChangeArea: () => void;
+  onShowAbout?: () => void;  // Optional callback for showing About page
   allAlerts: Alert[];
   timeOffset: number;
-  isCurrentLocation?: boolean;  // True when showing current location instead of home
+  isCurrentLocation?: boolean;
 }
 
 // Phase definitions for calm UX
@@ -44,7 +45,7 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
     badgeColor: '#166534',
     textKey: 'phase.safe',
     instructionKey: '',
-    text: 'אין התראה פעילה באזור',
+    text: 'אין התרעה פעילה באזור',
     instruction: ''
   },
   critical: {
@@ -99,7 +100,7 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
     textKey: 'phase.canExit',
     instructionKey: 'instruction.canExit',
     text: 'ניתן לצאת מהמרחב המוגן',
-    instruction: 'ההתראה הסתיימה לפי פיקוד העורף'
+    instruction: 'ההתרעה הסתיימה לפי פיקוד העורף'
   }
 };
 
@@ -107,10 +108,11 @@ const PHASE_CONFIGS: Record<Phase, PhaseConfig> = {
 export function CountdownTimer({
   selectedArea,
   activeAlert,
-  alertEnded,  // NEW: when true, alert ended per Pikud HaOref
-  newsFlash,   // Early warning (10 min before strike)
+  alertEnded,
+  newsFlash,
   getRemainingTime,
   onChangeArea,
+  onShowAbout,
   allAlerts,
   timeOffset,
   isCurrentLocation = false
@@ -520,6 +522,11 @@ export function CountdownTimer({
             <>{config.textKey ? t(config.textKey as any) : config.text}</>
           )}
         </div>
+        {!hasAlert && onShowAbout && (
+          <button onClick={onShowAbout} style={styles.infoButton} aria-label="About">
+            ℹ️
+          </button>
+        )}
       </div>
 
       {/* NewsFlash Banner - Early Warning */}
@@ -630,7 +637,9 @@ export function CountdownTimer({
       {/* Disclaimer */}
       <div style={styles.disclaimer}>
         <p style={styles.disclaimerText}>
-          {t('disclaimer.text')}
+          המידע מבוסס על נתונים פומביים של פיקוד העורף.
+          <br />
+          יש לפעול לפי ההנחיות הרשמיות בלבד.
         </p>
       </div>
 
@@ -690,6 +699,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: '20px',
     fontSize: '16px',
     fontWeight: 600
+  },
+  infoButton: {
+    background: 'none',
+    border: 'none',
+    fontSize: '18px',
+    cursor: 'pointer',
+    marginLeft: '12px',
+    padding: '4px',
+    opacity: 0.7
   },
   alertMessage: {
     padding: '0 20px',

@@ -21,7 +21,7 @@ export function DualAlertBanner({
       <div style={styles.alertIcon}>⚠️</div>
       <div style={styles.content}>
         <span style={styles.text}>
-          התראה פעילה גם ב{otherLabel}: <strong>{otherArea}</strong>
+          התרעה פעילה גם ב{otherLabel}: <strong>{otherArea}</strong>
         </span>
         <span style={styles.switchText}>הקש למעבר</span>
       </div>

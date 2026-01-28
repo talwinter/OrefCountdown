@@ -5,6 +5,7 @@ import { LocationPermissionModal } from './components/LocationPermissionModal';
 import { LocationToggle } from './components/LocationToggle';
 import { DualAlertBanner } from './components/DualAlertBanner';
 import { LanguageSelector } from './components/LanguageSelector';
+import { AboutPage } from './components/AboutPage';
 import { useAlerts } from './hooks/useAlerts';
 import { useAreas } from './hooks/useAreas';
 import { useCitiesGeo } from './hooks/useCitiesGeo';
@@ -17,7 +18,7 @@ const STORAGE_KEY = 'oref-selected-area';
 function App() {
   const [selectedArea, setSelectedArea] = useState<Area | null>(null);
   const [isSelectingArea, setIsSelectingArea] = useState(false);
-  const [activeView, setActiveView] = useState<'home' | 'current'>('home');
+  const [activeView, setActiveView] = useState<'home' | 'current' | 'about'>('home');
 
   const { isRTL, t } = useLanguage();
 
@@ -179,6 +180,11 @@ function App() {
     return <AreaSelector areas={areas} onSelect={handleAreaSelect} />;
   }
 
+  // About Page
+  if (activeView === 'about') {
+    return <AboutPage onBack={() => setActiveView('home')} />;
+  }
+
   // Main timer screen
   return (
     <div style={styles.mainContainer}>
@@ -227,6 +233,7 @@ function App() {
           newsFlash={displayNewsFlash}
           getRemainingTime={displayGetRemainingTime}
           onChangeArea={handleChangeArea}
+          onShowAbout={() => setActiveView('about')}
           allAlerts={displayAlerts}
           timeOffset={displayTimeOffset}
           isCurrentLocation={activeView === 'current'}
@@ -237,6 +244,15 @@ function App() {
 }
 
 const styles: { [key: string]: React.CSSProperties } = {
+  aboutLink: {
+    background: 'none',
+    border: 'none',
+    width: '32px',
+    height: '32px',
+    cursor: 'pointer',
+    fontSize: '18px',
+    marginRight: '8px'
+  },
   mainContainer: {
     height: '100%',
     display: 'flex',

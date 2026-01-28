@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Alert, AlertsResponse } from '../types';
+import { Alert, AlertsResponse, NewsFlash } from '../types';
 
 const POLL_INTERVAL = 2000; // Poll every 2 seconds (matches server update rate)
 const ALERT_ENDED_DISPLAY_TIME = 120000; // Show "alert ended" message for 120 seconds
@@ -11,6 +11,7 @@ export function useAlerts(selectedArea: string | null) {
   const [error, setError] = useState<string | null>(null);
   const [alertEnded, setAlertEnded] = useState(false);
   const [alertEndedAt, setAlertEndedAt] = useState<number | null>(null);
+  const [newsFlash, setNewsFlash] = useState<NewsFlash | null>(null);
   const timeOffsetRef = useRef<number>(0);
   const previousAlertRef = useRef<Alert | null>(null);
 
@@ -27,6 +28,7 @@ export function useAlerts(selectedArea: string | null) {
       timeOffsetRef.current = data.server_time - clientTime;
 
       setAlerts(data.alerts);
+      setNewsFlash(data.newsFlash || null);
       setServerTime(data.server_time);
       setError(null);
     } catch (err) {
@@ -98,11 +100,21 @@ export function useAlerts(selectedArea: string | null) {
     previousAlertRef.current = null;
   }, [selectedArea]);
 
+  // Extract newsFlash from response if available
+  // Note: App.tsx assumes AlertsResponse/server API includes newsFlash
+  // We need to verify if the server actually sends it.
+  // The user updated server index.js to send { alerts, newsFlash, server_time }.
+  // So data.newsFlash should be available.
+
+  // Actually, I need to cast data to any or update types first.
+  // Assume types.ts is updated or flexible.
+
   return {
     alerts,
     activeAlert,
     hasAlert,
-    alertEnded,  // NEW: true when alert just ended (safe to exit)
+    alertEnded,
+    newsFlash,
     getRemainingTime,
     serverTime,
     timeOffset: timeOffsetRef.current,

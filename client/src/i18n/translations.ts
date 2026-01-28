@@ -3,7 +3,7 @@ export type Language = 'he' | 'en';
 export const translations = {
   // Alert phases
   'phase.safe': {
-    he: 'אין התראה פעילה באזור',
+    he: 'אין התרעה פעילה באזור',
     en: 'No active alert in the area'
   },
   'phase.earlyWarning': {
@@ -61,7 +61,7 @@ export const translations = {
     en: 'Wait for Home Front Command announcement before exiting'
   },
   'instruction.canExit': {
-    he: 'ההתראה הסתיימה לפי פיקוד העורף',
+    he: 'ההתרעה הסתיימה לפי פיקוד העורף',
     en: 'Alert ended per Home Front Command'
   },
   'instruction.enterShelter': {
@@ -160,6 +160,10 @@ export const translations = {
     he: 'בחר אזור',
     en: 'Select Area'
   },
+  'ui.back': {
+    he: 'חזרה',
+    en: 'Back'
+  },
   'ui.searchArea': {
     he: 'חפש אזור...',
     en: 'Search area...'
@@ -189,7 +193,7 @@ export const translations = {
 
   // Dual alert banner
   'dualAlert.alsoAt': {
-    he: 'התראה פעילה גם ב',
+    he: 'התרעה פעילה גם ב',
     en: 'Alert also active at'
   },
   'dualAlert.tapToSwitch': {
