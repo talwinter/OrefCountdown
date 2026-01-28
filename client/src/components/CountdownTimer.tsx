@@ -121,6 +121,7 @@ export function CountdownTimer({
   const hasPlayedNewsFlashSound = useRef(false);
   const hasPlayedExitSound = useRef(false);
   const repeatSoundInterval = useRef<NodeJS.Timeout | null>(null);
+  const previousNewsFlash = useRef<NewsFlash | null>(null);
 
   // Vibration helper
   const vibrate = useCallback((pattern: number | number[]) => {
@@ -357,9 +358,14 @@ export function CountdownTimer({
       hasPlayedNewsFlashSound.current = true;
       playNewsFlashSound();
     } else if (!newsFlash) {
+      // NewsFlash ended - announce if there's no active alert (threat passed)
+      if (previousNewsFlash.current && !activeAlert) {
+        speak('ההתרעה המוקדמת הסתיימה');
+      }
       hasPlayedNewsFlashSound.current = false;
     }
-  }, [newsFlash, playNewsFlashSound]);
+    previousNewsFlash.current = newsFlash;
+  }, [newsFlash, activeAlert, playNewsFlashSound, speak]);
 
   // Play all clear sound + voice when alert ends (canExit phase)
   useEffect(() => {
