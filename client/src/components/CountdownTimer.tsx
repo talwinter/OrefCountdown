@@ -587,7 +587,7 @@ export function CountdownTimer({
               color: config.color,
               transition: 'color 2s ease'
             }}>
-              {config.text}
+              {config.textKey ? t(config.textKey as any) : config.text}
             </span>
             {hasAlert && !isExpired && (
               <span style={styles.phaseSubtext}>
