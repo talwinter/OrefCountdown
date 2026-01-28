@@ -90,6 +90,24 @@ export function CountdownTimer({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const hasPlayedSound = useRef(false);
 
+  // Track local exit state (when alert disappears)
+  const [isExitState, setIsExitState] = useState(false);
+  const previousAlertProp = useRef<Alert | null>(null);
+
+  // Version check removed
+
+  // Detect Active -> Inactive transition locally
+  useEffect(() => {
+    const prev = previousAlertProp.current;
+    if (prev && !activeAlert) {
+      setIsExitState(true);
+      // Auto-clear after 2 minutes (120 seconds) - User request
+      setTimeout(() => setIsExitState(false), 120000);
+    }
+    if (activeAlert) setIsExitState(false);
+    previousAlertProp.current = activeAlert;
+  }, [activeAlert]);
+
   // Update remaining time every 100ms for smooth progress
   useEffect(() => {
     const updateTime = () => {
@@ -114,8 +132,8 @@ export function CountdownTimer({
 
   // Determine current phase
   const getPhase = (): Phase => {
-    // If alert just ended (Pikud HaOref removed it) = safe to exit!
-    if (alertEnded) return 'canExit';
+    // Priority: Local exit state OR prop
+    if (isExitState || alertEnded) return 'canExit';
 
     if (!activeAlert) return 'safe';
     if (remainingTime === null) return 'safe';
@@ -135,6 +153,9 @@ export function CountdownTimer({
   };
 
   const phase = getPhase();
+
+  // Debug logs removed
+
   const config = PHASE_CONFIGS[phase];
 
   // Calculate remaining time for any alert
@@ -176,14 +197,7 @@ export function CountdownTimer({
     }
   }, []);
 
-  // Trigger test alert
-  const triggerTestAlert = async () => {
-    try {
-      await fetch(`/api/test-alert?area=${encodeURIComponent(selectedArea.name)}&test=true`);
-    } catch (e) {
-      console.error('Failed to trigger test alert:', e);
-    }
-  };
+  // Test alert function removed
 
   const hasAlert = activeAlert !== null;
   const isExpired = remainingTime !== null && remainingTime <= 0;
@@ -212,9 +226,11 @@ export function CountdownTimer({
       {/* Header */}
       <div style={styles.header}>
         <span style={styles.areaName}>{selectedArea.name}</span>
-        <button onClick={onChangeArea} style={styles.changeButton}>
-          החלף אזור
-        </button>
+        {!hasAlert && (
+          <button onClick={onChangeArea} style={styles.changeButton}>
+            החלף אזור
+          </button>
+        )}
       </div>
 
       {/* Status Badge */}
@@ -292,7 +308,7 @@ export function CountdownTimer({
 
       {/* Instructions */}
       <div style={styles.instructions}>
-        {hasAlert ? (
+        {(hasAlert || phase === 'canExit') ? (
           <p style={styles.instructionText}>
             {config.instruction}
           </p>
@@ -315,63 +331,60 @@ export function CountdownTimer({
         </div>
       )}
 
-      {/* Test button */}
-      <div style={styles.footer}>
-        <button onClick={triggerTestAlert} style={styles.testButton}>
-          בדיקת התראה
-        </button>
-      </div>
+      {/* Test button removed */}
 
-      {/* Search other areas section */}
-      <div style={styles.searchSection}>
-        <button
-          onClick={() => setIsSearchOpen(!isSearchOpen)}
-          style={styles.searchToggle}
-        >
-          🔍 בדוק אזור אחר {isSearchOpen ? '▲' : '▼'}
-        </button>
+      {/* Search other areas section - Only show when NO alert */}
+      {!hasAlert && (
+        <div style={styles.searchSection}>
+          <button
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            style={styles.searchToggle}
+          >
+            🔍 בדוק אזור אחר {isSearchOpen ? '▲' : '▼'}
+          </button>
 
-        {isSearchOpen && (
-          <div style={styles.searchContainer}>
-            <input
-              type="text"
-              placeholder="חפש עיר..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={styles.searchInput}
-              dir="rtl"
-            />
+          {isSearchOpen && (
+            <div style={styles.searchContainer}>
+              <input
+                type="text"
+                placeholder="חפש עיר..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={styles.searchInput}
+                dir="rtl"
+              />
 
-            {searchQuery.trim() && (
-              <div style={styles.searchResults}>
-                {searchResults.length > 0 ? (
-                  searchResults.map((alert) => {
-                    const alertTime = getAlertRemainingTime(alert);
-                    const alertPhase = alertTime <= 0 ? 'sheltering' :
-                      alertTime / alert.migun_time > 0.6 ? 'green' :
-                        alertTime / alert.migun_time > 0.3 ? 'yellow' : 'orange';
-                    return (
-                      <div key={alert.area} style={{
-                        ...styles.searchResultItem,
-                        backgroundColor: PHASE_CONFIGS[alertPhase].badgeColor
-                      }}>
-                        <span style={styles.searchResultArea}>{alert.area}</span>
-                        <span style={styles.searchResultStatus}>
-                          {PHASE_CONFIGS[alertPhase].text}
-                        </span>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div style={styles.noResults}>
-                    אין התראה פעילה ב{searchQuery}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+              {searchQuery.trim() && (
+                <div style={styles.searchResults}>
+                  {searchResults.length > 0 ? (
+                    searchResults.map((alert) => {
+                      const alertTime = getAlertRemainingTime(alert);
+                      const alertPhase = alertTime <= 0 ? 'sheltering' :
+                        alertTime / alert.migun_time > 0.6 ? 'green' :
+                          alertTime / alert.migun_time > 0.3 ? 'yellow' : 'orange';
+                      return (
+                        <div key={alert.area} style={{
+                          ...styles.searchResultItem,
+                          backgroundColor: PHASE_CONFIGS[alertPhase].badgeColor
+                        }}>
+                          <span style={styles.searchResultArea}>{alert.area}</span>
+                          <span style={styles.searchResultStatus}>
+                            {PHASE_CONFIGS[alertPhase].text}
+                          </span>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div style={styles.noResults}>
+                      אין התראה פעילה ב{searchQuery}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Disclaimer */}
       <div style={styles.disclaimer}>

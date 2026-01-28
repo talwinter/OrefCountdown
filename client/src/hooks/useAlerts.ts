@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { Alert, AlertsResponse } from '../types';
 
 const POLL_INTERVAL = 2000; // Poll every 2 seconds (matches server update rate)
-const ALERT_ENDED_DISPLAY_TIME = 60000; // Show "alert ended" message for 60 seconds
+const ALERT_ENDED_DISPLAY_TIME = 120000; // Show "alert ended" message for 120 seconds
 
 export function useAlerts(selectedArea: string | null) {
   const [alerts, setAlerts] = useState<Alert[]>([]);
@@ -47,47 +47,24 @@ export function useAlerts(selectedArea: string | null) {
     ? alerts.find(alert => alert.area === selectedArea) ?? null
     : null;
 
-  // Detect when alert ends (was active, now gone)
+  // Track if we had an active alert recently
+  const [wasActive, setWasActive] = useState(false);
+
+  // Detect alert transition: Active -> Inactive
   useEffect(() => {
-    const previousAlert = previousAlertRef.current;
-
-    // Debug logging
-    console.log('Alert state:', {
-      previousAlert: previousAlert?.area,
-      activeAlert: activeAlert?.area,
-      selectedArea,
-      alertEnded
-    });
-
-    // If we had an alert before, but now it's gone = alert ended!
-    // We don't need to check area name again, because previousAlert only references the alert for this selectedArea
-    if (previousAlert && !activeAlert) {
-      console.log('🟢 [useAlerts] Alert ended detected!', {
-        prev: previousAlert.area,
-        current: activeAlert,
-        time: new Date().toISOString()
-      });
+    // Case 1: Alert currently active
+    if (activeAlert) {
+      if (!wasActive) setWasActive(true);
+      if (alertEnded) setAlertEnded(false); // Reset exit message if new alert comes
+    }
+    // Case 2: No active alert, but WAS active recently (Transition)
+    else if (wasActive) {
+      console.log('🟢 [useAlerts] Alert transition: Active -> Inactive. Triggering Exit.');
       setAlertEnded(true);
       setAlertEndedAt(Date.now());
-    } else if (previousAlert && activeAlert) {
-      // Alert still active
-      // console.log('Alert still active...');
-    } else if (!previousAlert && activeAlert) {
-      console.log('🔴 [useAlerts] New alert started:', activeAlert.area);
+      setWasActive(false); // Reset flag
     }
-
-    // If a new alert starts, clear the "ended" state
-    if (activeAlert) {
-      if (alertEnded) {
-        console.log('New alert started, clearing alertEnded');
-      }
-      setAlertEnded(false);
-      setAlertEndedAt(null);
-    }
-
-    // Update previous alert ref
-    previousAlertRef.current = activeAlert;
-  }, [activeAlert, selectedArea, alertEnded]);
+  }, [activeAlert, wasActive, alertEnded]);
 
   // Auto-clear "alert ended" state after display time
   useEffect(() => {
