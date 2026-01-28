@@ -57,8 +57,7 @@ export function LocationToggle({
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     display: 'flex',
-    justifyContent: 'center',
-    padding: '12px 16px'
+    justifyContent: 'flex-start'
   },
   toggle: {
     display: 'flex',

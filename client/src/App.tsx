@@ -182,11 +182,6 @@ function App() {
   // Main timer screen
   return (
     <div style={styles.mainContainer}>
-      {/* Language Selector - top right corner */}
-      <div style={styles.languageSelectorContainer}>
-        <LanguageSelector />
-      </div>
-
       {/* Location Permission Modal */}
       {showPermissionModal && (
         <LocationPermissionModal
@@ -205,16 +200,23 @@ function App() {
         />
       )}
 
-      {/* Location Toggle */}
-      {showLocationToggle && (
-        <LocationToggle
-          activeView={activeView}
-          onToggle={handleToggleView}
-          homeHasAlert={homeActiveAlert !== null}
-          currentHasAlert={currentActiveAlert !== null}
-          currentLocationName={locationState.nearestCity?.name}
-        />
-      )}
+      {/* Top bar: Location Toggle (left) + Language Selector (right) */}
+      <div style={styles.topBar}>
+        <div style={styles.topBarLeft}>
+          {showLocationToggle && (
+            <LocationToggle
+              activeView={activeView}
+              onToggle={handleToggleView}
+              homeHasAlert={homeActiveAlert !== null}
+              currentHasAlert={currentActiveAlert !== null}
+              currentLocationName={locationState.nearestCity?.name}
+            />
+          )}
+        </div>
+        <div style={styles.topBarRight}>
+          <LanguageSelector />
+        </div>
+      </div>
 
       {/* Main Timer */}
       {displayArea && (
@@ -239,14 +241,20 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#1a1a2e',
-    position: 'relative'
+    backgroundColor: '#1a1a2e'
   },
-  languageSelectorContainer: {
-    position: 'absolute',
-    top: '8px',
-    right: '8px',
-    zIndex: 100
+  topBar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '8px 12px',
+    minHeight: '48px'
+  },
+  topBarLeft: {
+    flex: 1
+  },
+  topBarRight: {
+    flexShrink: 0
   },
   loadingContainer: {
     height: '100%',

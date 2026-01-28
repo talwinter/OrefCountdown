@@ -31,8 +31,7 @@ export function LanguageSelector() {
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     display: 'flex',
-    gap: '8px',
-    padding: '8px'
+    gap: '6px'
   },
   button: {
     padding: '6px 12px',
